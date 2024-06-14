@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Wild</title>
+  <meta name="keywords" content="wildelife, animals">
+  <meta name="description"
+    content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
+  <link rel="shortcut icon" href="/images/icons/favicon.ico">
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/5775cf1f45.js" crossorigin="anonymous"></script>
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/public.css">
+  <link rel="stylesheet" href="/css/blog.css">
+</head>
+
+<body>
+  <!-- import header/nav section -->
+  <%- include('../layouts/header.html') %>
+    <main>
+      <!-- >>>>>>> hero image start >>>>>>>> -->
+      <section class="hero-public">
+        <img src="/images/blog.jpg" alt="Eco-Wild">
+        <h1>Our Blogs</small></h1>
+      </section>
+      <!-- >>>>>>> hero image end >>>>>>>>> -->
+      <div class="container blog">
+        <!-- >>>>>>>>>> search bar start >>>>>>>>>>>> -->
+        <form action="/blog" method="get">
+          <div class="search">
+            <input type="search" name="search_query" id="search_query" placeholder="Search">
+            <button id="search_button"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+        </form>
+        <!-- >>>>>>>>>> search bar end >>>>>>>>>>>> -->
+
+        <!-- >>>>>>>>>> blog start >>>>>>>>>>>> -->
+        <div class="blog-lists">
+
+          <% paginatedBlogs.forEach(blog=> { %>
+            <div class="row blog-card">
+              <a href="/blog/<%= blog._id %>" class="col-md-6"><img src="https://<%= blog.image %>"
+                  alt="blog image"></a>
+              <div class="col-md-6 blog-title">
+                <h3>
+                  <%= blog.title %>
+                </h3>
+                <div class="subInfo">
+                  <p>
+                    <%= blog.createAt %>
+                  </p>
+                  <p>By <%= blog.author %>
+                  </p>
+                </div>
+                <p class="excerpt">
+                  <%= blog.excerpt %>
+                </p>
+                <a href="/blog/<%= blog._id %>" class="btn btn-info blog-link">Read More</a>
+              </div>
+            </div>
+
+            <% }); %>
+
+        </div>
+        <!-- >>>>>>>>>> blog end >>>>>>>>>>>> -->
+
+
+        <!-- >>>>>>>>>> pagination start >>>>>>>>>>>> -->
+
+        <div class="pages">
+          <ul class="pagination">
+            <% if (currentPage> 1) { %>
+              <li class="page-item">
+                <a href="/blog?page=<%= currentPage-1 %>" class="page-link">Previous</a>
+              </li>
+              <% } %>
+                <% for (let page=1; page <=totalPages; page++) { %>
+                  <li class="page-item">
+                    <a href="/blog?page=<%= page %>" class="page-link <%= page == currentPage ? 'pageActive' : '' %>">
+                      <%= page %>
+                    </a>
+                  </li>
+                  <% } %>
+                    <% if (currentPage < totalPages) { %>
+                      <li class="page-item">
+                        <a href="/blog?page=<%= currentPage+1 %>" class="page-link">Next</a>
+                      </li>
+                      <% } %>
+          </ul>
+        </div>
+        <!-- >>>>>>>>>> pagination end >>>>>>>>>>>> -->
+
+      </div>
+    </main>
+    <!-- import footer section -->
+    <%- include('../layouts/footer.html') %>
+
+      <!-- bootstrap JS, Popper.js, and jQuery -->
+      <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>

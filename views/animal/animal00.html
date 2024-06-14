@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Wild</title>
+  <meta name="keywords" content="wildelife, animals">
+  <meta name="description"
+    content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
+  <link rel="shortcut icon" href="/images/icons/favicon.ico">
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/5775cf1f45.js" crossorigin="anonymous"></script>
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/public.css">
+  <link rel="stylesheet" href="/css/wildlife.css">
+</head>
+
+<body>
+  <!-- import header/nav section -->
+  <%- include('../layouts/header.html') %>
+    <main>
+      <!-- >>>>>>> hero image start >>>>>>>> -->
+      <section class="hero-public">
+        <img src="/images/wildlife.jpg" alt="Eco-Wild">
+        <h1>Wildlife in Ontario</h1>
+      </section>
+      <!-- >>>>>>> hero image end >>>>>>>>> -->
+
+      <div class="container-fluid wildlife">
+
+        <div class="filter-box">
+
+
+          <!-- >>>>>>>>>> search bar start >>>>>>>>>>>> -->
+          <div class="search">
+            <input type="search" name="search_query" id="search_query" placeholder="Search by animal name">
+            <button id="search_button"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+          <!-- >>>>>>>>>>>> search bar end >>>>>>>>>>>> -->
+        </div>
+
+
+
+        <!-- >>>>>>>>>> animal type start >>>>>>>>>>>> -->
+        <!-- mammals -->
+        <div id="mammal" class="animals">
+          <h3 class="type-title">MAMMALS</h3>
+          <div class="list-box">
+            <a id="mammal-l" class="arrow-l" href="javascript:;"><i class="fa-solid fa-chevron-left"></i></a>
+            <a id="mammal-r" class="arrow-r" href="javascript:;"><i class="fa-solid fa-chevron-right"></i></a>
+            <ul id="mammal-list" class="item-list">
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/wl-raccoon.jpg" alt="raccoon">
+                      <figcaption>Raccoon</figcaption>
+                    </figure>
+                    <p class="animal-tag">mammal</p>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/wl-squirrel.jpg" alt="raccoon">
+                      <figcaption>Squirrel</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/wl-rabbit.jpg" alt="raccoon">
+                      <figcaption>Rabbit</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/wl-raccoon.jpg" alt="raccoon">
+                      <figcaption>Raccoon</figcaption>
+                    </figure>
+                    <p class="animal-tag">mammal</p>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/wl-squirrel.jpg" alt="raccoon">
+                      <figcaption>Squirrel</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/wl-rabbit.jpg" alt="raccoon">
+                      <figcaption>Rabbit</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/wl-raccoon.jpg" alt="raccoon">
+                      <figcaption>Raccoon</figcaption>
+                    </figure>
+                    <p class="animal-tag">mammal</p>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/wl-squirrel.jpg" alt="raccoon">
+                      <figcaption>Squirrel</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/wl-rabbit.jpg" alt="raccoon">
+                      <figcaption>Rabbit</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- birds -->
+        <div id="bird" class="animals">
+          <h3 class="type-title">BIRDS</h3>
+          <div class="list-box">
+            <a id="bird-l" class="arrow-l" href="javascript:;"><i class="fa-solid fa-chevron-left"></i></a>
+            <a id="bird-r" class="arrow-r" href="javascript:;"><i class="fa-solid fa-chevron-right"></i></a>
+            <ul id="bird-list" class="item-list">
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/b-eagle.jpg" alt="bird">
+                      <figcaption>Eagle</figcaption>
+                    </figure>
+                    <p class="animal-tag">Bird</p>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/b-hawk.jpg" alt="bird">
+                      <figcaption>Hawk</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/b-owl.jpg" alt="bird">
+                      <figcaption>Owl</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/b-turkey.jpg" alt="bird">
+                      <figcaption>Wild Turkey</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/b-eagle.jpg" alt="bird">
+                      <figcaption>Eagle</figcaption>
+                    </figure>
+                    <p class="animal-tag">Bird</p>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/b-hawk.jpg" alt="bird">
+                      <figcaption>Hawk</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/b-owl.jpg" alt="bird">
+                      <figcaption>Owl</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/b-turkey.jpg" alt="bird">
+                      <figcaption>Wild Turkey</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+
+        <!-- reptiles -->
+        <div id="reptile" class="animals">
+          <h3 class="type-title">REPTILES</h3>
+          <div class="list-box">
+            <a id="reptile-l" class="arrow-l" href="javascript:;"><i class="fa-solid fa-chevron-left"></i></a>
+            <a id="reptile-r" class="arrow-r" href="javascript:;"><i class="fa-solid fa-chevron-right"></i></a>
+            <ul id="reptile-list" class="item-list">
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/r-turtle.jpg" alt="reptile">
+                      <figcaption>Blanding Turtle</figcaption>
+                    </figure>
+                    <p class="animal-tag">reptile</p>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/r-turtle.jpg" alt="reptile">
+                      <figcaption>Eastern Musk Turtle</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/r-turtle.jpg" alt="reptile">
+                      <figcaption>Northern Map Turtle</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/r-turtle.jpg" alt="reptile">
+                      <figcaption>Painted Turtle</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/r-turtle.jpg" alt="reptile">
+                      <figcaption>Blanding Turtle</figcaption>
+                    </figure>
+                    <p class="animal-tag">reptile</p>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/r-turtle.jpg" alt="reptile">
+                      <figcaption>Eastern Musk Turtle</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/r-turtle.jpg" alt="reptile">
+                      <figcaption>Northern Map Turtle</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+              <li class="item">
+                <a href="#">
+                  <div class="item-img">
+                    <figure>
+                      <img src="/images/r-turtle.jpg" alt="reptile">
+                      <figcaption>Painted Turtle</figcaption>
+                    </figure>
+                  </div>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+
+        <!-- >>>>>>>>>> animal type end >>>>>>>>>>>> -->
+
+      </div>
+
+    </main>
+
+    <!-- import footer section -->
+    <%- include('../layouts/footer.html') %>
+
+      <!-- bootstrap JS, Popper.js, and jQuery -->
+      <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+      <script src="/js/scroll_list.js"></script>
+</body>
+
+</html>

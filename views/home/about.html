@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Wild</title>
+  <meta name="keywords" content="wildelife, animals">
+  <meta name="description"
+    content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
+  <link rel="shortcut icon" href="/images/icons/favicon.ico">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/public.css">
+  <link rel="stylesheet" href="/css/about.css">
+</head>
+
+<body>
+  <%- include('../layouts/header.html') %>
+    <main>
+      <!-- >>>>>>> hero image start >>>>>>>> -->
+
+      <section class="hero-public">
+        <img src="/images/about.jpg" alt="Eco-Wild">
+        <h1>About Us</h1>
+      </section>
+      <!-- >>>>>>> hero image end >>>>>>>>> -->
+
+      <div class="about container">
+        <!-- >>>>>>> about content start >>>>>>>> -->
+        <div class="row">
+          <div class="col-md-6 about-img">
+            <img src="/images/about01.jpg" alt="Eco-Wild">
+          </div>
+          <div class="col-md-6 about-info">
+            <h2>Our Mission</h2>
+            <p>Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife. We are
+              committed
+              to
+              the conservation of endangered species and their habitats. Our mission is to raise awareness about the
+              importance of protecting wildlife and to promote sustainable practices that will help preserve our
+              planet
+              for
+              future generations.</p>
+            <p>Our organization works with local communities, governments, and other non-profit organizations to
+              develop
+              conservation programs that will help protect wildlife and their habitats. We also provide educational
+              resources and support to help people learn more about the importance of wildlife conservation and how
+              they
+              can
+              get involved.</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 about-info">
+            <h2>Support us</h2>
+            <p>Join us in our mission to protect wildlife and preserve our planet for future generations. Together, we
+              can
+              make a difference and ensure that wildlife will continue to thrive for years to come.
+            </p>
+            <div class="donate-link">
+              <a href="/donate" class="btn btn-info">Donate Now</a>
+            </div>
+          </div>
+          <div class="col-md-6 about-img">
+            <img src="/images/about02.jpg" alt="Eco-Wild">
+          </div>
+        </div>
+        <!-- >>>>>>> about content end >>>>>>>> -->
+      </div>
+    </main>
+
+
+    <!-- import footer section -->
+    <%- include('../layouts/footer.html') %>
+      <!-- bootstrap JS, Popper.js, and jQuery -->
+      <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>

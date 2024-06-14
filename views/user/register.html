@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/public.css">
+  <link rel="stylesheet" href="/css/login.css">
+  <title>Register</title>
+</head>
+
+<body>
+  <main>
+    <div class="loginBgc"></div>
+    <div class="overlay"></div>
+    <div class="login-form">
+      <div class="logo"></div>
+      <h1>EcoWild</h1>
+      <form action="/register" method="post">
+        <div class="mb-3">
+          <label for="username" class="form-label required-label">Username</label>
+          <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameInfo">
+          <div id="usernameInfo" class="form-text">Include characters and numbers.</div>
+          <% if (typeof(errors) !='undefined' ){ if(errors.username) { %>
+            <div class="error">
+              <%= errors.username %>
+            </div>
+            <% }} %>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label required-label">Email</label>
+          <input type="email" class="form-control" id="email" name="email" aria-describedby="emailInfo">
+          <div id=" emailInfo" class="form-text">We'll never share your email with anyone else.
+          </div>
+          <% if (typeof(errors) !='undefined' ){ if(errors.email) { %>
+            <div class="error">
+              <%= errors.email %>
+            </div>
+            <% }} %>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label required-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" aria-describedby="passInfo">
+          <div id="passInfo" class="form-text">At least 6 characters.</div>
+          <% if (typeof(errors) !='undefined' ){ if(errors.password) { %>
+            <div class="error">
+              <%= errors.password %>
+            </div>
+            <% }} %>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="remember" name="remember">
+          <label class="form-check-label" for="remember">Remember me</label>
+        </div>
+        <% if (typeof(dbErrors) !='undefined' ){ %>
+          <div class="error">
+            <%= dbErrors.dberror %>
+          </div>
+          <% } %>
+            <div class="login-buttons">
+              <button type="submit" class="btn btn-info">Register</button>
+              <button type="button" id="cancel" class="btn btn-secondary">Cancel</button>
+            </div>
+            <a href="/login" class="option">Login</a>
+      </form>
+    </div>
+
+  </main>
+
+  <!-- bootstrap js -->
+  <script src="/bootstrap/js/bootstrap.js"></script>
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="/js/login.js"></script>
+</body>
+
+</html>

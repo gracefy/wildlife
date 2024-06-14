@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Wild</title>
+  <meta name="keywords" content="wildelife, animals">
+  <meta name="description"
+    content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
+  <link rel="shortcut icon" href="/images/icons/favicon.ico">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/public.css">
+  <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+  <!-- import header/nav section -->
+  <%- include('../layouts/header.html') %>
+
+    <main>
+
+      <!-- >>>>>>>>>>>> hero carousel start >>>>>>>>>>>>> -->
+      <section id="carouselCaption" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselCaption" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselCaption" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselCaption" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item hero-item active">
+            <img src="/images/squirrel.jpg" class="d-block w-100 hero-img" alt="squirrel">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Squirrel Squirrel</h5>
+              <p>Some representative placeholder content for the first slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item hero-item">
+            <img src="/images/deer.jpg" class="d-block w-100 hero-img" alt="deer">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Deer Deer</h5>
+              <p>Some representative placeholder content for the second slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item hero-item">
+            <img src="/images/eagle.jpg" class="d-block w-100 hero-img" alt="eagle">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Eagle Eagle</h5>
+              <p>Some representative placeholder content for the third slide.</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaption" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselCaption" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </section>
+      <!-- >>>>>>>>>>>> hero carousel end >>>>>>>>>>>>> -->
+
+      <div class="container home">
+        <!-- >>>>>>>>>>>> About section start >>>>>>>>>>>>> -->
+        <section class="row">
+          <h1>Welcome to Eco-Wild</h1>
+          <p>Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife. We are committed
+            to
+            the conservation of endangered species and their habitats. Our mission is to raise awareness about the
+            importance of protecting wildlife and to promote sustainable practices that will help preserve our planet
+            for
+            future generations.</p>
+        </section>
+        <!-- >>>>>>>>>>>> About section end >>>>>>>>>>>>> -->
+
+
+        <!-- >>>>>>>>>>>> Wildlife section start >>>>>>>>>>>>> -->
+        <section class="wildelife">
+          <h2>Wildlife in Ontario</h2>
+          <div class="type-list">
+            <% animalTypes.forEach(type=> {%>
+
+              <div class="row type-card">
+                <a href="/animal?type=<%= type._id %>" class="col-md-6">
+                  <figure class="animalType">
+                    <img src="https://<%= type.image %>" alt="<%= type.name %>" class="img-fluid">
+                    <figcaption>
+                      <%= type.name.toUpperCase() %>
+                    </figcaption>
+                  </figure>
+                </a>
+                <div class="col-md-6 animalTypeInfo">
+                  <%- type.desc -%>
+                    <a href="/animal?type=<%= type._id %>" class="btn btn-info">Explore More</a>
+                </div>
+              </div>
+
+              <%}) %>
+          </div>
+        </section>
+        <!-- >>>>>>>>>>>> Wildlife section end >>>>>>>>>>>>> -->
+
+        <!-- >>>>>>>>>>>> Event section start >>>>>>>>>>>>> -->
+        <section class="event">
+          <h2>Events/Volunteers</h2>
+          <div class="event-list">
+
+            <% events.forEach(event=> {%>
+
+              <div class="event-card">
+                <a href="/event">
+                  <img src="https://<%= event.image %>" alt="event image">
+                </a>
+                <div class="card-info">
+                  <h5 class="card-title">
+                    <%= event.title %>
+                  </h5>
+                  <p class="card-text">Start At:
+                    <%= event.startTime %>
+                  </p>
+                </div>
+                <div class="card-bottom">
+                  <a href="/event" class="card-link">See Datail</a>
+                </div>
+              </div>
+
+              <%}) %>
+
+          </div>
+        </section>
+        <!-- >>>>>>>>>>>> Event section start >>>>>>>>>>>>> -->
+
+        <!-- >>>>>>>>>>>> Donate section start >>>>>>>>>>>>> -->
+        <section class="row donate">
+          <div class="overlay"></div>
+          <div class="donate-info">
+            <h2>Donate</h2>
+
+            <p>Your donation will help us protect wildlife and their habitats. Together, we can make a difference and
+              ensure that wildlife will continue to thrive for years to come.</p>
+            <a href="/donate" class="btn btn-info">Donate Now</a>
+          </div>
+        </section>
+        <!-- >>>>>>>>>>>> Donate section end >>>>>>>>>>>>> -->
+      </div>
+    </main>
+
+    <!-- import footer section -->
+    <%- include('../layouts/footer.html') %>
+      <!-- bootstrap JS, Popper.js, and jQuery -->
+      <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+/* wildlife page css */
+.animalPage {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2vw;
+  gap: 4vw;
+}
+
+/* >>>>>>>>>>> animal type section >>>>>>>>>>>> */
+.aniaml-type {
+  display: flex;
+  justify-content: space-between;
+  gap: 2vw;
+  margin-top: 2vw;
+}
+
+.type-item {
+  position: relative;
+  filter: opacity(0.3);
+}
+
+.type-item img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.type-item h3 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1vw;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  color: white;
+  text-align: center;
+}
+
+.type-active {
+  filter: opacity(1);
+}
+
+
+/* >>>>>>>>>>> animal list section >>>>>>>>>>>> */
+.animal-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 4vw;
+  column-gap: 3vw;
+  border-top: 1px solid #ddd;
+  padding-top: 2vw;
+}
+
+.animal-card {
+  width: 100%;
+  /* height: 20vw; */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-img {
+  width: 100%;
+  height: 80%;
+  position: relative;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.5vw 1vw;
+  background-color: #33333380;
+  color: white;
+  font-size: 1.2vw;
+  border-radius: 0 0 10px 0;
+}
+
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1vw;
+}
+
+.card-title {
+  width: 100%;
+  padding: 1vw 0.5vw;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  color: #333;
+}
+
+.card-title h5 {
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.card-title p {
+  font-size: 1rem;
+  color: #aaa
+}
+
+/* >>>>>>>>>>>>>>> resposive design >>>>>>>>>>>>>>>>>>>> */
+@media screen and (max-width: 970px) {
+
+  h3,
+  h5 {
+    font-size: 22px;
+  }
+
+  p {
+    font-size: 20px;
+  }
+
+  .animal-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .animal-card {
+    height: 40vw;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  li {
+    font-size: 16px;
+  }
+
+  a {
+    font-size: 16px;
+  }
+
+  .animal-list {
+    grid-template-columns: 1fr;
+  }
+
+  .animal-card {
+    height: 60vw;
+  }
+}

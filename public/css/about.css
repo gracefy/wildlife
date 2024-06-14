@@ -1,0 +1,26 @@
+/* about page css */
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4vw;
+}
+
+
+/* >>>>>>>>>>> content section >>>>>>>>>>>> */
+.about-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+}
+
+.about-img img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.donate-link {
+  display: flex;
+  justify-content: center;
+  margin: 2vw 0;
+}

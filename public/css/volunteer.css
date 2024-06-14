@@ -1,0 +1,15 @@
+/* volunteer page style */
+
+.form-check {
+  margin: 10px 0;
+}
+
+.form-check label {
+  color: blue;
+  font-size: 0.8rem;
+}
+
+.submit {
+  margin: 2vw auto;
+  width: 200px;
+}
