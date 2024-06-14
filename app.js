@@ -2,17 +2,14 @@
 const express = require('express');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const path = require('path');
-const cookieParser = require('cookie-parser');
 
 //swagger
 const swaggerUi = require('swagger-ui-express');
 
-//import swaggerDocs
-const { swaggerDocs } = require('./configs/appConfig');
+//import appConfig
+const { appConfig, swaggerDocs } = require('./configs/appConfig');
 
-//import configs
-const appConfig = require('./configs/appConfig');
+//import dbConfig
 const { connectDB, dbConfig } = require('./configs/dbConfig');
 
 // import routes
@@ -98,5 +95,5 @@ connectDB();
 // Listen to port
 const PORT = appConfig.port || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on  http://localhost:${PORT}`);
+  console.log(`Server is running on  http://localhost:${PORT}<br>Swagger is running on http://localhost:${PORT}/api-docs`);
 });

@@ -25,6 +25,8 @@ const saveVolunteer = async (req, res) => {
     intro
   };
 
+  console.log('data', data);
+
   if (!errors.isEmpty()) {
     //set error messages for each field
     const errorMessages = {};
@@ -50,7 +52,7 @@ const saveVolunteer = async (req, res) => {
     //render volunteer page with success message
     return res.render('v-event/volunteer',
       {
-        volunteer,
+        data,
         event,
         success: 'Volunteer saved successfully.'
       });

@@ -30,9 +30,11 @@ const registerUser = async (req, res) => {
     // Redirect to the original page
     const originalPage = req.session.originalPage || '/';
     delete req.session.originalPage;
+    console.log('originalPage', originalPage);
+
 
     res.redirect(originalPage);
-
+    return;
 
   } catch (error) {
     if (error.path === 'existerror') {
@@ -75,6 +77,7 @@ const loginUser = async (req, res) => {
     console.log('originalPage', originalPage);
 
     res.redirect(originalPage);
+    return;
 
   } catch (error) {
     if (error.path === 'usererror' || error.path === 'passerror') {

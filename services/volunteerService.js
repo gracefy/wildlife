@@ -32,9 +32,16 @@ const getVolunteerById = async (id) => {
 }
 
 // Create volunteer
+// service
 const createVolunteer = async (volunteerData) => {
-  return await Volunteer.create(volunteerData);
-}
+  try {
+    return await Volunteer.create(volunteerData);
+  } catch (error) {
+    console.error('Error in createVolunteer service:', error);
+    throw error;
+  }
+};
+
 
 // Update volunteer
 const updateVolunteer = async (id, volunteerData) => {

@@ -1,7 +1,3 @@
-const mongoose = require('mongoose');
-
-
-
 /**
  * @swagger
  * components:
@@ -21,8 +17,14 @@ const mongoose = require('mongoose');
  *         desc:
  *           type: string
  *           description: Description of animal type (shown on the home page)
+ *       required:
+ *         - name
+ *         - image
+ *         - order
+ *         - desc
  */
 
+const mongoose = require('mongoose');
 
 // Define animalType schema
 const animalTypeSchema = new mongoose.Schema({

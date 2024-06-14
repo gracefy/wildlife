@@ -2,6 +2,22 @@
 require('dotenv').config();
 const path = require('path');
 const swaggerJsdoc = require('swagger-jsdoc');
+const { route } = require('../routes/animalRoute');
+const { model } = require('mongoose');
+
+const appConfig = {
+  port: process.env.PORT || 3000,
+  env: process.env.NODE_ENV,
+  logLevel: process.env.LOG_LEVEL,
+  sessionSecret: process.env.SESSION_SECRET,
+  googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+  publicPath: path.join(__dirname, '../public'),
+  viewPath: path.join(__dirname, '../views'),
+  routesPath: path.join(__dirname, '../routes'),
+  modelsPath: path.join(__dirname, '../models'),
+  bootstrapPath: path.join(__dirname, '../node_modules/bootstrap/dist/'),
+};
+
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -12,22 +28,10 @@ const swaggerOptions = {
       description: 'Wildlife Data Dictionary API generated with express',
     }
   },
-  apis: ['../routes/*.js', '../models/*.js'],
+  apis: [appConfig.routesPath + '/*.js', appConfig.modelsPath + '/*.js'],
 }
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
-
-
-const appConfig = {
-  port: process.env.PORT,
-  env: process.env.NODE_ENV,
-  logLevel: process.env.LOG_LEVEL,
-  sessionSecret: process.env.SESSION_SECRET,
-  googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
-  publicPath: path.join(__dirname, '../public'),
-  viewPath: path.join(__dirname, '../views'),
-  bootstrapPath: path.join(__dirname, '../node_modules/bootstrap/dist/'),
-};
 
 module.exports = {
   appConfig,

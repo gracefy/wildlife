@@ -1,3 +1,62 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Event:
+ *       type: object
+ *       properties:
+ *         title:
+ *           type: string
+ *           description: Event title, max 255 characters
+ *         city:
+ *           type: string
+ *           description: Event city, max 30 characters
+ *         location:
+ *           type: string
+ *           description: Event address, max 255 characters
+ *         order:
+ *           type: number
+ *           description: Order of event in the list, default is 1
+ *         detail:
+ *           type: string
+ *           description: Event detail, max 255 characters
+ *         image:
+ *           type: string
+ *           description: Image URL, max 255 characters
+ *         startTime:
+ *           type: string
+ *           description: Event start time
+ *         endTime:
+ *           type: string
+ *           description: Event end time
+ *         organizer:
+ *           type: array
+ *           items:
+ *             type: string
+ *             description: Event organizer, at least 1 organizer
+ *         participants:
+ *           type: number
+ *           description: Max Number of participants
+ *         createAt:
+ *           type: string
+ *           description: Event create time
+ *         updateAt:
+ *           type: string
+ *           description: Event update time
+ *       required:
+ *         - title
+ *         - city
+ *         - location
+ *         - order
+ *         - detail
+ *         - image
+ *         - startTime
+ *         - endTime
+ *         - organizer
+ *         - participants
+ */
+
+
 const mongoose = require('mongoose');
 
 const eventSchema = new mongoose.Schema({

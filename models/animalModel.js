@@ -1,7 +1,3 @@
-const mongoose = require('mongoose');
-const Location = require('./locationModel');
-const AnimalType = require('./animalTypeModel');
-
 /**
  * @swagger
  * components:
@@ -78,9 +74,14 @@ const AnimalType = require('./animalTypeModel');
  *         - image
  *         - desc
  *         - locations
- *         - createAt
- *         - updateAt
+ *
  */
+
+
+
+const mongoose = require('mongoose');
+const Location = require('./locationModel');
+const AnimalType = require('./animalTypeModel');
 
 // Define species schema
 const speciesSchema = {

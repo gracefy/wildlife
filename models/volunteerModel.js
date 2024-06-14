@@ -1,3 +1,62 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Volunteer:
+ *       type: object
+ *       properties:
+ *         eventid:
+ *           type: string
+ *           description: Reference to Event collection, points to Event id
+ *         userid:
+ *           type: string
+ *           description: Reference to User collection, points to User id
+ *         name:
+ *           type: string
+ *           description: Volunteer name
+ *         email:
+ *           type: string
+ *           description: Volunteer email
+ *         phone:
+ *           type: string
+ *           description: Volunteer phone number
+ *         street:
+ *           type: string
+ *           description: Volunteer street address
+ *         postal:
+ *           type: string
+ *           description: Volunteer postal code
+ *         city:
+ *           type: string
+ *           description: Volunteer city
+ *         province:
+ *           type: string
+ *           description: Volunteer province, default is ON
+ *         intro:
+ *           type: string
+ *           description: Volunteer introduction, default is empty
+ *         isPass:
+ *           type: boolean
+ *           description: Volunteer application status, default is false
+ *         createAt:
+ *           type: string
+ *           description: Volunteer application create time
+ *         updateAt:
+ *           type: string
+ *           description: Volunteer application update time
+ *       required:
+ *         - eventid
+ *         - userid
+ *         - name
+ *         - email
+ *         - phone
+ *         - street
+ *         - postal
+ *         - city
+ *         - province
+ */
+
+//import mongoose
 const mongoose = require('mongoose');
 const Event = require('./eventModel');
 const User = require('./userModel');
