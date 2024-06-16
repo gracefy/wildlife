@@ -35,17 +35,20 @@ const getAnimalById = async (id) => {
 
 // create animal
 const createAnimal = async (animalData) => {
-  return await Animal.create(animalData);
+  const animal = await Animal.create(animalData);
+  return animal;
 }
 
 // update animal
 const updateAnimal = async (id, animalData) => {
-  return await Animal.findByIdAndUpdate(id, animalData, { new: true });
+  const updateAnimal = await Animal.findByIdAndUpdate(id, animalData, { new: true });
+  return updateAnimal;
 }
 
 //delete animal
 const deleteAnimal = async (id) => {
-  return await Animal.findByIdAndDelete(id);
+  const result = await Animal.findByIdAndDelete(id);
+  return result !== null;
 }
 
 // >>>>>>>>>>>>>>>>>PAGINATION AND COUNT<<<<<<<<<<<<<<<<<<
@@ -131,4 +134,5 @@ module.exports = {
   getAnimalCountByType,
   getEndangeredAnimalCount,
   getSearchAnimalCount,
+  getAnimalsByName
 };

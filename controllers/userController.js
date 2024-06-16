@@ -22,7 +22,7 @@ const registerUser = async (req, res) => {
 
   try {
     // Create a new user
-    const user = await userService.registerService({ username, password, email });
+    const user = await userService.createUser({ username, password, email });
     req.session.userid = user._id;
     req.session.username = user.username;
 
@@ -66,7 +66,7 @@ const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await userService.loginService({ email, password });
+    const user = await userService.authUser({ email, password });
 
     req.session.userid = user._id;
     req.session.username = user.username;

@@ -2,7 +2,7 @@ const brcypt = require('bcryptjs');
 const User = require('../models/userModel');
 
 // Create a new user
-const registerService = async (user) => {
+const createUser = async (user) => {
   try {
     // Check if the user already exists
     const existingUser = await User.findOne({ email: user.email });
@@ -33,7 +33,7 @@ const registerService = async (user) => {
 }
 
 // Login a user
-const loginService = async (user) => {
+const authUser = async (user) => {
   try {
     // Check if the user exists
     const existingUser = await User.findOne({ email: user.email });
@@ -61,6 +61,6 @@ const loginService = async (user) => {
 
 // Export the functions
 module.exports = {
-  registerService,
-  loginService
+  createUser,
+  authUser
 };

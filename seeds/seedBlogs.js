@@ -1,5 +1,3 @@
-const connectDB = require('../configs/dbConfig');
-
 const Blog = require('../models/blogModel');
 
 const blogs = [
