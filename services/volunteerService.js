@@ -1,4 +1,5 @@
 const Volunteer = require('../models/volunteerModel');
+const Event = require('../models/eventModel');
 
 // Get all volunteers
 const getAllVolunteers = async () => {
@@ -31,6 +32,12 @@ const getVolunteerById = async (id) => {
     .populate('userid');
 }
 
+// Check if user is registered for the event
+const getRegisteredVolunteer = async (eventid, userid) => {
+  const volunteer = await Volunteer.findOne({ eventid, userid });
+  return volunteer;
+}
+
 // Create volunteer
 // service
 const createVolunteer = async (volunteerData) => {
@@ -61,5 +68,6 @@ module.exports = {
   getVolunteerById,
   createVolunteer,
   updateVolunteer,
-  deleteVolunteer
+  deleteVolunteer,
+  getRegisteredVolunteer
 }

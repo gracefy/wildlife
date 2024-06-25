@@ -19,7 +19,12 @@ const getAllEvents = async () => {
 
 // Get event by id
 const getEventById = async (id) => {
-  return await Event.findById(id);
+  const event = await Event.findById(id);
+  return event ? {
+    ...event.toObject(),
+    startTime: formatDateTime(event.startTime),
+    endTime: formatDateTime(event.endTime)
+  } : null;
 }
 
 // Create event

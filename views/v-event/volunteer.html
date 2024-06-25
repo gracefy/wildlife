@@ -8,7 +8,7 @@
   <meta name="keywords" content="wildelife, animals">
   <meta name="description"
     content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
-  <link rel="shortcut icon" href="/images/icons/favicon.ico">
+  <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
   <!-- bootstrap css -->
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="/css/public.css">
@@ -28,144 +28,95 @@
       <!-- >>>>>>> hero image end >>>>>>>>> -->
 
       <!-- >>>>>>>>> apply volunteer form start >>>>>>>>>>> -->
-      <% if(typeof(success)=='undefined' ){%>
-        <div class="container">
-          <h2>Apply Volunteer</h2>
-          <form method="post" action="/volunteer" class="volunteer">
-            <input type="hidden" name="eventid" value="<%= event._id %>">
-            <input type="hidden" name="userid" value="<%= userid %>">
-            <div class="mb-3">
-              <label for="event" class="form-label">Event Title</label>
-              <input type="text" class="form-control" name="event" value="<%= event.title %>" readonly>
-            </div>
-            <div class="mb-3">
-              <label for="name" class="form-label">User Name</label>
-              <input type="text" class="form-control" name="name" value="<%= username %>" readonly>
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label required-label">Email</label>
-              <input type="email" class="form-control" name="email" id="email">
-              <% if (typeof(errors) !='undefined' ){ if(errors.email) { %>
-                <div class="error">
-                  <%= errors.email %>
-                </div>
-                <% }} %>
-            </div>
-            <div class="mb-3">
-              <label for="phone" class="form-label required-label">Phone Number</label>
-              <input type="phone" class="form-control" name="phone" id="phone">
-              <% if (typeof(errors) !='undefined' ){ if(errors.phone) { %>
-                <div class="error">
-                  <%= errors.phone %>
-                </div>
-                <% }} %>
-            </div>
-            <div class="mb-3">
-              <label for="street" class="form-label required-label">Street Number and Name</label>
-              <input type="text" class="form-control" name="street" id="street">
-              <% if (typeof(errors) !='undefined' ){ if(errors.street) { %>
-                <div class="error">
-                  <%= errors.street %>
-                </div>
-                <% }} %>
-            </div>
-            <div class="mb-3">
-              <label for="postal" class="form-label required-label">Postal Code</label>
-              <input type="text" class="form-control" name="postal" id="postal">
-              <% if (typeof(errors) !='undefined' ){ if(errors.postal) { %>
-                <div class="error">
-                  <%= errors.postal %>
-                </div>
-                <% }} %>
-            </div>
-            <div class="mb-3">
-              <label for="city" class="form-label required-label">City</label>
-              <input type="text" class="form-control" name="city" id="city">
-              <% if (typeof(errors) !='undefined' ){ if(errors.city) { %>
-                <div class="error">
-                  <%= errors.city %>
-                </div>
-                <% }} %>
-            </div>
-            <div class="mb-3">
-              <label for="province" class="form-label required-label">Province</label>
-              <select id="province" name="province" class="form-select">
-                <% provinces.forEach(province=> { %>
-                  <option value="<%= province.code %>" <%=province.code==='ON' ? 'selected' : '' %>>
-                    <%= province.name %>
-                  </option>
-                  <% }) %>
-              </select>
-              <% if (typeof(errors) !='undefined' ){ if(errors.province) { %>
-                <div class="error">
-                  <%= errors.province %>
-                </div>
-                <% }} %>
-            </div>
-            <div class="mb-3">
-              <label for="intro" class="form-label">About You</label>
-              <textarea class="form-control" id="intro" name="intro" rows="3"
-                placeholder="Share more about yourself..."></textarea>
-            </div>
-
-            <% if (typeof(dberror) !='undefined' ){ %>
+      <div class="container">
+        <h2>Apply Volunteer</h2>
+        <form method="post" action="/volunteer" class="volunteer">
+          <input type="hidden" name="eventid" value="<%= event._id %>">
+          <input type="hidden" name="userid" value="<%= userid %>">
+          <div class="mb-3">
+            <label for="event" class="form-label">Event Title</label>
+            <input type="text" class="form-control" name="event" value="<%= event.title %>" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">User Name</label>
+            <input type="text" class="form-control" name="name" value="<%= username %>" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label required-label">Email</label>
+            <input type="email" class="form-control" name="email" id="email">
+            <% if (typeof(errors) !='undefined' ){ if(errors.email) { %>
               <div class="error">
-                <%= dberror %>
+                <%= errors.email %>
               </div>
-              <% } %>
-                <button type="submit" class="btn btn-info submit">Apply</button>
-          </form>
+              <% }} %>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label required-label">Phone Number</label>
+            <input type="phone" class="form-control" name="phone" id="phone">
+            <% if (typeof(errors) !='undefined' ){ if(errors.phone) { %>
+              <div class="error">
+                <%= errors.phone %>
+              </div>
+              <% }} %>
+          </div>
+          <div class="mb-3">
+            <label for="street" class="form-label required-label">Street Number and Name</label>
+            <input type="text" class="form-control" name="street" id="street">
+            <% if (typeof(errors) !='undefined' ){ if(errors.street) { %>
+              <div class="error">
+                <%= errors.street %>
+              </div>
+              <% }} %>
+          </div>
+          <div class="mb-3">
+            <label for="postal" class="form-label required-label">Postal Code</label>
+            <input type="text" class="form-control" name="postal" id="postal">
+            <% if (typeof(errors) !='undefined' ){ if(errors.postal) { %>
+              <div class="error">
+                <%= errors.postal %>
+              </div>
+              <% }} %>
+          </div>
+          <div class="mb-3">
+            <label for="city" class="form-label required-label">City</label>
+            <input type="text" class="form-control" name="city" id="city">
+            <% if (typeof(errors) !='undefined' ){ if(errors.city) { %>
+              <div class="error">
+                <%= errors.city %>
+              </div>
+              <% }} %>
+          </div>
+          <div class="mb-3">
+            <label for="province" class="form-label required-label">Province</label>
+            <select id="province" name="province" class="form-select">
+              <% provinces.forEach(province=> { %>
+                <option value="<%= province.code %>" <%=province.code==='ON' ? 'selected' : '' %>>
+                  <%= province.name %>
+                </option>
+                <% }) %>
+            </select>
+            <% if (typeof(errors) !='undefined' ){ if(errors.province) { %>
+              <div class="error">
+                <%= errors.province %>
+              </div>
+              <% }} %>
+          </div>
+          <div class="mb-3">
+            <label for="intro" class="form-label">About You</label>
+            <textarea class="form-control" id="intro" name="intro" rows="3"
+              placeholder="Share more about yourself..."></textarea>
+          </div>
 
-        </div>
-        <!-- >>>>>>>>> apply volunteer form end >>>>>>>>>>> -->
-
-        <%} %>
-          <% if(typeof(success) !='undefined' ){%>
-            <div class="container">
-              <h2>Thank you for applying</h2>
-              <p>Your application has been submitted successfully. We will contact you soon.</p>
-
-              <table class="table table-bordered table-striped">
-
-                <thead>
-                  <tr>
-                    <th>Event</th>
-                    <th>Event Date</th>
-                    <th>Event Location</th>
-                    <th>Volunteer Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Intro</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <%= event.title %>
-                    </td>
-                    <td>
-                      <%= event.startTime%> - <%= event.endTime%>
-                    </td>
-                    <td>
-                      <%= event.location %>, <%= event.city %>
-                          <%= event.province %>
-                    </td>
-                    <td>
-                      <%= data.name %>
-                    </td>
-                    <td>
-                      <%= data.phone %>
-                    </td>
-                    <td>
-                      <%= data.email %>
-                    </td>
-                    <td>
-                      <%= data.intro %>
-                    </td>
-                  </tr>
-              </table>
+          <% if (typeof(dberror) !='undefined' ){ %>
+            <div class="error">
+              <%= dberror %>
             </div>
             <% } %>
+              <button type="submit" class="btn btn-info submit">Apply</button>
+        </form>
+
+      </div>
+      <!-- >>>>>>>>> apply volunteer form end >>>>>>>>>>> -->
     </main>
 
     <!-- import footer section -->

@@ -1,6 +1,8 @@
 // import the functions from service
 const animalService = require('../services/animalService');
-const { appConfig } = require('../configs/appConfig');
+const appConfig = require('../configs/appConfig');
+// const { appConfig } = require('../configs/appConfig');
+console.log(appConfig); // 打印 appConfig 对象以检查是否正确导入
 
 
 // get animal list

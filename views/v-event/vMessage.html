@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Wild</title>
+  <meta name="keywords" content="wildelife, animals">
+  <meta name="description"
+    content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
+  <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/public.css">
+  <link rel="stylesheet" href="/css/event.css">
+</head>
+
+<body>
+  <!-- import header/nav section -->
+  <%- include('../layouts/header.html') %>
+
+    <main>
+      <!-- >>>>>>> hero image start >>>>>>>> -->
+      <section class="hero-public">
+        <img src="/images/event.jpg" alt="a bird">
+        <h1>Our Events <small class="text-body-secondary">We need You</small></h1>
+      </section>
+      <!-- >>>>>>> hero image end >>>>>>>>> -->
+
+      <!-- >>>>>>>>>>>>>>>> message start >>>>>>>>>>>>>> -->
+      <div class="message">
+        <% if(typeof(eventError) !='undefined' ) {%>
+          <p>
+            <%= eventError %>
+          </p>
+          <%} else if(typeof(existError)!='undefined' ) {%>
+            <div class="container">
+              <p>
+                <%= existError %>
+              </p>
+
+              <table class="table table-bordered table-striped">
+
+                <thead>
+                  <tr>
+                    <th>Event</th>
+                    <th>Event Date</th>
+                    <th>Event Location</th>
+                    <th>Volunteer Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Intro</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <%= event.title %>
+                    </td>
+                    <td>
+                      <%= event.startTime%> - <%= event.endTime%>
+                    </td>
+                    <td>
+                      <%= event.location %>, <%= event.city %>
+                          <%= event.province %>
+                    </td>
+                    <td>
+                      <%= volunteer.name %>
+                    </td>
+                    <td>
+                      <%= volunteer.phone %>
+                    </td>
+                    <td>
+                      <%= volunteer.email %>
+                    </td>
+                    <td>
+                      <%= volunteer.intro %>
+                    </td>
+                  </tr>
+              </table>
+            </div>
+            <%} else if(typeof(success) !='undefined' ) {%>
+              <div class="container">
+                <h2>Thank you for applying</h2>
+                <p>Your application has been submitted successfully. We will contact you soon.</p>
+
+                <table class="table table-bordered table-striped">
+
+                  <thead>
+                    <tr>
+                      <th>Event</th>
+                      <th>Event Date</th>
+                      <th>Event Location</th>
+                      <th>Volunteer Name</th>
+                      <th>Phone</th>
+                      <th>Email</th>
+                      <th>Intro</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <%= event.title %>
+                      </td>
+                      <td>
+                        <%= event.startTime%> - <%= event.endTime%>
+                      </td>
+                      <td>
+                        <%= event.location %>, <%= event.city %>
+                            <%= event.province %>
+                      </td>
+                      <td>
+                        <%= data.name %>
+                      </td>
+                      <td>
+                        <%= data.phone %>
+                      </td>
+                      <td>
+                        <%= data.email %>
+                      </td>
+                      <td>
+                        <%= data.intro %>
+                      </td>
+                    </tr>
+                </table>
+              </div>
+              <%} else {%>
+                <p>You are in wrong place. Please return to Event List.</p>
+                <%}%>
+
+                  <a href="/event" class="btn btn-link">Go to Event List</a>
+      </div>
+      <!-- >>>>>>>>>>>>>>>> message end >>>>>>>>>>>>>> -->
+
+
+    </main>
+
+    <!-- import footer section -->
+    <%- include('../layouts/footer.html') %>
+
+      <!-- bootstrap JS, Popper.js, and jQuery -->
+      <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>

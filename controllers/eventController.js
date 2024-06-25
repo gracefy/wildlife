@@ -31,30 +31,7 @@ const getEventList = async (req, res) => {
   }
 }
 
-// get event detail
-const getEventById = async (req, res) => {
-  const id = req.params.id;
-
-  try {
-    const event = await eventService.getEventById(id);
-
-    if (!event) {
-      return res.status(404).send('Event not found');
-    }
-
-    // pass the data to the view
-    res.render('v-event/volunteer', {
-      event,
-      provinces
-    });
-
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-}
 
 module.exports = {
-  getEventList,
-  getEventById,
-  provinces
+  getEventList
 }

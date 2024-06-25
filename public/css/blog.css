@@ -25,11 +25,10 @@
   border-radius: 10px 0 0 10px;
 }
 
-.blog-title {
+.blog-card .blog-info {
   display: flex;
   flex-direction: column;
-  gap: 0.5vw;
-  color: #333;
+  gap: 1vw;
   padding: 2vw;
 }
 
@@ -45,11 +44,13 @@
   color: #555;
 }
 
-.blog-link {
-  width: 200px;
-  text-align: center;
-  margin-top: auto;
+.blog-info .blog-link {
+  margin-top: 2vw;
   align-self: center;
+}
+
+.blog-info .blog-link a {
+  padding: 5px 16px;
 }
 
 @media screen and (max-width: 768px) {

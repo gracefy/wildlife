@@ -42,6 +42,13 @@
   margin-top: 20px;
 }
 
+.comment h3 {
+  text-align: center;
+  margin: 20px 30px;
+  /* background-color: #EEF7FF; */
+  padding: 1vw;
+}
+
 .comment-message {
   margin: 20px 0;
   text-align: center;
@@ -54,6 +61,26 @@
   margin: 20px auto;
 }
 
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 4vw;
+}
+
+.comment-item {
+  margin: 0 30px;
+  padding: 1vw;
+  background-color: #EEF7FF;
+  border-radius: 10px;
+  border-bottom: 1px solid #EEF7FF;
+}
+
+.userinfo {
+  font-size: o.8rem;
+  color: #aaa;
+  margin-top: 10px;
+}
 
 
 /* >>>>>>>>>>>>>> responsive >>>>>>>>>>>>>>> */

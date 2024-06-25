@@ -8,7 +8,7 @@
   <meta name="keywords" content="wildelife, animals">
   <meta name="description"
     content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
-  <link rel="shortcut icon" href="/images/icons/favicon.ico">
+  <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/5775cf1f45.js" crossorigin="anonymous"></script>
   <!-- bootstrap css -->
@@ -44,7 +44,7 @@
             <div class="row blog-card">
               <a href="/blog/<%= blog._id %>" class="col-md-6"><img src="https://<%= blog.image %>"
                   alt="blog image"></a>
-              <div class="col-md-6 blog-title">
+              <div class="col-md-6 blog-info">
                 <h3>
                   <%= blog.title %>
                 </h3>
@@ -58,7 +58,9 @@
                 <p class="excerpt">
                   <%= blog.excerpt %>
                 </p>
-                <a href="/blog/<%= blog._id %>" class="btn btn-info blog-link">Read More</a>
+                <div class="blog-link"> <a class="btn btn-info" href="/blog/<%= blog._id %>">Read
+                    More</a>
+                </div>
               </div>
             </div>
 
@@ -66,7 +68,6 @@
 
         </div>
         <!-- >>>>>>>>>> blog end >>>>>>>>>>>> -->
-
 
         <!-- >>>>>>>>>> pagination start >>>>>>>>>>>> -->
 

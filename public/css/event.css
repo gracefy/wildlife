@@ -13,13 +13,6 @@
   border-radius: 10px;
 }
 
-/* .event-item {
-  display: flex;
-  gap: 2vw;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 1vw;
-  border-radius: 10px;
-} */
 .event-item {
   border-bottom: 1px solid #ddd;
   padding: 1vw;

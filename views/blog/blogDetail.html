@@ -8,7 +8,7 @@
   <meta name="keywords" content="wildelife, animals">
   <meta name="description"
     content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
-  <link rel="shortcut icon" href="/images/icons/favicon.ico">
+  <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/5775cf1f45.js" crossorigin="anonymous"></script>
   <!-- bootstrap css -->
@@ -47,26 +47,43 @@
         <!-- >>>>>>>>>> blog comment start >>>>>>>>>>>> -->
         <div class="comment">
           <% if(comments.length>0) {%>
+            <h3>Comments</h3>
             <div class="comment-list">
               <% comments.forEach(comment=> { %>
-                <div class="comment-item">
-                  <p>
-                    <%= comment.content %>
-                  </p>
-                  <p>By <%= comment.author %> on <%= comment.createAt %>
-                  </p>
+                <div class="comment-item" style="white-space: pre-line;">
+                  <%= comment.content %>
+                    <p class="text-end userinfo">By <%= comment.userid.username %> on <%= comment.createAt %>
+                    </p>
                 </div>
                 <% }); %>
             </div>
             <% } else { %>
-              <p class="comment-message">You are the first comment!</p>
+              <p class="comment-message">Looks like you're the first to comment. Share your thoughts!</p>
               <% } %>
-                <form action="/blog/<%= blog._id %>/comment" method="POST">
+                <form action="/blog/<%= blog._id %>/comment" method="post">
+                  <input type="hidden" name="blogid" value="<%= blog._id %>">
                   <div class="form-group">
                     <label for="content">Comment</label>
-                    <textarea name="content" id="content" class="form-control" required></textarea>
+                    <textarea name="content" class="form-control" rows="4" placeholder="Share your thoughts here"
+                      required><% if(typeof(errors)!='undefined' ){%>
+                        <%- content %>
+                      <%}%></textarea>
+                    <div class="form-text">Comments should be within 500 words.</div>
                   </div>
-                  <button type="submit" class="btn btn-info comment-submit">Comment</button>
+                  <% if(typeof(userid)!='undefined' && userid ){%>
+                    <input type="hidden" name="userid" value="<%= userid %>">
+                    <% if(typeof(errors)!='undefined' ){ errors.forEach(error=> {%>
+                      <p class="error">
+                        <%= error %>
+                      </p>
+                      <%})}%>
+                        <button type="submit" class="btn btn-info comment-submit">Comment</button>
+                        <%} else {%>
+                          <button type="submit" class="btn btn-secondary comment-submit" disabled>Comment</button>
+                          <p class="comment-message">Please <a href="/login" class="btn-link">login</a> to comment
+                          </p>
+                          <%}%>
+
                 </form>
 
         </div>

@@ -32,7 +32,6 @@ const registerUser = async (req, res) => {
     delete req.session.originalPage;
     console.log('originalPage', originalPage);
 
-
     res.redirect(originalPage);
     return;
 
@@ -58,7 +57,6 @@ const loginUser = async (req, res) => {
     errors.array().forEach(error => {
       errorMessages[error.path] = error.msg;
     });
-    // console.log(errorMessages);
 
     return res.render('user/login', { errors: errorMessages });
   }
@@ -100,12 +98,15 @@ const register = (req, res) => {
 
 const logout = (req, res) => {
   req.session.destroy((err) => {
+
     if (err) {
       console.log('Error in Logout', err.message);
-
-      res.redirect('/');
-
     }
+
+    //clear user info from locals
+    res.locals.username = null;
+    res.locals.userid = null;
+
     res.redirect('/');
   });
 }

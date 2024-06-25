@@ -4,6 +4,43 @@ const eventService = require('../services/eventService');
 const provinces = require('../configs/provinces');
 
 
+// get volunteer page
+const applyVolunteer = async (req, res) => {
+  const eventid = req.params.eventid;
+  const userid = req.session.userid;
+
+  try {
+    const event = await eventService.getEventById(eventid);
+
+    if (!event) {
+      return res.render('v-event/vMessage', {
+        eventError: 'Event not found.'
+      });
+    }
+    //get volunteer data if user already registered for this event
+    const volunteer = await volunteerService.getRegisteredVolunteer(eventid, userid);
+
+    if (volunteer) {
+      return res.render('v-event/vMessage', {
+        event,
+        volunteer,
+        existError: 'You have already registered for this event.'
+      });
+    }
+    // pass the data to the view
+    res.render('v-event/volunteer', {
+      event,
+      provinces
+    });
+
+  } catch (error) {
+    return res.render('v-event/vMessage', {
+      eventError: 'Error in getting event detail.'
+    });
+  }
+}
+
+
 //save volunteer
 const saveVolunteer = async (req, res) => {
   // Validate the request
@@ -48,9 +85,8 @@ const saveVolunteer = async (req, res) => {
     // Create a new volunteer
     const volunteer = await volunteerService.createVolunteer(data);
 
-
     //render volunteer page with success message
-    return res.render('v-event/volunteer',
+    return res.render('v-event/vMessage',
       {
         data,
         event,
@@ -72,5 +108,6 @@ const saveVolunteer = async (req, res) => {
 }
 
 module.exports = {
-  saveVolunteer
+  saveVolunteer,
+  applyVolunteer
 }

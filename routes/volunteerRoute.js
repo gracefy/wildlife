@@ -3,8 +3,14 @@ const express = require('express');
 const router = express.Router();
 const { check } = require('express-validator');
 const volunteerController = require('../controllers/volunteerController');
+const isLogin = require('../middleware/isLogin');
+
 
 // Define the routes
+
+// get volunteer page
+router.get('/volunteer/:eventid', isLogin, volunteerController.applyVolunteer);
+
 //save volunteer
 router.post('/volunteer', [
   check('name', 'Name is required.').notEmpty(),

@@ -28,7 +28,7 @@ const swaggerOptions = {
       description: 'Wildlife Data Dictionary API generated with express',
     }
   },
-  apis: [appConfig.routesPath + '/*.js', appConfig.modelsPath + '/*.js'],
+  apis: [path.join(appConfig.routesPath, '*.js'), path.join(appConfig.modelsPath, '*.js')],
 }
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);

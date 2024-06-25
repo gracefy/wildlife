@@ -194,7 +194,7 @@ button {
 .username {
   background-color: transparent;
   font-size: 1.2rem;
-  color: #1415AC;
+  color: #5DC3F3;
 }
 
 /* footer section */
@@ -210,7 +210,6 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* color: #fff; */
   font-size: 0.8rem;
   margin-top: 4vw;
 }
@@ -300,6 +299,7 @@ footer {
   border: 1px solid #C5E7EF;
 }
 
+/* >>>>>>>>>>>>>>> other common>>>>>>>>>>>>>>>>>>>> */
 .error {
   color: red;
   font-size: 0.8em;
@@ -311,11 +311,22 @@ footer {
   margin-left: 5px;
 }
 
+
 .option {
   text-align: center;
   text-decoration: underline;
   color: #aaa;
   margin-top: 10px;
+}
+
+.message {
+  text-align: center;
+  color: #5DC3F3;
+  margin-top: 10px;
+}
+
+.message p {
+  margin: 10px 0;
 }
 
 
@@ -378,5 +389,10 @@ footer {
   .search button {
     font-size: 2vw;
     padding-right: 2vw;
+  }
+
+  .copyright p,
+  .media ul li {
+    font-size: 0.8rem;
   }
 }

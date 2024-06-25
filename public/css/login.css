@@ -56,6 +56,10 @@
   border-radius: 5px;
 }
 
+.login-prompt {
+  text-align: center;
+  margin-top: 20px;
+}
 
 
 /* Responsive */

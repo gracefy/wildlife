@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- bootstrap css -->
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/css/public.css">
   <link rel="stylesheet" href="/css/login.css">
   <title>Register</title>
@@ -21,8 +22,8 @@
       <form action="/register" method="post">
         <div class="mb-3">
           <label for="username" class="form-label required-label">Username</label>
-          <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameInfo">
-          <div id="usernameInfo" class="form-text">Include characters and numbers.</div>
+          <input type="text" class="form-control" id="username" name="username">
+          <div class="form-text">Include characters and numbers.</div>
           <% if (typeof(errors) !='undefined' ){ if(errors.username) { %>
             <div class="error">
               <%= errors.username %>
@@ -31,8 +32,8 @@
         </div>
         <div class="mb-3">
           <label for="email" class="form-label required-label">Email</label>
-          <input type="email" class="form-control" id="email" name="email" aria-describedby="emailInfo">
-          <div id=" emailInfo" class="form-text">We'll never share your email with anyone else.
+          <input type="email" class="form-control" id="email" name="email">
+          <div class="form-text">We'll never share your email with anyone else.
           </div>
           <% if (typeof(errors) !='undefined' ){ if(errors.email) { %>
             <div class="error">
@@ -43,8 +44,8 @@
 
         <div class="mb-3">
           <label for="password" class="form-label required-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password" aria-describedby="passInfo">
-          <div id="passInfo" class="form-text">At least 6 characters.</div>
+          <input type="password" class="form-control" id="password" name="password">
+          <div class="form-text">At least 6 characters.</div>
           <% if (typeof(errors) !='undefined' ){ if(errors.password) { %>
             <div class="error">
               <%= errors.password %>
@@ -64,7 +65,9 @@
               <button type="submit" class="btn btn-info">Register</button>
               <button type="button" id="cancel" class="btn btn-secondary">Cancel</button>
             </div>
-            <a href="/login" class="option">Login</a>
+            <p class="login-prompt">
+              Already have an account? Please <a href="/login" class="btn-link">Login</a>
+            </p>
       </form>
     </div>
 

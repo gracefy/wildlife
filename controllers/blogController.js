@@ -1,5 +1,6 @@
 //import services
 const blogService = require('../services/blogService');
+const commentService = require('../services/commentService');
 
 // get blog list
 const getBlogList = async (req, res) => {
@@ -39,14 +40,16 @@ const getBlogList = async (req, res) => {
     });
 
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.render('blog/blogError', {
+      error: 'Error in getting blog list.'
+    });
   }
 }
 
 // get blog detail
 const getBlogById = async (req, res) => {
   const id = req.params.id;
-  const comments = [];
+  const comments = await commentService.getCommentsByBlog(id);
 
   try {
     const blog = await blogService.getBlogById(id);
@@ -62,11 +65,55 @@ const getBlogById = async (req, res) => {
     });
 
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.render('blog/blogError', {
+      error: 'Error in getting blog detail.'
+    });
   }
 }
 
+//handle the comment post request
+const createComment = async (req, res) => {
+
+  const { blogid, userid } = req.body;
+  const content = req.body.content.trim();
+
+  let errors = [];
+  if (!content) {
+    errors.push('Comment is required.');
+  } else if (content.split(/\s+/).length > 500) {
+    errors.push('Comment should within 500 words.');
+  } else if (!userid) {
+    errors.push('No User information, please try again.');
+  } else if (!blogid) {
+    errors.push('No Blog information, please try again.');
+  }
+
+  if (errors.length > 0) {
+    const blog = await blogService.getBlogById(blogid);
+    const comments = await commentService.getCommentsByBlog(blogid);
+
+    return res.render('blog/blogDetail', {
+      blog,
+      comments,
+      content,
+      errors
+    });
+  }
+
+  try {
+    await commentService.createComment({ blogid, userid, content });
+    res.redirect(`/blog/${blogid}`);
+
+  } catch (error) {
+    return res.render('blog/blogError', {
+      error: 'Error in creating comment.'
+    });
+  }
+}
+
+//export all functions
 module.exports = {
   getBlogList,
-  getBlogById
+  getBlogById,
+  createComment
 }
