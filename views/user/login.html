@@ -19,7 +19,7 @@
     <div class="login-form">
       <div class="logo"></div>
       <h1>EcoWild</h1>
-      <form action="/login" method="post">
+      <form action="/user/login" method="post">
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
           <input type="email" class="form-control" id="email" name="email">
@@ -49,9 +49,10 @@
           <% } %>
             <div class="login-buttons">
               <button type="submit" class="btn btn-info">Login</button>
-              <button type="button" id="cancel" class="btn btn-secondary">Cancel</button>
+              <a href="/"><button type="button" class="btn btn-secondary">Cancel</button></a>
             </div>
-            <p class="login-prompt">Do not have an account? Please <a href="/register" class="btn-link">Register</a>
+            <p class="login-prompt">Do not have an account? Please <a href="/user/register"
+                class="btn-link">Register</a>
             </p>
       </form>
     </div>
@@ -59,10 +60,6 @@
 
   <!-- bootstrap js -->
   <script src="/bootstrap/js/bootstrap.js"></script>
-  <!-- jquery -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <script src="/js/login.js"></script>
 </body>
 
 </html>

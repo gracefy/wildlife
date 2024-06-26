@@ -1,6 +1,8 @@
 const { validationResult } = require('express-validator');
 const volunteerService = require('../services/volunteerService');
 const eventService = require('../services/eventService');
+const addressService = require('../services/addressService');
+const userService = require('../services/userService');
 const provinces = require('../configs/provinces');
 
 
@@ -46,23 +48,8 @@ const saveVolunteer = async (req, res) => {
   // Validate the request
   const errors = validationResult(req);
 
-  const { eventid, userid, name, email, phone, street, postal, city, province, intro } = req.body;
+  const { eventid, userid, name, email, fname, lname, phone, street, postal, city, province, intro } = req.body;
   const event = await eventService.getEventById(eventid);
-
-  const data = {
-    eventid,
-    userid,
-    name,
-    email,
-    phone,
-    street,
-    postal,
-    city,
-    province,
-    intro
-  };
-
-  console.log('data', data);
 
   if (!errors.isEmpty()) {
     //set error messages for each field
@@ -74,7 +61,7 @@ const saveVolunteer = async (req, res) => {
     // render volunteer page with error message
     return res.render('v-event/volunteer',
       {
-        data,
+        data: req.body,
         event,
         provinces,
         errors: errorMessages
@@ -82,13 +69,21 @@ const saveVolunteer = async (req, res) => {
   }
 
   try {
+
+    //create address
+    const address = await addressService.createAddress({ fname, lname, phone, street, city, province, postal });
+    const addressid = address._id;
+
+    //update user info with address id
+    await userService.updateUserAddress(userid, addressid);
+
     // Create a new volunteer
-    const volunteer = await volunteerService.createVolunteer(data);
+    const volunteer = await volunteerService.createVolunteer({ event: eventid, user: userid, address: addressid, intro: intro });
 
     //render volunteer page with success message
     return res.render('v-event/vMessage',
       {
-        data,
+        data: req.body,
         event,
         success: 'Volunteer saved successfully.'
       });
@@ -99,7 +94,7 @@ const saveVolunteer = async (req, res) => {
     //render volunteer page with error message
     return res.render('v-event/volunteer',
       {
-        data,
+        data: req.body,
         event,
         provinces,
         dberror: 'Error in saving volunteer, please try again.'

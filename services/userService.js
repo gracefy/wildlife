@@ -59,8 +59,32 @@ const authUser = async (user) => {
   }
 }
 
+//get user by id
+const getUserById = async (userId) => {
+  try {
+    const user = await User.findById(userId).populate('address');
+    return user;
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
+//update user info with address id
+const updateUserAddress = async (userId, addressId) => {
+  try {
+    const user = await User.findByIdAndUpdate(userId, { address: addressId }, { new: true });
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
 // Export the functions
 module.exports = {
   createUser,
-  authUser
+  authUser,
+  getUserById,
+  updateUserAddress
 };

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Wild Donate</title>
+  <meta name="keywords" content="wildelife, animals">
+  <meta name="description"
+    content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
+  <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/5775cf1f45.js" crossorigin="anonymous"></script>
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/public.css">
+  <link rel="stylesheet" href="/css/donate.css">
+</head>
+
+<body>
+  <!-- import header/nav section -->
+  <%- include('../layouts/header.html') %>
+    <main>
+      <!-- >>>>>>> hero image start >>>>>>>> -->
+      <section class="hero-public">
+        <img src="/images/bear.jpg" alt="bear">
+        <h1>Donate Eco-Wild</small></h1>
+      </section>
+      <!-- >>>>>>> hero image end >>>>>>>>> -->
+
+      <!-- >>>>>>>>>> message start >>>>>>>>>>>> -->
+      <div class="container">
+        <h2>Thank you for your donation!</h2>
+
+        <div class="message success">
+          <p>Your donation of $<%= amount %> has been received.</p>
+          <p>Thank you for your support!</p>
+        </div>
+        <div class="mt-5 text-center">
+          <a href="/" class="btn btn-info">Return to homapage</a>
+          <a href="/user/profile" class="btn btn-info">Check my donation list</a>
+        </div>
+        <!-- >>>>>>>>>> message end >>>>>>>>>>>> -->
+      </div>
+    </main>
+    <!-- import footer section -->
+    <%- include('../layouts/footer.html') %>
+
+      <!-- bootstrap JS, Popper.js, and jQuery -->
+      <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>

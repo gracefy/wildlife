@@ -1,0 +1,82 @@
+/* donate page style */
+.donate-form {
+  width: 100%;
+  display: flex;
+  gap: 4vw;
+}
+
+.address-info {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.login-link {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+input[type="radio"]:checked+.amount-item {
+  background-color: #0dcaf0;
+  color: #000;
+}
+
+.amount-info {
+  margin: 10px;
+}
+
+.amount-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 2vw;
+}
+
+.amount-item {
+  width: 160px;
+}
+
+.amount-item.active {
+  color: #000 !important;
+}
+
+.custom-amount {
+  margin-top: 20px;
+  grid-column: span 3;
+}
+
+.submit button {
+  width: 60%;
+  margin-top: 20px;
+}
+
+/* success page */
+.message.success {
+  margin-top: 4vw;
+}
+
+
+/* responsive */
+@media screen and (max-width: 768px) {
+  .donate-form {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  /* 
+  .amount-options {
+    grid-template-columns: 1fr;
+  } */
+
+  .amount-item {
+    width: 120px;
+  }
+}

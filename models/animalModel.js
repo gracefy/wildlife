@@ -77,8 +77,6 @@
  *
  */
 
-
-
 const mongoose = require('mongoose');
 const Location = require('./locationModel');
 const AnimalType = require('./animalTypeModel');

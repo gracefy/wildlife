@@ -19,6 +19,7 @@ const blogRoute = require('./routes/blogRoute');
 const homeRoute = require('./routes/homeRoute');
 const userRoute = require('./routes/userRoute');
 const volunteerRoute = require('./routes/volunteerRoute');
+const donateRoute = require('./routes/donateRoute');
 
 //impot custom middleware
 const animalTypeMiddleware = require('./middleware/animalTypeMiddleware');
@@ -61,6 +62,8 @@ app.set('views', appConfig.viewPath);
 app.use(express.static(appConfig.publicPath));
 //path to bootstrap
 app.use('/bootstrap', express.static(appConfig.bootstrapPath));
+//path to jquery
+app.use('/jquery', express.static(appConfig.jqueryPath));
 
 //use custom middleware
 app.use(storeOriginalPage);
@@ -75,19 +78,19 @@ app.use((req, res, next) => {
 
 
 //use routes
+app.use('/', homeRoute);
+
 app.use('/animal', animalRoute);
 
 app.use('/event', eventRoute);
 
 app.use('/blog', blogRoute);
 
-app.use('/', homeRoute);
+app.use('/user', userRoute);
 
-app.use('/about', homeRoute);
+app.use('/volunteer', volunteerRoute);
 
-app.use('/', userRoute);
-
-app.use('/', volunteerRoute);
+app.use('/donate', donateRoute);
 
 // Connect to database
 connectDB();
@@ -95,5 +98,6 @@ connectDB();
 // Listen to port
 const PORT = appConfig.port || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on  http://localhost:${PORT}<br>Swagger is running on http://localhost:${PORT}/api-docs`);
+  console.log(`Server is running on  http://localhost:${PORT}`);
+  console.log(`Swagger is running on http://localhost:${PORT}/api-docs`);
 });

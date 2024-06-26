@@ -25,6 +25,7 @@ const registerUser = async (req, res) => {
     const user = await userService.createUser({ username, password, email });
     req.session.userid = user._id;
     req.session.username = user.username;
+    req.session.email = user.email;
 
 
     // Redirect to the original page
@@ -68,6 +69,7 @@ const loginUser = async (req, res) => {
 
     req.session.userid = user._id;
     req.session.username = user.username;
+    req.session.email = user.email;
 
     // Redirect to the original page
     const originalPage = req.session.originalPage || '/';
@@ -106,6 +108,7 @@ const logout = (req, res) => {
     //clear user info from locals
     res.locals.username = null;
     res.locals.userid = null;
+    res.locals.useremail = null;
 
     res.redirect('/');
   });

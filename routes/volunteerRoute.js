@@ -9,10 +9,10 @@ const isLogin = require('../middleware/isLogin');
 // Define the routes
 
 // get volunteer page
-router.get('/volunteer/:eventid', isLogin, volunteerController.applyVolunteer);
+router.get('/:eventid', isLogin, volunteerController.applyVolunteer);
 
 //save volunteer
-router.post('/volunteer', [
+router.post('/', [
   check('name', 'Name is required.').notEmpty(),
   check('email', 'Please enter a valid email').isEmail(),
   check('phone', 'Phone is required.').notEmpty(),

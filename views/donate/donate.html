@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Wild Donate</title>
+  <meta name="keywords" content="wildelife, animals">
+  <meta name="description"
+    content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
+  <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/5775cf1f45.js" crossorigin="anonymous"></script>
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/public.css">
+  <link rel="stylesheet" href="/css/donate.css">
+</head>
+
+<body>
+  <!-- import header/nav section -->
+  <%- include('../layouts/header.html') %>
+    <main>
+      <!-- >>>>>>> hero image start >>>>>>>> -->
+      <section class="hero-public">
+        <img src="/images/bear.jpg" alt="bear">
+        <h1>Donate Eco-Wild</small></h1>
+      </section>
+      <!-- >>>>>>> hero image end >>>>>>>>> -->
+
+      <!-- >>>>>>>>>> donate start >>>>>>>>>>>> -->
+      <div class="container">
+        <form action="/donate/process" method="post">
+          <div class="donate-form">
+            <div class="row address-info">
+              <h2 class="mb-3">Your information</h2>
+              <% if(typeof(userid)=='undefined' || !userid ){%>
+                <div class="login-link">
+                  <p>Please <a href="/user/login" class="btn-link">Login</a> to better track your donations.</p>
+                  <p>Do not have an account? please <a href="/user/register" class="btn-link">Register</a> first.
+                  </p>
+                </div>
+                <%} else{%>
+                  <input type="hidden" name="userid" value="<%= userid %>">
+                  <div class="mb-3">
+                    <label for="uname">Username</label>
+                    <input type="text" class="form-control" name="uname" id="uname" value="<%= username %>" readonly>
+                  </div>
+                  <div class="mb-3">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" name="email" id="email" value="<%= useremail %>" readonly>
+                  </div>
+                  <div class="mb-3">
+                    <label for="fname" class="form-label required-label">First Name</label>
+                    <input type="text" class="form-control" name="fname" id="fname">
+                    <% if (typeof(errors) !='undefined' ){ if(errors.fname) { %>
+                      <div class="error">
+                        <%= errors.fname %>
+                      </div>
+                      <% }} %>
+                  </div>
+                  <div class="mb-3">
+                    <label for="lname" class="form-label required-label">Last Name</label>
+                    <input type="text" class="form-control" name="lname" id="lname">
+                    <% if (typeof(errors) !='undefined' ){ if(errors.lname) { %>
+                      <div class="error">
+                        <%= errors.lname %>
+                      </div>
+                      <% }} %>
+                  </div>
+                  <div class="mb-3">
+                    <label for="phone" class="form-label required-label">Phone Number</label>
+                    <input type="phone" class="form-control" name="phone" id="phone">
+                    <% if (typeof(errors) !='undefined' ){ if(errors.phone) { %>
+                      <div class="error">
+                        <%= errors.phone %>
+                      </div>
+                      <% }} %>
+                  </div>
+                  <div class="mb-3">
+                    <label for="street" class="form-label required-label">Street Number and Name</label>
+                    <input type="text" class="form-control" name="street" id="street">
+                    <% if (typeof(errors) !='undefined' ){ if(errors.street) { %>
+                      <div class="error">
+                        <%= errors.street %>
+                      </div>
+                      <% }} %>
+                  </div>
+                  <div class="mb-3">
+                    <label for="postal" class="form-label required-label">Postal Code</label>
+                    <input type="text" class="form-control" name="postal" id="postal">
+                    <% if (typeof(errors) !='undefined' ){ if(errors.postal) { %>
+                      <div class="error">
+                        <%= errors.postal %>
+                      </div>
+                      <% }} %>
+                  </div>
+                  <div class="mb-3">
+                    <label for="city" class="form-label required-label">City</label>
+                    <input type="text" class="form-control" name="city" id="city">
+                    <% if (typeof(errors) !='undefined' ){ if(errors.city) { %>
+                      <div class="error">
+                        <%= errors.city %>
+                      </div>
+                      <% }} %>
+                  </div>
+                  <div class="mb-3">
+                    <label for="province" class="form-label required-label">Province</label>
+                    <select id="province" name="province" class="form-select">
+                      <% provinces.forEach(province=> { %>
+                        <option value="<%= province.code %>" <%=province.code==='ON' ? 'selected' : '' %>>
+                          <%= province.name %>
+                        </option>
+                        <% }) %>
+                    </select>
+                    <% if (typeof(errors) !='undefined' ){ if(errors.province) { %>
+                      <div class="error">
+                        <%= errors.province %>
+                      </div>
+                      <% }} %>
+                  </div>
+                  <%}%>
+            </div>
+            <div class="row">
+              <div class="amount-info">
+                <h2>Donate</h2>
+                <p class="text-center">Thank you for helping us to protect wildlife.</p>
+                <div class="amount-options">
+                  <input type="radio" name="amount" id="amount5" class="hidden" value="5">
+                  <label for="amount5" class="btn btn-outline-info amount-item">$5</label>
+                  <input type="radio" name="amount" id="amount10" class="hidden" value="10">
+                  <label for="amount10" class="btn btn-outline-info amount-item">$10</label>
+                  <input type="radio" name="amount" id="amount15" class="hidden" value="15">
+                  <label for="amount15" class="btn btn-outline-info amount-item">$15</label>
+                  <input type="radio" name="amount" id="amount20" class="hidden" value="20">
+                  <label for="amount20" class="btn btn-outline-info amount-item">$20</label>
+                  <input type="radio" name="amount" id="amount25" class="hidden" value="25">
+                  <label for="amount25" class="btn btn-outline-info amount-item">$25</label>
+                  <input type="radio" name="amount" id="amount30" class="hidden" value="30">
+                  <label for="amount30" class="btn btn-outline-info amount-item">$30</label>
+                  <div class="custom-amount">
+                    <label for="customAmount">Other Amount: </label>
+                    <input type="number" name="customAmount" id="customAmount" min="1" placeholder="$"
+                      class="btn btn-outline-info amount-item">
+                  </div>
+                </div>
+              </div>
+              <div class="submit text-center">
+                <button type="submit" class="btn btn-info">Donate</button>
+              </div>
+            </div>
+
+          </div>
+        </form>
+
+        <!-- >>>>>>>>>> donate end >>>>>>>>>>>> -->
+      </div>
+    </main>
+    <!-- import footer section -->
+    <%- include('../layouts/footer.html') %>
+
+      <!-- bootstrap JS, Popper.js, and jQuery -->
+      <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+      <script src="/jquery/jquery.js"></script>
+      <script src="/js/handleDonateAmount.js"></script>
+</body>
+
+</html>

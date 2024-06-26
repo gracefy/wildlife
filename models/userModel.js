@@ -28,11 +28,17 @@
 
 
 const mongoose = require('mongoose');
+const Address = require('./addressModel');
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
+  address: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Address',
+    default: ''
+  },
   createAt: { type: Date, default: Date.now },
   updateAt: { type: Date, default: Date.now }
 });

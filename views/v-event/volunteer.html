@@ -42,11 +42,29 @@
             <input type="text" class="form-control" name="name" value="<%= username %>" readonly>
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label required-label">Email</label>
-            <input type="email" class="form-control" name="email" id="email">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" id="email" value="<%= useremail %>" readonly>
             <% if (typeof(errors) !='undefined' ){ if(errors.email) { %>
               <div class="error">
                 <%= errors.email %>
+              </div>
+              <% }} %>
+          </div>
+          <div class="mb-3">
+            <label for="fname" class="form-label required-label">First Name</label>
+            <input type="text" class="form-control" name="fname" id="fname">
+            <% if (typeof(errors) !='undefined' ){ if(errors.fname) { %>
+              <div class="error">
+                <%= errors.fname %>
+              </div>
+              <% }} %>
+          </div>
+          <div class="mb-3">
+            <label for="lname" class="form-label required-label">Last Name</label>
+            <input type="text" class="form-control" name="lname" id="lname">
+            <% if (typeof(errors) !='undefined' ){ if(errors.lname) { %>
+              <div class="error">
+                <%= errors.lname %>
               </div>
               <% }} %>
           </div>

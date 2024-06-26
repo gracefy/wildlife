@@ -16,6 +16,7 @@ const appConfig = {
   routesPath: path.join(__dirname, '../routes'),
   modelsPath: path.join(__dirname, '../models'),
   bootstrapPath: path.join(__dirname, '../node_modules/bootstrap/dist/'),
+  jqueryPath: path.join(__dirname, '../node_modules/jquery/dist/'),
 };
 
 

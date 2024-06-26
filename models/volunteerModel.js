@@ -60,25 +60,24 @@
 const mongoose = require('mongoose');
 const Event = require('./eventModel');
 const User = require('./userModel');
+const Address = require('./addressModel');
 
 const volunteerSchema = new mongoose.Schema({
-  eventid: {
+  event: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Event',
     required: true
   },
-  userid: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
-  name: { type: String, required: true },
-  email: { type: String, required: true },
-  phone: { type: String, required: true },
-  street: { type: String, required: true },
-  postal: { type: String, required: true },
-  city: { type: String, required: true },
-  province: { type: String, required: true },
+  address: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Address',
+    required: true
+  },
   intro: { type: String, default: '' },
   isPass: { type: Boolean, default: false },
   createAt: { type: Date, default: Date.now },

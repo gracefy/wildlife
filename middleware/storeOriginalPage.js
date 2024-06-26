@@ -1,6 +1,6 @@
 
 const storeOriginalPage = (req, res, next) => {
-  if (req.method === 'GET' && req.originalUrl !== '/login' && req.originalUrl !== '/register') {
+  if (req.method === 'GET' && req.originalUrl !== '/user/login' && req.originalUrl !== '/user/register') {
 
     // Store the original page
     req.session.originalPage = req.originalUrl;

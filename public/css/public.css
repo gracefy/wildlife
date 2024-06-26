@@ -42,7 +42,6 @@ main {
   font-size: 3vw;
 }
 
-
 /* font style */
 h1 {
   font-size: 2rem;
@@ -106,51 +105,11 @@ form {
 }
 
 /* button style */
-
 button {
   cursor: pointer;
   border: none;
   font-size: 1rem;
 }
-
-/* .btn-dark {
-  background-color: #343a40;
-  color: #fff;
-  padding: 0.5vw 1.4vw;
-  border-radius: 0.3vw;
-}
-
-.btn-dark:hover {
-  filter: brightness(120%);
-}
-
-.btn-white {
-  background-color: #fff;
-  color: #7AB2B2;
-  padding: 0.5vw 1.4vw;
-  border-radius: 0.3vw;
-}
-
-.btn-white:hover {
-  filter: brightness(120%);
-}
-
-
-.btn-blue {
-  background-color: #7AB2B2;
-  color: #fff;
-  padding: 0.5vw 1.2vw;
-  border-radius: 0.3vw;
-} */
-
-/* .btn-blue:hover {
-  filter: brightness(120%);
-} */
-
-/* .btn-blue.submit {
-  width: 40vw;
-  margin: 20px auto;
-} */
 
 /* header section */
 .navbar {
@@ -327,6 +286,11 @@ footer {
 
 .message p {
   margin: 10px 0;
+}
+
+input:read-only {
+  background-color: #f3f3f3;
+  color: #686868;
 }
 
 

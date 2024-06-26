@@ -40,7 +40,6 @@
               </p>
 
               <table class="table table-bordered table-striped">
-
                 <thead>
                   <tr>
                     <th>Event</th>
@@ -65,13 +64,14 @@
                           <%= event.province %>
                     </td>
                     <td>
-                      <%= volunteer.name %>
+                      <%= volunteer.address.fname %>
+                        <%= volunteer.address.lname %>
                     </td>
                     <td>
-                      <%= volunteer.phone %>
+                      <%= volunteer.address.phone %>
                     </td>
                     <td>
-                      <%= volunteer.email %>
+                      <%= useremail %>
                     </td>
                     <td>
                       <%= volunteer.intro %>
@@ -85,7 +85,6 @@
                 <p>Your application has been submitted successfully. We will contact you soon.</p>
 
                 <table class="table table-bordered table-striped">
-
                   <thead>
                     <tr>
                       <th>Event</th>

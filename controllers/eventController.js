@@ -1,6 +1,5 @@
 //import services
 const eventService = require('../services/eventService');
-const provinces = require('../configs/provinces');
 
 // get event list
 const getEventList = async (req, res) => {
