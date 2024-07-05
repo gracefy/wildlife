@@ -4,6 +4,7 @@ const eventService = require('../services/eventService');
 const addressService = require('../services/addressService');
 const userService = require('../services/userService');
 const provinces = require('../configs/provinces');
+const isAddressExist = require('../middleware/isAddressExist');
 
 
 // get volunteer page
@@ -21,6 +22,7 @@ const applyVolunteer = async (req, res) => {
     }
     //get volunteer data if user already registered for this event
     const volunteer = await volunteerService.getRegisteredVolunteer(eventid, userid);
+    const user = await userService.getUserById(userid);
 
     if (volunteer) {
       return res.render('v-event/vMessage', {
@@ -32,6 +34,7 @@ const applyVolunteer = async (req, res) => {
     // pass the data to the view
     res.render('v-event/volunteer', {
       event,
+      user,
       provinces
     });
 
@@ -45,11 +48,13 @@ const applyVolunteer = async (req, res) => {
 
 //save volunteer
 const saveVolunteer = async (req, res) => {
+  const { userid, eventid, intro } = req.body;
+
   // Validate the request
   const errors = validationResult(req);
 
-  const { eventid, userid, name, email, fname, lname, phone, street, postal, city, province, intro } = req.body;
   const event = await eventService.getEventById(eventid);
+  const user = await userService.getUserById(userid);
 
   if (!errors.isEmpty()) {
     //set error messages for each field
@@ -62,6 +67,7 @@ const saveVolunteer = async (req, res) => {
     return res.render('v-event/volunteer',
       {
         data: req.body,
+        user,
         event,
         provinces,
         errors: errorMessages
@@ -69,16 +75,20 @@ const saveVolunteer = async (req, res) => {
   }
 
   try {
+    if (!req.userHasAddress) {
 
-    //create address
-    const address = await addressService.createAddress({ fname, lname, phone, street, city, province, postal });
-    const addressid = address._id;
+      const { fname, lname, phone, street, city, province, postal } = req.body;
 
-    //update user info with address id
-    await userService.updateUserAddress(userid, addressid);
+      //create address
+      const address = await addressService.createAddress({ fname, lname, phone, street, city, province, postal });
+      const addressid = address._id;
+
+      //update user info with address id
+      await userService.updateUserAddress(userid, addressid);
+    }
 
     // Create a new volunteer
-    const volunteer = await volunteerService.createVolunteer({ event: eventid, user: userid, address: addressid, intro: intro });
+    await volunteerService.createVolunteer({ event: eventid, user: userid, intro: intro });
 
     //render volunteer page with success message
     return res.render('v-event/vMessage',
@@ -95,6 +105,7 @@ const saveVolunteer = async (req, res) => {
     return res.render('v-event/volunteer',
       {
         data: req.body,
+        user,
         event,
         provinces,
         dberror: 'Error in saving volunteer, please try again.'

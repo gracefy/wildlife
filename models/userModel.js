@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
   address: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Address',
-    default: ''
+    required: false
   },
   createAt: { type: Date, default: Date.now },
   updateAt: { type: Date, default: Date.now }

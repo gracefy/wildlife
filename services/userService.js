@@ -1,4 +1,4 @@
-const brcypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
 
 // Create a new user
@@ -14,7 +14,7 @@ const createUser = async (user) => {
     }
 
     // Hash the password
-    const hashedPassword = await brcypt.hash(user.password, 10);
+    const hashedPassword = await bcrypt.hash(user.password, 10);
 
     // Create a new user
     const newUser = new User({
@@ -44,7 +44,7 @@ const authUser = async (user) => {
     }
 
     // Check if the password is correct
-    const isPasswordMatch = await brcypt.compare(user.password, existingUser.password);
+    const isPasswordMatch = await bcrypt.compare(user.password, existingUser.password);
     if (!isPasswordMatch) {
 
       const passError = { msg: 'Password is invalid. Please try again.', path: 'passerror' }

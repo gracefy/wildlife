@@ -60,7 +60,6 @@
 const mongoose = require('mongoose');
 const Event = require('./eventModel');
 const User = require('./userModel');
-const Address = require('./addressModel');
 
 const volunteerSchema = new mongoose.Schema({
   event: {
@@ -71,11 +70,6 @@ const volunteerSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
-  },
-  address: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Address',
     required: true
   },
   intro: { type: String, default: '' },

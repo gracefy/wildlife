@@ -45,9 +45,7 @@
                     <th>Event</th>
                     <th>Event Date</th>
                     <th>Event Location</th>
-                    <th>Volunteer Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
+                    <th>User Name</th>
                     <th>Intro</th>
                   </tr>
                 </thead>
@@ -64,14 +62,7 @@
                           <%= event.province %>
                     </td>
                     <td>
-                      <%= volunteer.address.fname %>
-                        <%= volunteer.address.lname %>
-                    </td>
-                    <td>
-                      <%= volunteer.address.phone %>
-                    </td>
-                    <td>
-                      <%= useremail %>
+                      <%= username %>
                     </td>
                     <td>
                       <%= volunteer.intro %>

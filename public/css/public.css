@@ -293,6 +293,14 @@ input:read-only {
   color: #686868;
 }
 
+/* address page */
+.address-form {
+  margin: 2vw 0;
+}
+
+.address-submit button {
+  padding: 10px 60px;
+}
 
 /* >>>>>>>>>>>>>>> resposive design >>>>>>>>>>>>>>>>>>>> */
 @media screen and (max-width: 768px) {

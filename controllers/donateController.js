@@ -1,5 +1,7 @@
 const donateService = require('../services/donateService');
 const userService = require('../services/userService');
+const addressService = require('../services/addressService');
+const { check, validationResult } = require('express-validator');
 const stripe = require('../configs/stripe');
 const endpointSecret = process.env.STRIPE_ENDPOINT_SECRET;
 
@@ -28,15 +30,44 @@ const getDonate = async (req, res) => {
 
 // process donate post
 const processDonate = async (req, res) => {
+  const { userid, uname, email } = req.body;
+  const user = await userService.getUserById(userid);
+
+
+  // Validate the request
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    //set error messages for each field
+    const errorMessages = {};
+    errors.array().forEach(error => {
+      errorMessages[error.path] = error.msg;
+    });
+
+    return res.render('donate/donate', {
+      errors: errorMessages,
+      provinces,
+      user
+    });
+  }
+
+  //get amount
   const presetAmount = req.body.amount;
   const customAmount = req.body.customAmount;
   const amount = customAmount || presetAmount;
 
-  const { userid, uname, email, fname, lname, phone, street, postal, city, province } = req.body;
-
-
   try {
-    const user = await userService.getUserById(userid);
+
+    if (!req.userHasAddress) {
+
+      const { fname, lname, phone, street, postal, city, province } = req.body;
+      //create address
+      const address = await addressService.createAddress({ fname, lname, phone, street, city, province, postal });
+      const addressid = address._id;
+
+      //update user info with address id
+      await userService.updateUserAddress(userid, addressid);
+    }
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -55,13 +86,7 @@ const processDonate = async (req, res) => {
       metadata: {
         userid,
         uname,
-        fname,
-        lname,
-        phone,
-        street,
-        postal,
-        city,
-        province
+        amount
       },
       success_url: `${req.headers.origin}/donate/success?amount=${amount}`,
       cancel_url: `${req.headers.origin}/donate`,

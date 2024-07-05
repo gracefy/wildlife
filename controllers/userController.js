@@ -1,5 +1,7 @@
 const { validationResult } = require('express-validator');
 const userService = require('../services/userService');
+const addressService = require('../services/addressService');
+const provinces = require('../configs/provinces');
 
 //handle user registration
 const registerUser = async (req, res) => {
@@ -114,11 +116,58 @@ const logout = (req, res) => {
   });
 }
 
+//open address page
+const getAddress = async (req, res) => {
+  const userid = req.session.userid;
+  const user = await userService.getUserById(userid);
+
+  res.render('user/address', { user, provinces });
+}
+
+//handle user address update
+const updateAddress = async (req, res) => {
+  // Validate the request
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+
+    //set error messages for each field
+    const errorMessages = {};
+    errors.array().forEach(error => {
+      errorMessages[error.path] = error.msg;
+    });
+
+    return res.render('user/address', { errors: errorMessages, user: req.body, provinces });
+  }
+
+  const { userid, addressid, fname, lname, phone, street, city, province, postal } = req.body;
+
+  try {
+
+    //update address
+    const address = await addressService.updateAddress(addressid, { fname, lname, phone, street, city, province, postal });
+
+    // Redirect to the original page
+    const originalPage = req.session.originalPage || '/';
+    delete req.session.originalPage;
+    console.log('originalPage', originalPage);
+
+    res.redirect(originalPage);
+    return;
+
+  } catch (error) {
+    console.log('error in saving new address', error.message);
+    return res.render('user/address', { dbErrors: { dberror: 'Error in saving address, please try again.' }, user: req.body, provinces });
+  }
+}
+
 // Export the functions
 module.exports = {
   registerUser,
   loginUser,
   login,
   register,
-  logout
+  logout,
+  getAddress,
+  updateAddress
 };

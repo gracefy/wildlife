@@ -44,93 +44,95 @@
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" name="email" id="email" value="<%= useremail %>" readonly>
-            <% if (typeof(errors) !='undefined' ){ if(errors.email) { %>
-              <div class="error">
-                <%= errors.email %>
+          </div>
+          <%if(user.address){%>
+            <label for="address" class="form-label">Your Address</label>
+            <input type="text" class="form-control" name="address" id="address" value=" <%= user.address.fname %> <%= user.address.lname %>, <%= user.address.phone %>, <%= user.address.street %>, <%= user.address.city
+                    %>, <%= user.address.province %>, <%= user.address.postal %>" readonly>
+            <a href="/user/address" class="btn-link text-end">Edit Address</a>
+            <%} else{%>
+              <div class="mb-3">
+                <label for="fname" class="form-label required-label">First Name</label>
+                <input type="text" class="form-control" name="fname" id="fname">
+                <% if (typeof(errors) !='undefined' ){ if(errors.fname) { %>
+                  <div class="error">
+                    <%= errors.fname %>
+                  </div>
+                  <% }} %>
               </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="fname" class="form-label required-label">First Name</label>
-            <input type="text" class="form-control" name="fname" id="fname">
-            <% if (typeof(errors) !='undefined' ){ if(errors.fname) { %>
-              <div class="error">
-                <%= errors.fname %>
+              <div class="mb-3">
+                <label for="lname" class="form-label required-label">Last Name</label>
+                <input type="text" class="form-control" name="lname" id="lname">
+                <% if (typeof(errors) !='undefined' ){ if(errors.lname) { %>
+                  <div class="error">
+                    <%= errors.lname %>
+                  </div>
+                  <% }} %>
               </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="lname" class="form-label required-label">Last Name</label>
-            <input type="text" class="form-control" name="lname" id="lname">
-            <% if (typeof(errors) !='undefined' ){ if(errors.lname) { %>
-              <div class="error">
-                <%= errors.lname %>
+              <div class="mb-3">
+                <label for="phone" class="form-label required-label">Phone Number</label>
+                <input type="phone" class="form-control" name="phone" id="phone">
+                <% if (typeof(errors) !='undefined' ){ if(errors.phone) { %>
+                  <div class="error">
+                    <%= errors.phone %>
+                  </div>
+                  <% }} %>
               </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="phone" class="form-label required-label">Phone Number</label>
-            <input type="phone" class="form-control" name="phone" id="phone">
-            <% if (typeof(errors) !='undefined' ){ if(errors.phone) { %>
-              <div class="error">
-                <%= errors.phone %>
+              <div class="mb-3">
+                <label for="street" class="form-label required-label">Street Number and Name</label>
+                <input type="text" class="form-control" name="street" id="street">
+                <% if (typeof(errors) !='undefined' ){ if(errors.street) { %>
+                  <div class="error">
+                    <%= errors.street %>
+                  </div>
+                  <% }} %>
               </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="street" class="form-label required-label">Street Number and Name</label>
-            <input type="text" class="form-control" name="street" id="street">
-            <% if (typeof(errors) !='undefined' ){ if(errors.street) { %>
-              <div class="error">
-                <%= errors.street %>
+              <div class="mb-3">
+                <label for="postal" class="form-label required-label">Postal Code</label>
+                <input type="text" class="form-control" name="postal" id="postal">
+                <% if (typeof(errors) !='undefined' ){ if(errors.postal) { %>
+                  <div class="error">
+                    <%= errors.postal %>
+                  </div>
+                  <% }} %>
               </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="postal" class="form-label required-label">Postal Code</label>
-            <input type="text" class="form-control" name="postal" id="postal">
-            <% if (typeof(errors) !='undefined' ){ if(errors.postal) { %>
-              <div class="error">
-                <%= errors.postal %>
+              <div class="mb-3">
+                <label for="city" class="form-label required-label">City</label>
+                <input type="text" class="form-control" name="city" id="city">
+                <% if (typeof(errors) !='undefined' ){ if(errors.city) { %>
+                  <div class="error">
+                    <%= errors.city %>
+                  </div>
+                  <% }} %>
               </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="city" class="form-label required-label">City</label>
-            <input type="text" class="form-control" name="city" id="city">
-            <% if (typeof(errors) !='undefined' ){ if(errors.city) { %>
-              <div class="error">
-                <%= errors.city %>
+              <div class="mb-3">
+                <label for="province" class="form-label required-label">Province</label>
+                <select id="province" name="province" class="form-select">
+                  <% provinces.forEach(province=> { %>
+                    <option value="<%= province.code %>" <%=province.code==='ON' ? 'selected' : '' %>>
+                      <%= province.name %>
+                    </option>
+                    <% }) %>
+                </select>
+                <% if (typeof(errors) !='undefined' ){ if(errors.province) { %>
+                  <div class="error">
+                    <%= errors.province %>
+                  </div>
+                  <% }} %>
               </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="province" class="form-label required-label">Province</label>
-            <select id="province" name="province" class="form-select">
-              <% provinces.forEach(province=> { %>
-                <option value="<%= province.code %>" <%=province.code==='ON' ? 'selected' : '' %>>
-                  <%= province.name %>
-                </option>
-                <% }) %>
-            </select>
-            <% if (typeof(errors) !='undefined' ){ if(errors.province) { %>
-              <div class="error">
-                <%= errors.province %>
-              </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="intro" class="form-label">About You</label>
-            <textarea class="form-control" id="intro" name="intro" rows="3"
-              placeholder="Share more about yourself..."></textarea>
-          </div>
+              <%}%>
+                <div class="mb-3">
+                  <label for="intro" class="form-label">About You</label>
+                  <textarea class="form-control" id="intro" name="intro" rows="3"
+                    placeholder="Share more about yourself..."></textarea>
+                </div>
 
-          <% if (typeof(dberror) !='undefined' ){ %>
-            <div class="error">
-              <%= dberror %>
-            </div>
-            <% } %>
-              <button type="submit" class="btn btn-info submit">Apply</button>
+                <% if (typeof(dberror) !='undefined' ){ %>
+                  <div class="error">
+                    <%= dberror %>
+                  </div>
+                  <% } %>
+                    <button type="submit" class="btn btn-info submit">Apply</button>
         </form>
 
       </div>

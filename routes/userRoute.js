@@ -18,6 +18,21 @@ router.post('/login', [
   check('password', 'Password is required.').notEmpty(),
 ], userController.loginUser);
 
+//open address page
+router.get('/address', userController.getAddress);
+
+//save address
+router.post('/address', [
+  check('fname', 'First Name is required.').notEmpty(),
+  check('lname', 'Last Name is required.').notEmpty(),
+  check('phone', 'Phone is required.').notEmpty(),
+  check('street', 'Street is required.').notEmpty(),
+  check('postal', 'Postal is required.').notEmpty(),
+  check('city', 'City is required.').notEmpty(),
+  check('province', 'Province is required.').notEmpty(),
+], userController.updateAddress);
+
+
 
 //login page
 router.get('/login', userController.login);
