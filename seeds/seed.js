@@ -2,14 +2,15 @@
 const { connectDB } = require('../configs/dbConfig');
 
 //import the seed functions
-const seedAnimalTypes = require('./seedAnimalTypes');
-const seedLocations = require('./seedLocations');
-const seedAnimals = require('./seedAnimals');
-const seedEvents = require('./seedEvents');
-const seedBlogs = require('./seedBlogs');
+const seedAnimalType = require('./seedAnimalType');
+const seedLocation = require('./seedLocation');
+const seedAnimal = require('./seedAnimal');
+const seedEvent = require('./seedEvent');
+const seedBlog = require('./seedBlog');
 const seedAddress = require('./seedAddress');
 const seedUser = require('./seedUser');
 const seedComment = require('./seedComment');
+const seedDonation = require('./seedDonation');
 const mongoose = require('mongoose');
 
 const seedData = async () => {
@@ -17,19 +18,19 @@ const seedData = async () => {
     await connectDB();
 
     //Seed Animal Types
-    await seedAnimalTypes();
+    await seedAnimalType();
 
     //Seed Locations
-    await seedLocations();
+    await seedLocation();
 
     //Seed Animals
-    await seedAnimals();
+    await seedAnimal();
 
     //Seed Events
-    await seedEvents();
+    await seedEvent();
 
     //Seed Blogs
-    await seedBlogs();
+    await seedBlog();
 
     // Seed Address
     await seedAddress();
@@ -39,6 +40,9 @@ const seedData = async () => {
 
     // Seed Comment
     await seedComment();
+
+    // Seed Donation
+    await seedDonation();
 
     console.log('>>>>>>>>>>>>> All Data seeded! <<<<<<<<<<<<<<<<');
     mongoose.connection.close();

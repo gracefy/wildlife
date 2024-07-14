@@ -707,7 +707,7 @@ const animalData = async () => {
 }
 
 
-const seedAnimals = async () => {
+const seedAnimal = async () => {
 
   try {
 
@@ -726,4 +726,4 @@ const seedAnimals = async () => {
   }
 }
 
-module.exports = seedAnimals;
+module.exports = seedAnimal;

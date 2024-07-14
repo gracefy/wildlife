@@ -24,7 +24,7 @@ const animalTypes = [
   }
 ];
 
-const seedAnimalTypes = async () => {
+const seedAnimalType = async () => {
 
   try {
 
@@ -42,4 +42,4 @@ const seedAnimalTypes = async () => {
   }
 }
 
-module.exports = seedAnimalTypes;
+module.exports = seedAnimalType;

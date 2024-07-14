@@ -170,7 +170,7 @@ const locations = [
 
 ]
 
-const seedLocations = async () => {
+const seedLocation = async () => {
 
   try {
 
@@ -188,4 +188,4 @@ const seedLocations = async () => {
   }
 }
 
-module.exports = seedLocations;
+module.exports = seedLocation;

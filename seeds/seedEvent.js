@@ -125,7 +125,7 @@ const events = [
   }
 ]
 
-const seedEvents = async () => {
+const seedEvent = async () => {
 
   try {
 
@@ -143,4 +143,4 @@ const seedEvents = async () => {
   }
 }
 
-module.exports = seedEvents;
+module.exports = seedEvent;

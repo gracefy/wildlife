@@ -1,8 +1,6 @@
 // import the functions from service
 const animalService = require('../services/animalService');
-const appConfig = require('../configs/appConfig');
-// const { appConfig } = require('../configs/appConfig');
-console.log(appConfig); // 打印 appConfig 对象以检查是否正确导入
+
 
 
 // get animal list
@@ -58,7 +56,8 @@ const getAnimalList = async (req, res) => {
 // get animal detail
 const getAnimalById = async (req, res) => {
   const id = req.params.id;
-  const apiKey = appConfig.googleMapsApiKey;
+  // const apiKey = appConfig.googleMapsApiKey;
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
 
   try {
     const animal = await animalService.getAnimalById(id);

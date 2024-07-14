@@ -242,7 +242,7 @@ const blogs = [
   }
 ]
 
-const seedBlogs = async () => {
+const seedBlog = async () => {
 
   try {
 
@@ -260,4 +260,4 @@ const seedBlogs = async () => {
   }
 }
 
-module.exports = seedBlogs;
+module.exports = seedBlog;

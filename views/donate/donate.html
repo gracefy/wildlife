@@ -146,15 +146,15 @@
                   <label for="amount30" class="btn btn-outline-info amount-item">$30</label>
                   <div class="custom-amount">
                     <label for="customAmount">Other Amount: </label>
-                    <input type="number" name="customAmount" id="customAmount" min="1" placeholder="$"
+                    <input type="number" name="customAmount" id="customAmount" placeholder="$"
                       class="btn btn-outline-info amount-item">
                   </div>
-                  <% if (typeof(errors) !='undefined' ){ if(errors.amount) { %>
-                    <div class="error">
-                      <%= errors.amount %>
-                    </div>
-                    <% }} %>
                 </div>
+                <% if (typeof(errors) !='undefined' ){ if(errors.amount) { %>
+                  <div class="error">
+                    <%= errors.amount %>
+                  </div>
+                  <% }} %>
               </div>
               <div class="submit text-center">
                 <button type="submit" class="btn btn-info">Donate</button>

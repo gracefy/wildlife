@@ -24,15 +24,13 @@ const getDonate = async (req, res) => {
   res.render('donate/donate',
     {
       provinces
-    }
-  );
+    });
 }
 
 // process donate post
 const processDonate = async (req, res) => {
   const { userid, uname, email } = req.body;
   const user = await userService.getUserById(userid);
-
 
   // Validate the request
   const errors = validationResult(req);
@@ -51,10 +49,16 @@ const processDonate = async (req, res) => {
     });
   }
 
-  //get amount
+  // Determine the amount
   const presetAmount = req.body.amount;
   const customAmount = req.body.customAmount;
-  const amount = customAmount || presetAmount;
+  let amount = 0;
+
+  if (customAmount && customAmount > 0) {
+    amount = customAmount;
+  } else {
+    amount = presetAmount;
+  }
 
   try {
 

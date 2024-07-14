@@ -3,7 +3,7 @@ const userService = require('../services/userService');
 const addressService = require('../services/addressService');
 const provinces = require('../configs/provinces');
 
-//handle user registration
+//handle user registration post
 const registerUser = async (req, res) => {
   // Validate the request
   const errors = validationResult(req);
@@ -48,7 +48,7 @@ const registerUser = async (req, res) => {
   }
 }
 
-//handle user login
+//handle user login post
 const loginUser = async (req, res) => {
 
   // Validate the request
