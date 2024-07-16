@@ -1,4 +1,4 @@
-const userSerivice = require('../services/userService');
+const userService = require('../services/userService');
 const commentService = require('../services/commentService');
 const donateService = require('../services/donateService');
 const volunteerService = require('../services/volunteerService');
@@ -13,59 +13,72 @@ const getProfile = async (req, res) => {
   const userid = req.params.userid;
 
   if (!userid) {
-    return res.redirect('/user/login');
+    console.log('Error getting userid.');
+    return res.render('home/error', { message: 'Sorry, Error in getting user information.' });
   }
 
-  const user = await userSerivice.getUserById(userid);
-  const comments = await commentService.getCommentsByUser(userid) || [];
-  const donations = await donateService.getDonatesByUser(userid) || [];
-  const volunteers = await volunteerService.getVolunteersByUser(userid) || [];
+  try {
+    const user = await userService.getUserById(userid);
+    const comments = await commentService.getCommentsByUser(userid) || [];
+    const donations = await donateService.getDonatesByUser(userid) || [];
+    const volunteers = await volunteerService.getVolunteersByUser(userid) || [];
 
-  res.render('profile/profile', {
-    user,
-    comments,
-    donations,
-    volunteers
-  });
+    res.render('profile/profile', {
+      user,
+      comments,
+      donations,
+      volunteers
+    });
+  } catch (error) {
+    console.log('Error getting profile:', error.message);
+    return res.render('home/error', { message: 'Sorry, Error in getting user profile.' });
+  }
 }
 
 
 //post user profile
 const updateProfile = async (req, res) => {
   const { userid, username, email } = req.body;
+  try {
+    const user = await userService.getUserById(userid);
+    const comments = await commentService.getCommentsByUser(userid) || [];
+    const donations = await donateService.getDonatesByUser(userid) || [];
+    const volunteers = await volunteerService.getVolunteersByUser(userid) || [];
 
-  const user = await userSerivice.getUserById(userid);
-  const comments = await commentService.getCommentsByUser(userid) || [];
-  const donations = await donateService.getDonatesByUser(userid) || [];
-  const volunteers = await volunteerService.getVolunteersByUser(userid) || [];
+    const errors = validationResult(req);
 
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
+    if (!errors.isEmpty()) {
 
-    const errorMessages = {};
+      const errorMessages = {};
 
-    errors.array().forEach(error => {
-      errorMessages[error.path] = error.msg;
-    });
+      errors.array().forEach(error => {
+        errorMessages[error.path] = error.msg;
+      });
 
-    return res.render('profile/profile', {
-      user,
-      comments,
-      donations,
-      volunteers,
-      errors: errorMessages
-    });
+      return res.render('profile/profile', {
+        user,
+        comments,
+        donations,
+        volunteers,
+        errors: errorMessages
+      });
 
-  } else {
-    const newUser = await userSerivice.updateUser(userid, { username, email });
+    } else {
 
-    return res.render('profile/profile', {
-      user: newUser,
-      comments,
-      donations,
-      volunteers,
-      success: 'Profile updated successfully.'
-    });
+      const newUser = await userService.updateUser(userid, { username, email });
+
+      return res.render('profile/profile', {
+        user: newUser,
+        comments,
+        donations,
+        volunteers,
+        success: 'Profile updated successfully.'
+      });
+    }
+  } catch (error) {
+    console.log('Error updating profile:', error.message);
+    return res.render('home/error', { message: 'Sorry, Error in updating user profile.' });
+
   }
 }
 
@@ -73,53 +86,57 @@ const updateProfile = async (req, res) => {
 //post user password
 const updatePassword = async (req, res) => {
   const { userid, oldPass, newPass } = req.body;
+  try {
+    const user = await userService.getUserById(userid);
+    const comments = await commentService.getCommentsByUser(userid) || [];
+    const donations = await donateService.getDonatesByUser(userid) || [];
+    const volunteers = await volunteerService.getVolunteersByUser(userid) || [];
 
-  const user = await userSerivice.getUserById(userid);
-  const comments = await commentService.getCommentsByUser(userid) || [];
-  const donations = await donateService.getDonatesByUser(userid) || [];
-  const volunteers = await volunteerService.getVolunteersByUser(userid) || [];
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
 
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
+      const errorMessages = {};
 
-    const errorMessages = {};
+      errors.array().forEach(error => {
+        errorMessages[error.path] = error.msg;
+      });
 
-    errors.array().forEach(error => {
-      errorMessages[error.path] = error.msg;
-    });
-
-    return res.render('profile/profile', {
-      user,
-      comments,
-      donations,
-      volunteers,
-      errors: errorMessages
-    });
-
-  } else {
-
-    const isPasswordMatch = await bcrypt.compare(oldPass, user.password);
-
-    if (!isPasswordMatch) {
       return res.render('profile/profile', {
         user,
         comments,
         donations,
         volunteers,
-        errors: { oldPass: 'Old password is incorrect.' }
+        errors: errorMessages
+      });
+
+    } else {
+
+      const isPasswordMatch = await bcrypt.compare(oldPass, user.password);
+
+      if (!isPasswordMatch) {
+        return res.render('profile/profile', {
+          user,
+          comments,
+          donations,
+          volunteers,
+          errors: { oldPass: 'Old password is incorrect.' }
+        });
+      }
+
+      const password = newPass;
+      const newUser = await userService.updateUserPassword(userid, password);
+
+      return res.render('profile/profile', {
+        user: newUser,
+        comments,
+        donations,
+        volunteers,
+        success: 'Password updated successfully.'
       });
     }
-
-    const password = newPass;
-    const newUser = await userSerivice.updateUserPassword(userid, password);
-
-    return res.render('profile/profile', {
-      user: newUser,
-      comments,
-      donations,
-      volunteers,
-      success: 'Password updated successfully.'
-    });
+  } catch (error) {
+    console.log('Error updating password:', error.message);
+    return res.render('home/error', { message: 'Sorry, Error in updating user password.' });
   }
 }
 

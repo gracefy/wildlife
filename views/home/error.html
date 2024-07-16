@@ -9,37 +9,40 @@
   <meta name="description"
     content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
   <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/5775cf1f45.js" crossorigin="anonymous"></script>
   <!-- bootstrap css -->
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="/css/public.css">
-  <link rel="stylesheet" href="/css/blogDetail.css">
 </head>
 
 <body>
-  <!-- import header/nav section -->
   <%- include('../layouts/header.html') %>
-    <main>
-      <div class="container">
-
-        <!-- >>>>>>>>>> blog Error start >>>>>>>>>>>> -->
-        <% if(typeof(error)!='undefined' ) {%>
-          <div class="error">
-            <%= error %>
+    <main class="container d-flex align-items-center mt-5">
+      <div class="errorpage">
+        <!-- >>>>>>> hero image start >>>>>>>> -->
+        <section class="error-hero">
+          <img src="https://aflive.qiniu.huangmeimi.com/upic_1721139774163" alt="Eco-Wild">
+        </section>
+        <!-- >>>>>>> hero image end >>>>>>>>> -->
+        <% if(typeof(message) !='undefined' ){%>
+          <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Error!</h4>
+            <p>
+              <%=message%>
+            </p>
           </div>
-          <%} else {%>
-            <div class="error">
-              You are not authorized to view this page.
+          <%}else{%>
+            <div class="alert alert-danger" role="alert">
+              <h4 class="alert-heading">Error!</h4>
+              <p>Sorry, the page you are looking for is not available.</p>
             </div>
             <%}%>
-              <!-- >>>>>>>>>> blog Error end >>>>>>>>>>>> -->
-              <p> Please go back to <a href="/" class="btn-link"> Home Page</a></p>
       </div>
+
     </main>
+
+
     <!-- import footer section -->
     <%- include('../layouts/footer.html') %>
-
       <!-- bootstrap JS, Popper.js, and jQuery -->
       <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 </body>

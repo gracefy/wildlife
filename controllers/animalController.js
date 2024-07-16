@@ -49,7 +49,10 @@ const getAnimalList = async (req, res) => {
     });
 
   } catch (error) {
-    res.status(500).json({ message: error.message });
+
+    console.log('Error getting animals:', error.message);
+    return res.render('home/error', { message: 'Sorry, Error in geeting animals data.' });
+
   }
 }
 
@@ -72,7 +75,9 @@ const getAnimalById = async (req, res) => {
       apiKey
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.log('Error getting animal:', error.message);
+
+    return res.render('home/error', { message: 'Sorry, Error in getting animal data.' });
   }
 }
 

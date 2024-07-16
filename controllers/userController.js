@@ -16,7 +16,11 @@ const registerUser = async (req, res) => {
       errorMessages[error.path] = error.msg;
     });
     // console.log(errorMessages);
-    res.render('user/register', { errors: errorMessages, username: req.body.username, email: req.body.email });
+    res.render('user/register', {
+      errors: errorMessages,
+      username: req.body.username,
+      email: req.body.email
+    });
     return;
   }
 
@@ -40,10 +44,16 @@ const registerUser = async (req, res) => {
 
   } catch (error) {
     if (error.path === 'existerror') {
-      return res.render('user/register', { dbErrors: { dberror: error.msg }, username: username, email: email });
+      return res.render('user/register', {
+        dbErrors: { dberror: error.msg },
+        username: username, email: email
+      });
     } else {
       console.log('error in saving new user', error.message);
-      return res.render('user/register', { dbErrors: { dberror: 'Error in Register, please try again.' }, username: username, email: email });
+      return res.render('user/register', {
+        dbErrors: { dberror: 'Error in Register, please try again.' },
+        username: username, email: email
+      });
     }
   }
 }
@@ -83,10 +93,15 @@ const loginUser = async (req, res) => {
 
   } catch (error) {
     if (error.path === 'usererror' || error.path === 'passerror') {
-      return res.render('user/login', { dbErrors: { dberror: error.msg } });
+      return res.render('user/login', {
+        dbErrors: { dberror: error.msg }
+      });
     } else {
       console.log('error in Login', error.message);
-      return res.render('user/login', { dbErrors: { dberror: 'Error in Login, please try again.' }, email: email });
+      return res.render('user/login', {
+        dbErrors: { dberror: 'Error in Login, please try again.' },
+        email: email
+      });
     }
   }
 }
@@ -119,9 +134,14 @@ const logout = (req, res) => {
 //open address page
 const getAddress = async (req, res) => {
   const userid = req.session.userid;
-  const user = await userService.getUserById(userid);
+  try {
+    const user = await userService.getUserById(userid);
 
-  res.render('user/address', { user, provinces });
+    res.render('user/address', { user, provinces });
+  } catch (error) {
+    console.log('Error in getting address page:', error.message);
+    return res.render('home/error', { message: 'Sorry, Error in getting address page.' });
+  }
 }
 
 //post user address

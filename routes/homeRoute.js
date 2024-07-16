@@ -11,5 +11,8 @@ router.get('/', homeController.getHome);
 // Route for about page
 router.get('/about', homeController.getAbout);
 
+// Route for error page
+// router.get('/error', homeController.getError);
+
 //export router
 module.exports = router;

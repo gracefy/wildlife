@@ -11,6 +11,7 @@ const seedAddress = require('./seedAddress');
 const seedUser = require('./seedUser');
 const seedComment = require('./seedComment');
 const seedDonation = require('./seedDonation');
+const seedVolunteer = require('./seedVolunteer');
 const mongoose = require('mongoose');
 
 const seedData = async () => {
@@ -43,6 +44,9 @@ const seedData = async () => {
 
     // Seed Donation
     await seedDonation();
+
+    // Seed Volunteer
+    await seedVolunteer();
 
     console.log('>>>>>>>>>>>>> All Data seeded! <<<<<<<<<<<<<<<<');
     mongoose.connection.close();

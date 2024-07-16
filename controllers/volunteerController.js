@@ -39,6 +39,7 @@ const applyVolunteer = async (req, res) => {
     });
 
   } catch (error) {
+    console.log('Error getting event detail:', error.message);
     return res.render('v-event/vMessage', {
       eventError: 'Error in getting event detail.'
     });

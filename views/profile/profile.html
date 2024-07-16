@@ -9,9 +9,10 @@
   <meta name="description"
     content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
   <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
-
   <!-- bootstrap css -->
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/5775cf1f45.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/public.css">
   <link rel="stylesheet" href="/css/profile.css">
 </head>
@@ -39,7 +40,7 @@
 
 
         <!-- >>>>>>> profile  start >>>>>>>> -->
-        <section id="profile" class="item display">
+        <section id="profile" class="item">
 
           <% if(typeof(success) !='undefined' ) {%>
             <div class="alert alert-success" role="alert">
@@ -109,16 +110,20 @@
                       <div id="passwordForm">
                         <form action="/profile/password" method="post">
                           <input type="hidden" name="userid" value="<%= userid %>">
-
                           <div class="row mb-3">
                             <div class="col-md-5">
                               <label for="oldPass" class="form-label">Old Password</label>
-                              <input type="password" class="form-control" name="oldPass" />
+                              <div class="passwordInput">
+                                <input type="password" class="form-control" id="oldPass" name="oldPass"> <i
+                                  id="toggleOldPass" class="fa fa-eye-slash"></i>
+                              </div>
                             </div>
                             <div class="col-md-5">
                               <label for="newPass" class="form-label">New Password</label>
-                              <input type="password" class="form-control" name="newPass"
-                                placeholder="6-20 characters" />
+                              <div class="passwordInput">
+                                <input type="password" class="form-control" id="newPass" name="newPass"
+                                  placeholder="6-20 characters"> <i id="toggleNewPass" class="fa fa-eye-slash"></i>
+                              </div>
                             </div>
                             <div class="col-md-2 d-flex align-items-end">
                               <button type="submit" class="btn btn-outline-info">Update</button>
@@ -336,6 +341,7 @@
       <script src="/bootstrap/js/bootstrap.bundle.js"></script>
       <script src="/jquery/jquery.js"></script>
       <script src="/js/userProfile.js"></script>
+      <script src="/js/showPassword.js"></script>
 </body>
 
 </html>

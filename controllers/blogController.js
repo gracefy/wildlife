@@ -41,8 +41,10 @@ const getBlogList = async (req, res) => {
     });
 
   } catch (error) {
-    return res.render('blog/blogError', {
-      error: 'Error in getting blog list.'
+    console.log('Error getting blogs:', error.message);
+
+    return res.render('home/error', {
+      error: 'Sorry, Error in getting blog list.'
     });
   }
 }
@@ -50,9 +52,8 @@ const getBlogList = async (req, res) => {
 // get blog detail
 const getBlogById = async (req, res) => {
   const id = req.params.id;
-  const comments = await commentService.getCommentsByBlog(id);
-
   try {
+    const comments = await commentService.getCommentsByBlog(id);
     const blog = await blogService.getBlogById(id);
 
     if (!blog) {
@@ -66,8 +67,10 @@ const getBlogById = async (req, res) => {
     });
 
   } catch (error) {
-    return res.render('blog/blogError', {
-      error: 'Error in getting blog detail.'
+    console.log('Error getting blog:', error.message);
+
+    return res.render('home/error', {
+      message: 'Sorry, Error in getting blog detail.'
     });
   }
 }
@@ -99,8 +102,10 @@ const createComment = async (req, res) => {
     res.redirect(`/blog/${blogid}`);
 
   } catch (error) {
-    return res.render('blog/blogError', {
-      error: 'Error in creating comment.'
+
+    console.log('Error in creating comment:', error.message);
+    return res.render('home/error', {
+      message: 'Sorry, Error in creating comment.'
     });
   }
 }

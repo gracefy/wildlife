@@ -11,56 +11,65 @@ const provinces = require('../configs/provinces');
 // get donate page
 const getDonate = async (req, res) => {
   const userid = req.session.userid;
-  if (userid) {
-    const user = await userService.getUserById(userid);
-    return res.render('donate/donate',
-      {
-        user,
-        provinces
-      }
-    );
-  }
 
-  res.render('donate/donate',
-    {
-      provinces
-    });
+  try {
+    if (userid) {
+      const user = await userService.getUserById(userid);
+      return res.render('donate/donate',
+        {
+          user,
+          provinces
+        }
+      );
+    } else {
+      res.render('donate/donate',
+        {
+          provinces
+        });
+    }
+  } catch (error) {
+    console.log('Error in getting donate page:', error.message);
+    return res.render('home/error', { message: 'Sorry, Error in getting donate page.' });
+  }
 }
 
 // process donate post
 const processDonate = async (req, res) => {
   const { userid, uname, email } = req.body;
-  const user = await userService.getUserById(userid);
-
-  // Validate the request
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    //set error messages for each field
-    const errorMessages = {};
-    errors.array().forEach(error => {
-      errorMessages[error.path] = error.msg;
-    });
-
-    return res.render('donate/donate', {
-      errors: errorMessages,
-      provinces,
-      user
-    });
-  }
-
-  // Determine the amount
-  const presetAmount = req.body.amount;
-  const customAmount = req.body.customAmount;
-  let amount = 0;
-
-  if (customAmount && customAmount > 0) {
-    amount = customAmount;
-  } else {
-    amount = presetAmount;
-  }
-
   try {
+    //get user info
+    const user = await userService.getUserById(userid);
+    if (!user) {
+      return res.render('home/error', { message: 'Sorry, user not found.' });
+    }
+
+    // Validate the request
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      //set error messages for each field
+      const errorMessages = {};
+      errors.array().forEach(error => {
+        errorMessages[error.path] = error.msg;
+      });
+
+      return res.render('donate/donate', {
+        errors: errorMessages,
+        provinces,
+        user
+      });
+    }
+
+    // Determine the amount
+    const presetAmount = req.body.amount;
+    const customAmount = req.body.customAmount;
+    let amount = 0;
+
+    if (customAmount && customAmount > 0) {
+      amount = customAmount;
+    } else {
+      amount = presetAmount;
+    }
 
     if (!req.userHasAddress) {
 
@@ -99,16 +108,21 @@ const processDonate = async (req, res) => {
     res.redirect(303, session.url);
 
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: error.message });
+    console.log('Error in processing donate:', error.message);
+    return res.render('home/error', { message: 'Sorry, Error in processing donate.' });
+
   }
 }
 
 //get success page
 const getSuccess = async (req, res) => {
+
   const amount = req.query.amount;
   const userid = req.session.userid;
   const user = await userService.getUserById(userid);
+  if (!user) {
+    return res.render('home/error', { message: 'Sorry, user not found.' });
+  }
 
   res.render('donate/success', { user, amount });
 }
@@ -117,32 +131,39 @@ const getSuccess = async (req, res) => {
 const handleWebhook = async (req, res) => {
   const sig = req.headers['stripe-signature'];
 
-  let event;
-
   try {
-    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    // Parse and verify Stripe webhook event
+    let event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    let donateData;
+
+    // Set donation data based on event type
+    if (event.type == 'checkout.session.completed') {
+      const session = event.data.object;
+
+      donateData = {
+        userid: session.metadata.userid,
+        amount: session.amount_total / 100,
+        createAt: new Date(session.created * 1000),
+        status: 'completed'
+      }
+    } else {
+      const session = event.data.object;
+      donateData = {
+        userid: session.metadata.userid,
+        amount: session.amount_total / 100,
+        createAt: new Date(session.created * 1000),
+        status: 'failed'
+      }
+    }
+
+    //save donate data
+    await donateService.saveDonate(donateData);
   } catch (error) {
-    console.log(error);
-    return res.status(400).send(`Webhook Error: ${error.message}`);
+    // handle error
+    console.log('Error saving donate:', error.message);
+    return res.render('home/error', { message: 'Sorry, Error in saving donation.' });
   }
-
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
-
-    const donateData = {
-      userid: session.metadata.userid,
-      amount: session.amount_total / 100,
-      createAt: new Date(session.created * 1000),
-      status: 'completed'
-    }
-
-    try {
-      await donateService.saveDonate(donateData);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
+  // Return success response to Stripe after successful handling
   res.json({ received: true });
 }
 

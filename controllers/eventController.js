@@ -42,7 +42,11 @@ const getEventList = async (req, res) => {
     });
 
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.log('Error getting events:', error.message);
+
+    return res.render('home/error', {
+      error: 'Sorry, Error in getting event list.'
+    });
   }
 }
 

@@ -36,7 +36,9 @@ const getCommentsByUser = async (userid) => {
 
 // Create comment
 const createComment = async (commentData) => {
+
   return await Comment.create(commentData);
+
 }
 
 // Delete comment

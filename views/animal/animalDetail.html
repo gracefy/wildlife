@@ -118,13 +118,14 @@
                 <!-- >>>>>>>>>> detail map start >>>>>>>>>>>>>>> -->
 
                 <div class="map-info">
-                  <!-- <div id="map" style="height: 500px; width: 100%;"></div> -->
-                  <gmp-map center="<%= animal.locations[0].lat %>,<%= animal.locations[0].lng %>" zoom="5"
+
+                  <gmp-map id="map" center="<%= animal.locations[0].lat %>,<%= animal.locations[0].lng %>" zoom="5"
                     map-id="DEMO_MAP_ID" style="height: 400px">
 
                     <% animal.locations.forEach(location=> { %>
                       <gmp-advanced-marker position="<%= location.lat %>,<%= location.lng %>"
-                        title="<%= location.name %>"></gmp-advanced-marker>
+                        title="<%= location.name %>"
+                        onclick="showInfo('<%= location.name %>', '<%= location.address %>', '<%= location.city %>', '<%= location.province %>')"></gmp-advanced-marker>
                       <% }); %>
                   </gmp-map>
 
@@ -165,9 +166,11 @@
     <%- include('../layouts/footer.html') %>
       <!-- bootstrap JS, Popper.js, and jQuery -->
       <script src="/bootstrap/js/bootstrap.bundle.js"></script>
-
       <script src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&libraries=maps,marker&v=beta"
         defer></script>
+      <script src="/jquery/jquery.js"></script>
+      <script src="/js/showMapInfo.js"></script>
+
 </body>
 
 

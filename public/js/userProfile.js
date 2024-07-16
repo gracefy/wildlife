@@ -1,4 +1,23 @@
 $(function () {
+  if (window.location.hash) {
+    var hash = window.location.hash.substring(1); // Remove the '#'
+
+    // Remove 'active' class from all tabs
+    $('.profile-tab').removeClass('active');
+
+    // Add 'active' class to the corresponding tab
+    $('.profile-tab[data-tab="' + hash + '"]').addClass('active');
+
+    // Hide all tab contents
+    $('.item').hide();
+
+    // Show the corresponding tab content
+    $('#' + hash).show();
+  } else {
+    // Show initial tab content
+    $('#profile').show();
+  }
+
   $(document).on('click', '.profile-tab', function (e) {
     e.preventDefault();
 
@@ -17,9 +36,6 @@ $(function () {
     // Show the corresponding tab content
     $('#' + tab).show();
   });
-
-  // Show initial tab content (e.g., profile tab)
-  $('#profile').show();
 
 
   // Show/hide the edit profile form
