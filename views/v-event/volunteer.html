@@ -122,9 +122,15 @@
               </div>
               <%}%>
                 <div class="mb-3">
-                  <label for="intro" class="form-label">About You</label>
+                  <label for="intro" class="form-label">About Yourself</label>
                   <textarea class="form-control" id="intro" name="intro" rows="3"
-                    placeholder="Share more about yourself..."></textarea>
+                    placeholder="You can share more about yourself..."></textarea>
+                  <div class="form-text">Max 200 characters.</div>
+                  <% if (typeof(errors) !='undefined' ){ if(errors.intro) { %>
+                    <div class="error">
+                      <%= errors.intro %>
+                    </div>
+                    <% }} %>
                 </div>
 
                 <% if (typeof(dberror) !='undefined' ){ %>

@@ -12,8 +12,8 @@ const saveDonate = async (donateData) => {
 }
 
 // Get all donates by user id
-const getDonatesByUserId = async (userId) => {
-  const donates = await Donate.find({ userId });
+const getDonatesByUser = async (userId) => {
+  const donates = await Donate.find({ userid: userId });
   return donates.map(donate => ({
     ...donate.toObject(),
     createAt: formatDateTime(donate.createAt),
@@ -23,7 +23,7 @@ const getDonatesByUserId = async (userId) => {
 
 module.exports = {
   saveDonate,
-  getDonatesByUserId
+  getDonatesByUser
 };
 
 

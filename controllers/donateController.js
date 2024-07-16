@@ -113,18 +113,6 @@ const getSuccess = async (req, res) => {
   res.render('donate/success', { user, amount });
 }
 
-
-// get donate list
-const getDonateList = async (req, res) => {
-  const userId = req.user.id;
-  try {
-    const donates = await donateService.getDonatesByUserId(userId);
-    res.render('/donate', { donates });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-}
-
 //handle webhook
 const handleWebhook = async (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -144,7 +132,7 @@ const handleWebhook = async (req, res) => {
     const donateData = {
       userid: session.metadata.userid,
       amount: session.amount_total / 100,
-      createAt: session.created,
+      createAt: new Date(session.created * 1000),
       status: 'completed'
     }
 
@@ -160,7 +148,6 @@ const handleWebhook = async (req, res) => {
 
 
 module.exports = {
-  getDonateList,
   processDonate,
   getDonate,
   getSuccess,

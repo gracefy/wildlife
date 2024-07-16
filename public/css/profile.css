@@ -1,0 +1,68 @@
+.address-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-link a {
+  color: #333;
+}
+
+.profile-link a:hover {
+  color: #5DC3F3;
+}
+
+.item {
+  display: none;
+}
+
+.item.display {
+  display: block;
+}
+
+
+/* resposive */
+
+@media (max-width: 768px) {
+
+  #userProfileContainer {
+    font-size: 16px;
+  }
+
+  #userProfileContainer a {
+    font-size: 16px;
+  }
+
+
+  #profile .btn {
+    margin-top: 10px;
+  }
+
+  #volunteers .table thead {
+    display: none;
+  }
+
+  #volunteers .table .intro {
+    display: none;
+  }
+
+
+  #volunteers .table tr {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  #volunteers .table tbody td {
+    display: flex;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #volunteers .table tbody td:before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 50%;
+  }
+
+
+
+}

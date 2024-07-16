@@ -1,6 +1,14 @@
 const Volunteer = require('../models/volunteerModel');
 const Event = require('../models/eventModel');
 
+
+//import moment
+const moment = require('moment');
+const formatDateTime = (dateTime) => {
+  return moment(dateTime).format('YYYY-MM-DD hh:mmA');
+}
+
+
 // Get all volunteers
 const getAllVolunteers = async () => {
   return await Volunteer.find()
@@ -19,17 +27,45 @@ const getVolunteersByEvent = async (eventid) => {
 
 // Get volunteers by userid
 const getVolunteersByUser = async (userid) => {
-  return await Volunteer.find({ user: userid })
+  let volunteers = await Volunteer.find({ user: userid })
     .sort({ createAt: -1 }) //sort by createAt in descending order
     .populate('event') //populate the eventid field
-    .populate('user'); //populate the userid field
+    .populate({
+      path: 'user',
+      populate: { path: 'address' }
+    }); //populate the userid field
+
+  if (volunteers.length > 0) {
+    volunteers = volunteers.map(volunteer => {
+      if (volunteer.event) {
+        // Format event startTime and endTime
+        const event = {
+          ...volunteer.event.toObject(),
+          startTime: formatDateTime(volunteer.event.startTime),
+          endTime: formatDateTime(volunteer.event.endTime)
+        };
+        return {
+          ...volunteer.toObject(),
+          event
+        };
+      }
+      return volunteer.toObject();
+    });
+  }
+  return volunteers;
+
 }
 
 // Get volunteer by id
 const getVolunteerById = async (id) => {
-  return await Volunteer.findById(id)
+  const volunteer = await Volunteer.findById(id)
     .populate('event')
-    .populate('user');
+    .populate({
+      path: 'user',
+      populate: { path: 'address' }
+    });
+
+  return volunteer;
 }
 
 // Check if user is registered for the event

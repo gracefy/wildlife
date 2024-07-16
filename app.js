@@ -20,6 +20,7 @@ const homeRoute = require('./routes/homeRoute');
 const userRoute = require('./routes/userRoute');
 const volunteerRoute = require('./routes/volunteerRoute');
 const donateRoute = require('./routes/donateRoute');
+const profileRoute = require('./routes/profileRoute');
 
 //impot custom middleware
 const animalTypeMiddleware = require('./middleware/animalTypeMiddleware');
@@ -36,7 +37,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(express.urlencoded({ extended: false }));
 
 //use session
-
 const store = new MongoDBStore({
   uri: dbConfig.mongoURI,
   collection: 'sessions'
@@ -47,9 +47,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: store,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24  // 1 day
-  }
+  unset: 'destroy'
 }));
 
 
@@ -91,6 +89,8 @@ app.use('/user', userRoute);
 app.use('/volunteer', volunteerRoute);
 
 app.use('/donate', donateRoute);
+
+app.use('/profile', profileRoute);
 
 // Connect to database
 connectDB();

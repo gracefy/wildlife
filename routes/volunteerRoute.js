@@ -13,6 +13,8 @@ const validateAddress = require('../middleware/validateAddress');
 router.get('/:eventid', isLogin, volunteerController.applyVolunteer);
 
 //save volunteer
-router.post('/', isAddressExist, validateAddress, volunteerController.saveVolunteer);
+router.post('/', isAddressExist, validateAddress, [
+  check('intro', 'Introduction should less than 200 characters.').isLength({ max: 200 }),
+], volunteerController.saveVolunteer);
 
 module.exports = router;

@@ -124,10 +124,12 @@ const getAddress = async (req, res) => {
   res.render('user/address', { user, provinces });
 }
 
-//handle user address update
+//post user address
 const updateAddress = async (req, res) => {
   // Validate the request
   const errors = validationResult(req);
+
+  const { userid, addressid, fname, lname, phone, street, city, province, postal } = req.body;
 
   if (!errors.isEmpty()) {
 
@@ -137,15 +139,41 @@ const updateAddress = async (req, res) => {
       errorMessages[error.path] = error.msg;
     });
 
-    return res.render('user/address', { errors: errorMessages, user: req.body, provinces });
+    // Set user.address to the submitted data
+    const user = {
+      address: {
+        _id: addressid,
+        fname,
+        lname,
+        phone,
+        street,
+        city,
+        province,
+        postal
+      }
+    };
+
+
+    return res.render('user/address', {
+      errors: errorMessages,
+      user,
+      provinces
+    });
   }
 
-  const { userid, addressid, fname, lname, phone, street, city, province, postal } = req.body;
-
   try {
+    if (!addressid) {
+      //create new address
+      const address = await addressService.createAddress({ fname, lname, phone, street, city, province, postal });
 
-    //update address
-    const address = await addressService.updateAddress(addressid, { fname, lname, phone, street, city, province, postal });
+      const addressid = address._id;
+
+      //update user info with address id
+      await userService.updateUserAddress(userid, addressid);
+    } else {
+      //update address
+      await addressService.updateAddress(addressid, { fname, lname, phone, street, city, province, postal });
+    }
 
     // Redirect to the original page
     const originalPage = req.session.originalPage || '/';
@@ -157,7 +185,25 @@ const updateAddress = async (req, res) => {
 
   } catch (error) {
     console.log('error in saving new address', error.message);
-    return res.render('user/address', { dbErrors: { dberror: 'Error in saving address, please try again.' }, user: req.body, provinces });
+
+    // Set user.address to the submitted data
+    const user = {
+      address: {
+        _id: addressid,
+        fname,
+        lname,
+        phone,
+        street,
+        city,
+        province,
+        postal
+      }
+    };
+    return res.render('user/address', {
+      dbErrors: { dberror: 'Error in saving address, please try again.' },
+      user,
+      provinces
+    });
   }
 }
 

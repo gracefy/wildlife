@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Wild</title>
+  <meta name="keywords" content="wildelife, animals">
+  <meta name="description"
+    content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
+  <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
+
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/public.css">
+  <link rel="stylesheet" href="/css/profile.css">
+</head>
+
+<body>
+  <%- include('../layouts/header.html') %>
+    <main id="userProfileContainer">
+      <div class="userProfile container">
+        <!-- >>>>>>> tabs start >>>>>>>> -->
+        <ul class="nav nav-underline profile-link">
+          <li class="nav-item">
+            <a class="nav-link profile-tab active" data-tab="profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link profile-tab" data-tab="volunteers">Volunteers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link profile-tab" data-tab="comments">Comments</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link profile-tab" data-tab="donations">Donation</a>
+          </li>
+        </ul>
+        <!-- >>>>>>> tabs end >>>>>>>> -->
+
+
+        <!-- >>>>>>> profile  start >>>>>>>> -->
+        <section id="profile" class="item display">
+
+          <% if(typeof(success) !='undefined' ) {%>
+            <div class="alert alert-success" role="alert">
+              <%= success %>
+            </div>
+            <%}%>
+
+              <h2 class="h2 mt-5">Profile</h2>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="col-md-4">Username</th>
+                    <th class="col-md-4">Email</th>
+                    <th class="col-md-4"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <%= user.username %>
+                    </td>
+                    <td>
+                      <%= user.email %>
+                    </td>
+                    <td class="text-center">
+                      <a class="btn btn-info me-3" id="editProfile">Edit Profile</a>
+                      <a class="btn btn-info" id="changePassword">Change Password</a>
+                    </td>
+                  </tr>
+                  </tr>
+                </tbody>
+              </table>
+              <% if (typeof(errors) !='undefined' ) { %>
+                <% Object.keys(errors).forEach(function(key) { %>
+                  <div class="error text-center">
+                    <%= errors[key] %>
+                  </div>
+                  <% }); %>
+                    <% } %>
+
+                      <!-- >>>>>>> edit profile  start >>>>>>>> -->
+
+                      <div id="editForm">
+                        <form action="/profile/edit" method="post">
+                          <input type="hidden" name="userid" value="<%= userid %>">
+
+                          <div class="row mb-3">
+                            <div class="col-md-5">
+                              <label for="username" class="form-label">Username</label>
+                              <input type="text" class="form-control" name="username" value="<%= username%>"
+                                placeholder="Max 20 characters. Only include characters and numbers." />
+                            </div>
+                            <div class="col-md-5">
+                              <label for="email" class="form-label">Email</label>
+                              <input type="email" class="form-control" name="email" value="<%= useremail%>" />
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                              <button type="submit" class="btn btn-outline-info">Update</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <!-- >>>>>>> edit profile  end >>>>>>>> -->
+
+                      <!-- >>>>>>> change password  start >>>>>>>> -->
+
+                      <div id="passwordForm">
+                        <form action="/profile/password" method="post">
+                          <input type="hidden" name="userid" value="<%= userid %>">
+
+                          <div class="row mb-3">
+                            <div class="col-md-5">
+                              <label for="oldPass" class="form-label">Old Password</label>
+                              <input type="password" class="form-control" name="oldPass" />
+                            </div>
+                            <div class="col-md-5">
+                              <label for="newPass" class="form-label">New Password</label>
+                              <input type="password" class="form-control" name="newPass"
+                                placeholder="6-20 characters" />
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                              <button type="submit" class="btn btn-outline-info">Update</button>
+                            </div>
+                          </div>
+                        </form>
+
+                      </div>
+
+
+                      <!-- >>>>>>> change password  end >>>>>>>> -->
+
+                      <h2 class="h2 mt-5">Address</h2>
+                      <div class="address-info">
+                        <%if(user.address){%>
+
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th class="col-md-8">Address</th>
+                                <th class="col-md-4"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <%= user.address.fname %>
+                                    <%= user.address.lname %>, <%= user.address.phone %>, <%= user.address.street %>
+                                          ,
+                                          <%= user.address.city %>, <%= user.address.province %>, <%=
+                                                user.address.postal %>
+                                </td>
+
+                                <td class="text-center">
+                                  <a href="/user/address" class="btn btn-info">Edit Address</a>
+                                </td>
+                              </tr>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <%} else{%>
+                            <div class="alert alert-info" role="alert">
+                              You have not added address yet.
+                              <a href="/user/address" class="btn-link">Add Address</a> now!
+                              <% } %>
+                            </div>
+        </section>
+        <!-- >>>>>>> profile  end >>>>>>>> -->
+
+        <!-- >>>>>>> volunteer start >>>>>>>> -->
+        <section id="volunteers" class="item">
+          <h2 class="h2 mt-5">Volunteers</h2>
+          <% if(volunteers.length>0){ %>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>NO.</th>
+                    <th>Event</th>
+                    <th>Event Date</th>
+                    <th>Event Location</th>
+                    <th>Volunteer Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% volunteers.forEach((volunteer,index)=> { %>
+                    <tr>
+                      <td rowspan="2" data-label="NO.">
+                        <%= index+1 %>
+                      </td>
+                      <td data-label="Event">
+                        <a href="/event?search_query=<%= encodeURIComponent(volunteer.event.title) %>">
+                          <%= volunteer.event.title %>
+                        </a>
+                      </td>
+                      <td data-label="Event Date">
+                        <%= volunteer.event.startTime%> - <%= volunteer.event.endTime%>
+                      </td>
+                      <td data-label="Location">
+                        <%= volunteer.event.location %>, <%= volunteer.event.city %>
+                            <%= volunteer.event.province %>
+                      </td>
+                      <td data-label="Volunteer Name">
+                        <%= volunteer.user.address.fname %>
+                      </td>
+                      <td data-label="Phone">
+                        <%= volunteer.user.address.phone %>
+                      </td>
+                      <td data-label="Email">
+                        <%= volunteer.user.email %>
+                      </td>
+                    </tr>
+                    <tr class="intro">
+                      <th>Introduction</th>
+                      <td colspan="5">
+                        <%= volunteer.intro %>
+                      </td>
+                    </tr>
+                    <%})%>
+                </tbody>
+              </table>
+            </div>
+
+            <%} else {%>
+
+              <div class="alert alert-info" role="alert">
+                You have not applied for any event yet.
+                Go to check <a href="/event" class="btn-link">Events</a>!
+              </div>
+              <%}%>
+
+        </section>
+
+        <!-- >>>>>>> volunteer end >>>>>>>> -->
+
+        <!-- >>>>>>> comment start >>>>>>>> -->
+        <section id="comments" class="item">
+          <h2 class="h2 mt-5">Comments</h2>
+          <% if(comments.length>0){ %>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>NO.</th>
+                  <th>Blog Title</th>
+                  <th>Comment</th>
+                  <th>Comment Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% comments.forEach((comment,index)=> { %>
+                  <tr>
+                    <td>
+                      <%= index+1 %>
+                    </td>
+                    <td>
+                      <a href="/blog/<%= comment.blogid._id %>">
+                        <%= comment.blogid.title %>
+                      </a>
+                    </td>
+                    <td>
+                      <%= comment.content %>
+                    </td>
+                    <td>
+                      <%= comment.createAt %>
+                    </td>
+                  </tr>
+                  <%})%>
+              </tbody>
+            </table>
+            <%} else {%>
+
+              <div class="alert alert-info" role="alert">
+                You have not commented yet.
+                Go to check <a href="/blog" class="btn-link">Blogs</a>!
+              </div>
+              <%}%>
+
+        </section>
+        <!-- >>>>>>> comment end >>>>>>>> -->
+
+        <!-- >>>>>>> donation start >>>>>>>> -->
+        <section id="donations" class="item">
+          <h2 class="h2 mt-5">Donations</h2>
+          <% if(donations.length>0){ %>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>NO.</th>
+                  <th>Donation Date</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% donations.forEach((donation,index)=> { %>
+                  <tr>
+                    <td>
+                      <%= index+1 %>
+                    </td>
+                    <td>
+                      <%= donation.createAt %>
+                    </td>
+                    <td>
+                      $<%= donation.amount %>
+                    </td>
+                  </tr>
+                  <%})%>
+              </tbody>
+            </table>
+            <div class="mt-5 text-center">
+              <a href="/donate" class="btn btn-info">Donate Again</a>
+            </div>
+            <%} else {%>
+
+              <div class="alert alert-info" role="alert">
+                You have not donated yet.
+                Go to <a href="/donate" class="btn-link">Donate</a> now!
+              </div>
+              <%}%>
+
+        </section>
+        <!-- >>>>>>> donation end >>>>>>>> -->
+
+      </div>
+
+
+    </main>
+
+
+    <!-- import footer section -->
+    <%- include('../layouts/footer.html') %>
+
+      <!-- bootstrap JS, Popper.js, and jQuery -->
+      <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+      <script src="/jquery/jquery.js"></script>
+      <script src="/js/userProfile.js"></script>
+</body>
+
+</html>

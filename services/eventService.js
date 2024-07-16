@@ -57,6 +57,26 @@ const getPaginationEvents = async (skipNumber, limitSize) => {
   }));
 }
 
+//get event by keyword
+const getPaginationEventsByKeyword = async (keyword, skipNumber, limitSize) => {
+  const paginatedEvents = await Event
+    .find({ title: { $regex: keyword, $options: 'i' } })
+    .sort({ startTime: -1 })
+    .skip(skipNumber)
+    .limit(limitSize);
+  return paginatedEvents.map(event => ({
+    ...event.toObject(),
+    startTime: formatDateTime(event.startTime),
+    endTime: formatDateTime(event.endTime)
+  }));
+}
+
+//get event count by keyword
+const getSearchEventCount = async (keyword) => {
+  return await Event.countDocuments({ title: { $regex: keyword, $options: 'i' } });
+}
+
+
 module.exports = {
   getAllEvents,
   getEventById,
@@ -64,5 +84,7 @@ module.exports = {
   updateEvent,
   deleteEvent,
   getEventCount,
-  getPaginationEvents
+  getPaginationEvents,
+  getPaginationEventsByKeyword,
+  getSearchEventCount
 }

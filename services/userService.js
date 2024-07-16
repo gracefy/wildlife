@@ -80,11 +80,36 @@ const updateUserAddress = async (userId, addressId) => {
   }
 }
 
+//update user info
+const updateUser = async (userId, userInfo) => {
+  try {
+    const user = await User.findByIdAndUpdate(userId, userInfo, { new: true }).populate('address');
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
+//update user password
+const updateUserPassword = async (userId, password) => {
+  try {
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await User.findByIdAndUpdate(userId, { password: hashedPassword }, { new: true });
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
 
 // Export the functions
 module.exports = {
   createUser,
   authUser,
   getUserById,
-  updateUserAddress
+  updateUserAddress,
+  updateUser,
+  updateUserPassword
 };

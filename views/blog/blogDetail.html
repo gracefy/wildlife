@@ -64,17 +64,15 @@
                   <input type="hidden" name="blogid" value="<%= blog._id %>">
                   <div class="form-group">
                     <label for="content">Comment</label>
-                    <textarea name="content" class="form-control" rows="4" placeholder="Share your thoughts here"
-                      required><% if(typeof(errors)!='undefined' ){%>
-                        <%- content %>
-                      <%}%></textarea>
-                    <div class="form-text">Comments should be within 500 words.</div>
+                    <textarea name="content" class="form-control" rows="4"
+                      placeholder="Share your thoughts here"><% if(typeof(errors)!='undefined' ){%><%- content %><%}%></textarea>
+                    <div class="form-text">Comments should be within 200 characters.</div>
                   </div>
                   <% if(typeof(userid)!='undefined' && userid ){%>
                     <input type="hidden" name="userid" value="<%= userid %>">
                     <% if(typeof(errors)!='undefined' ){ errors.forEach(error=> {%>
                       <p class="error">
-                        <%= error %>
+                        <%= error.msg %>
                       </p>
                       <%})}%>
                         <button type="submit" class="btn btn-info comment-submit">Comment</button>

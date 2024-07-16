@@ -8,93 +8,177 @@
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
   <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/css/public.css">
-  <title>Edit</title>
+  <title>Eco-Wild</title>
 </head>
 
 <body>
   <%- include('../layouts/header.html') %>
-
     <main>
-
       <div class="container address-form">
-
         <h1>Edit Address</h1>
         <form action="/user/address" method="post">
-          <input type="hidden" name="userid" value="<%= userid %>">
-          <input type="hidden" name="addressid" value="<%= user.address._id %>">
-          <div class="mb-3">
-            <label for="fname" class="form-label required-label">First Name</label>
-            <input type="text" class="form-control" name="fname" id="fname" value="<%= user.address.fname %>">
-            <% if (typeof(errors) !='undefined' ){ if(errors.fname) { %>
-              <div class="error">
-                <%= errors.fname %>
-              </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="lname" class="form-label required-label">Last Name</label>
-            <input type="text" class="form-control" name="lname" id="lname" value="<%= user.address.lname %>">
-            <% if (typeof(errors) !='undefined' ){ if(errors.lname) { %>
-              <div class="error">
-                <%= errors.lname %>
-              </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="phone" class="form-label required-label">Phone Number</label>
-            <input type="phone" class="form-control" name="phone" id="phone" value="<%= user.address.phone %>">
-            <% if (typeof(errors) !='undefined' ){ if(errors.phone) { %>
-              <div class="error">
-                <%= errors.phone %>
-              </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="street" class="form-label required-label">Street Number and Name</label>
-            <input type="text" class="form-control" name="street" id="street" value="<%= user.address.street %>">
-            <% if (typeof(errors) !='undefined' ){ if(errors.street) { %>
-              <div class="error">
-                <%= errors.street %>
-              </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="postal" class="form-label required-label">Postal Code</label>
-            <input type="text" class="form-control" name="postal" id="postal" value="<%= user.address.postal %>">
-            <% if (typeof(errors) !='undefined' ){ if(errors.postal) { %>
-              <div class="error">
-                <%= errors.postal %>
-              </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="city" class="form-label required-label">City</label>
-            <input type="text" class="form-control" name="city" id="city" value="<%= user.address.city %>">
-            <% if (typeof(errors) !='undefined' ){ if(errors.city) { %>
-              <div class="error">
-                <%= errors.city %>
-              </div>
-              <% }} %>
-          </div>
-          <div class="mb-3">
-            <label for="province" class="form-label required-label">Province</label>
-            <select id="province" name="province" class="form-select">
-              <% provinces.forEach(province=> { %>
-                <option value="<%= province.code %>" <%=province.code==user.address.province ? 'selected' : '' %>>
-                  <%= province.name %>
-                </option>
-                <% }) %>
-            </select>
-            <% if (typeof(errors) !='undefined' ){ if(errors.province) { %>
-              <div class="error">
-                <%= errors.province %>
-              </div>
-              <% }} %>
-          </div>
-          <div class="address-submit text-center mt-5">
-            <button type="submit" class="btn btn-info">Update</button>
-          </div>
+          <% if(user.address){%>
+            <input type="hidden" name="userid" value="<%= userid %>">
+            <input type="hidden" name="addressid" value="<%= user.address._id %>">
+            <div class="mb-3">
+              <label for="fname" class="form-label required-label">First Name</label>
+              <input type="text" class="form-control" name="fname" id="fname" value="<%= user.address.fname %>">
+              <div class="form-text">Max 20 characters. Only characters without spaces.</div>
+              <% if (typeof(errors) !='undefined' ){ if(errors.fname) { %>
+                <div class="error">
+                  <%= errors.fname %>
+                </div>
+                <% }} %>
+            </div>
+            <div class="mb-3">
+              <label for="lname" class="form-label required-label">Last Name</label>
+              <input type="text" class="form-control" name="lname" id="lname" value="<%= user.address.lname %>">
+              <div class="form-text">Max 20 characters. Only characters without spaces.</div>
+              <% if (typeof(errors) !='undefined' ){ if(errors.lname) { %>
+                <div class="error">
+                  <%= errors.lname %>
+                </div>
+                <% }} %>
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label required-label">Phone Number</label>
+              <input type="phone" class="form-control" name="phone" id="phone" value="<%= user.address.phone %>">
+              <div class="form-text">Format: 112-223-4455/1122234455</div>
+              <% if (typeof(errors) !='undefined' ){ if(errors.phone) { %>
+                <div class="error">
+                  <%= errors.phone %>
+                </div>
+                <% }} %>
+            </div>
+            <div class="mb-3">
+              <label for="street" class="form-label required-label">Street Number and Name</label>
+              <input type="text" class="form-control" name="street" id="street" value="<%= user.address.street %>">
+              <div class="form-text">Max 50 characters.</div>
+              <% if (typeof(errors) !='undefined' ){ if(errors.street) { %>
+                <div class="error">
+                  <%= errors.street %>
+                </div>
+                <% }} %>
+            </div>
+            <div class="mb-3">
+              <label for="postal" class="form-label required-label">Postal Code</label>
+              <input type="text" class="form-control" name="postal" id="postal" value="<%= user.address.postal %>">
+              <div class="form-text">Format: 1A2B3C/1A2 B3C</div>
+              <% if (typeof(errors) !='undefined' ){ if(errors.postal) { %>
+                <div class="error">
+                  <%= errors.postal %>
+                </div>
+                <% }} %>
+            </div>
+            <div class="mb-3">
+              <label for="city" class="form-label required-label">City</label>
+              <input type="text" class="form-control" name="city" id="city" value="<%= user.address.city %>">
+              <div class="form-text">Max 20 characters.</div>
+              <% if (typeof(errors) !='undefined' ){ if(errors.city) { %>
+                <div class="error">
+                  <%= errors.city %>
+                </div>
+                <% }} %>
+            </div>
+            <div class="mb-3">
+              <label for="province" class="form-label required-label">Province</label>
+              <select id="province" name="province" class="form-select">
+                <% provinces.forEach(province=> { %>
+                  <option value="<%= province.code %>" <%=province.code==user.address.province ? 'selected' : '' %>>
+                    <%= province.name %>
+                  </option>
+                  <% }) %>
+              </select>
+              <% if (typeof(errors) !='undefined' ){ if(errors.province) { %>
+                <div class="error">
+                  <%= errors.province %>
+                </div>
+                <% }} %>
+            </div>
+            <div class="address-submit text-center mt-5">
+              <button type="submit" class="btn btn-info">Update</button>
+            </div>
+            <%}else{%>
+              <input type="hidden" name="userid" value="<%= userid %>">
+              <div class="mb-3">
+                <label for="fname" class="form-label required-label">First Name</label>
+                <input type="text" class="form-control" name="fname" id="fname">
+                <div class="form-text">Max 20 characters. Only characters without spaces.</div>
 
+                <% if (typeof(errors) !='undefined' ){ if(errors.fname) { %>
+                  <div class="error">
+                    <%= errors.fname %>
+                  </div>
+                  <% }} %>
+              </div>
+              <div class="mb-3">
+                <label for="lname" class="form-label required-label">Last Name</label>
+                <input type="text" class="form-control" name="lname" id="lname">
+                <div class="form-text">Max 20 characters. Only characters without spaces.</div>
+                <% if (typeof(errors) !='undefined' ){ if(errors.lname) { %>
+                  <div class="error">
+                    <%= errors.lname %>
+                  </div>
+                  <% }} %>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label required-label">Phone Number</label>
+                <input type="phone" class="form-control" name="phone" id="phone">
+                <div class="form-text">Format: 112-223-4455/1122234455</div>
+                <% if (typeof(errors) !='undefined' ){ if(errors.phone) { %>
+                  <div class="error">
+                    <%= errors.phone %>
+                  </div>
+                  <% }} %>
+              </div>
+              <div class="mb-3">
+                <label for="street" class="form-label required-label">Street Number and Name</label>
+                <input type="text" class="form-control" name="street" id="street">
+                <div class="form-text">Max 50 characters.</div>
+                <% if (typeof(errors) !='undefined' ){ if(errors.street) { %>
+                  <div class="error">
+                    <%= errors.street %>
+                  </div>
+                  <% }} %>
+              </div>
+              <div class="mb-3">
+                <label for="postal" class="form-label required-label">Postal Code</label>
+                <input type="text" class="form-control" name="postal" id="postal">
+                <div class="form-text">Format: 1A2B3C/1A2 B3C</div>
+                <% if (typeof(errors) !='undefined' ){ if(errors.postal) { %>
+                  <div class="error">
+                    <%= errors.postal %>
+                  </div>
+                  <% }} %>
+              </div>
+              <div class="mb-3">
+                <label for="city" class="form-label required-label">City</label>
+                <input type="text" class="form-control" name="city" id="city">
+                <div class="form-text">Max 20 characters.</div>
+                <% if (typeof(errors) !='undefined' ){ if(errors.city) { %>
+                  <div class="error">
+                    <%= errors.city %>
+                  </div>
+                  <% }} %>
+              </div>
+              <div class="mb-3">
+                <label for="province" class="form-label required-label">Province</label>
+                <select id="province" name="province" class="form-select">
+                  <% provinces.forEach(province=> { %>
+                    <option value="<%= province.code %>" <%=province.code==='ON' ? 'selected' : '' %>>
+                      <%= province.name %>
+                    </option>
+                    <% }) %>
+                </select>
+                <% if (typeof(errors) !='undefined' ){ if(errors.province) { %>
+                  <div class="error">
+                    <%= errors.province %>
+                  </div>
+                  <% }} %>
+              </div>
+              <div class="address-submit text-center mt-5">
+                <button type="submit" class="btn btn-info">Save</button>
+                <%}%>
         </form>
       </div>
     </main>

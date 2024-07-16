@@ -13,6 +13,9 @@ router.get('/', blogController.getBlogList);
 router.get('/:id', blogController.getBlogById);
 
 // Route for create comment
-router.post('/:id/comment', blogController.createComment);
+router.post('/:id/comment', [
+  check('content', 'Comment is required.').notEmpty(),
+  check('content', 'Comment should within 200 characters.').isLength({ max: 200 }),
+], blogController.createComment);
 
 module.exports = router;

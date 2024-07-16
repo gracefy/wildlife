@@ -117,6 +117,10 @@ button {
 
 }
 
+.navbar a:hover {
+  color: #5DC3F3;
+}
+
 .logo {
   width: 6vw;
   height: 6vw;
@@ -126,19 +130,6 @@ button {
   width: 100%;
   height: 100%;
 }
-
-/* navigation */
-/* .nav-items {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 3vw;
-} */
-
-/* .nav-items a {
-  font-size: 1.4vw;
-  color: #000;
-} */
 
 .active {
   color: #5DC3F3 !important;
@@ -208,6 +199,21 @@ footer {
 .social-media img {
   width: 1.5vw;
   height: 1.5vw;
+}
+
+
+/* >>>>>>>>>>> password section >>>>>>>>>>>> */
+
+.passwordInput {
+  position: relative;
+}
+
+.passwordInput i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
 /* >>>>>>>>>>> search bar section >>>>>>>>>>>> */

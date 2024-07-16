@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- bootstrap css -->
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/5775cf1f45.js" crossorigin="anonymous"></script>
   <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/css/public.css">
   <link rel="stylesheet" href="/css/login.css">
@@ -31,17 +33,20 @@
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password">
+          <div class="passwordInput">
+            <input type="password" class="form-control" id="password" name="password"> <i id="togglePassword"
+              class="fa fa-eye-slash"></i>
+          </div>
           <% if (typeof(errors) !='undefined' ){ if(errors.password) { %>
             <div class="error">
               <%= errors.password %>
             </div>
             <% }} %>
         </div>
-        <div class="mb-3 form-check">
+        <!-- <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" id="remember" name="remember">
           <label class="form-check-label" for="remember">Remember me</label>
-        </div>
+        </div> -->
         <% if (typeof(dbErrors) !='undefined' ){ %>
           <div class="error">
             <%= dbErrors.dberror %>
@@ -60,6 +65,8 @@
 
   <!-- bootstrap js -->
   <script src="/bootstrap/js/bootstrap.js"></script>
+  <script src="/jquery/jquery.js"></script>
+  <script src="/js/showPassword.js"></script>
 </body>
 
 </html>

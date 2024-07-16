@@ -25,7 +25,8 @@ const getCommentsByBlog = async (blogid) => {
 const getCommentsByUser = async (userid) => {
   const comments = await Comment.find({ userid: userid, isDeleted: false })
     .sort({ createAt: -1 }) //sort by createAt in descending order
-    .populate('blogid'); //populate the blogid field
+    .populate('blogid') //populate the blogid field
+    .populate('userid'); //populate the userid field
 
   return comments.map(comment => ({
     ...comment.toObject(),

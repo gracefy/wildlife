@@ -46,7 +46,6 @@
                     <th>Event Date</th>
                     <th>Event Location</th>
                     <th>User Name</th>
-                    <th>Intro</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -64,7 +63,10 @@
                     <td>
                       <%= username %>
                     </td>
-                    <td>
+                  </tr>
+                  <tr>
+                    <th>Introduction</th>
+                    <td colspan="5">
                       <%= volunteer.intro %>
                     </td>
                   </tr>
@@ -84,7 +86,6 @@
                       <th>Volunteer Name</th>
                       <th>Phone</th>
                       <th>Email</th>
-                      <th>Intro</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -108,7 +109,10 @@
                       <td>
                         <%= data.email %>
                       </td>
-                      <td>
+                    </tr>
+                    <tr>
+                      <th>Intro</th>
+                      <td colspan="5">
                         <%= data.intro %>
                       </td>
                     </tr>
@@ -118,7 +122,7 @@
                 <p>You are in wrong place. Please return to Event List.</p>
                 <%}%>
 
-                  <a href="/event" class="btn btn-link">Go to Event List</a>
+                  <a href="/event" class="btn btn-link">Back to Event List</a>
       </div>
       <!-- >>>>>>>>>>>>>>>> message end >>>>>>>>>>>>>> -->
 

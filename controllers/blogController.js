@@ -1,6 +1,7 @@
 //import services
 const blogService = require('../services/blogService');
 const commentService = require('../services/commentService');
+const { validationResult } = require('express-validator');
 
 // get blog list
 const getBlogList = async (req, res) => {
@@ -74,21 +75,14 @@ const getBlogById = async (req, res) => {
 //handle the comment post request
 const createComment = async (req, res) => {
 
-  const { blogid, userid } = req.body;
-  const content = req.body.content.trim();
+  const { blogid, userid, content } = req.body;
 
-  let errors = [];
-  if (!content) {
-    errors.push('Comment is required.');
-  } else if (content.split(/\s+/).length > 500) {
-    errors.push('Comment should within 500 words.');
-  } else if (!userid) {
-    errors.push('No User information, please try again.');
-  } else if (!blogid) {
-    errors.push('No Blog information, please try again.');
-  }
+  const errors = validationResult(req);
 
-  if (errors.length > 0) {
+  if (!errors.isEmpty()) {
+
+    const errorArray = errors.array();
+
     const blog = await blogService.getBlogById(blogid);
     const comments = await commentService.getCommentsByBlog(blogid);
 
@@ -96,7 +90,7 @@ const createComment = async (req, res) => {
       blog,
       comments,
       content,
-      errors
+      errors: errorArray
     });
   }
 
