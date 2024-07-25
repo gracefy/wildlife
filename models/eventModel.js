@@ -1,3 +1,32 @@
+const { max } = require('moment');
+const mongoose = require('mongoose');
+
+const eventSchema = new mongoose.Schema({
+
+  title: { type: String, required: true },
+  city: { type: String, required: true },
+  location: { type: String, required: true },
+  order: { type: Number, default: 1 },
+  detail: { type: String, required: true },
+  image: { type: String, required: true },
+  startTime: { type: Date, required: true },
+  endTime: { type: Date, required: true },
+  organizer: { type: [String], required: true },
+  participants: { type: Number, required: true },
+  createAt: { type: Date, default: Date.now },
+  updateAt: { type: Date, default: Date.now }
+});
+
+// Pre-save update time
+eventSchema.pre('save', function (next) {
+  this.updateAt = new Date();
+  next();
+});
+
+const Event = mongoose.model('Event', eventSchema);
+
+module.exports = Event;
+
 /**
  * @swagger
  * components:
@@ -7,13 +36,13 @@
  *       properties:
  *         title:
  *           type: string
- *           description: Event title, max 255 characters
+ *           description: Event title, max 100 characters
  *         city:
  *           type: string
  *           description: Event city, max 30 characters
  *         location:
  *           type: string
- *           description: Event address, max 255 characters
+ *           description: Event address, max 100 characters
  *         order:
  *           type: number
  *           description: Order of event in the list, default is 1
@@ -22,7 +51,7 @@
  *           description: Event detail, max 255 characters
  *         image:
  *           type: string
- *           description: Image URL, max 255 characters
+ *           description: Image URL, max 100 characters
  *         startTime:
  *           type: string
  *           description: Event start time
@@ -55,32 +84,3 @@
  *         - organizer
  *         - participants
  */
-
-
-const mongoose = require('mongoose');
-
-const eventSchema = new mongoose.Schema({
-
-  title: { type: String, required: true },
-  city: { type: String, required: true },
-  location: { type: String, required: true },
-  order: { type: Number, default: 1 },
-  detail: { type: String, required: true },
-  image: { type: String, required: true },
-  startTime: { type: Date, required: true },
-  endTime: { type: Date, required: true },
-  organizer: { type: [String], required: true },
-  participants: { type: Number, required: true },
-  createAt: { type: Date, default: Date.now },
-  updateAt: { type: Date, default: Date.now }
-});
-
-// Pre-save update time
-eventSchema.pre('save', function (next) {
-  this.updateAt = new Date();
-  next();
-});
-
-const Event = mongoose.model('Event', eventSchema);
-
-module.exports = Event;

@@ -1,82 +1,3 @@
-/**
- * @swagger
- * components:
- *   schemas:
- *     Animal:
- *       type: object
- *       properties:
- *         type:
- *           type: string
- *           description: Reference to animal type, points to the ObjectId in AnimalType collection
- *         name:
- *           type: string
- *           description: Animal name
- *         order:
- *           type: number
- *           description: Order of animal in the list
- *         habitat:
- *           type: string
- *           description: Animal habitat information
- *         diet:
- *           type: string
- *           description: Animal diet information
- *         reproduction:
- *           type: string
- *           description: Animal reproduction information
- *         image:
- *           type: string
- *           description: Image URL
- *         endangered:
- *           type: boolean
- *           description: Endangered status, default is false
- *         desc:
- *           type: string
- *           description: Animal description, should be a long text in HTML format
- *         special:
- *           type: string
- *           description: Special information about the animal, should be a long text in HTML format
- *         species:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *                 description: Species name
- *               desc:
- *                 type: string
- *                 description: Species description
- *               image:
- *                 type: string
- *                 description: Species image URL
- *               endangered:
- *                 type: boolean
- *                 description: Species endangered status, default is false
- *               locations:
- *                 type: array
- *                 items:
- *                   type: string
- *                   description: Reference to location, points to the ObjectId in Location collection
- *         createAt:
- *           type: string
- *           format: date-time
- *           description: Create time, default is current time
- *         updateAt:
- *           type: string
- *           format: date-time
- *           description: Update time, default is current time
- *       required:
- *         - type
- *         - name
- *         - habitat
- *         - diet
- *         - reproduction
- *         - image
- *         - desc
- *         - locations
- *
- */
-
 const mongoose = require('mongoose');
 const Location = require('./locationModel');
 const AnimalType = require('./animalTypeModel');
@@ -125,3 +46,90 @@ animalSchema.pre('save', function (next) {
 const Animal = mongoose.model('Animal', animalSchema);
 
 module.exports = Animal;
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Animal:
+ *       type: object
+ *       required:
+ *         - type
+ *         - name
+ *         - habitat
+ *         - diet
+ *         - reproduction
+ *         - image
+ *         - desc
+ *         - locations
+ *       properties:
+ *         type:
+ *           type: string
+ *           description: The type of the animal
+ *         name:
+ *           type: string
+ *           description: The name of the animal
+ *         order:
+ *           type: number
+ *           description: The order of the animal
+ *           default: 1
+ *         habitat:
+ *           type: string
+ *           description: The habitat of the animal
+ *         diet:
+ *           type: string
+ *           description: The diet of the animal
+ *         reproduction:
+ *           type: string
+ *           description: The reproduction of the animal
+ *         image:
+ *           type: string
+ *           description: An image URL of the animal
+ *         endangered:
+ *           type: boolean
+ *           description: Whether the animal is endangered
+ *           default: false
+ *         desc:
+ *           type: string
+ *           description: A description of the animal
+ *         special:
+ *           type: string
+ *           description: Any special characteristics of the animal
+ *           default: ''
+ *         species:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Species name
+ *               desc:
+ *                 type: string
+ *                 description: Species description
+ *               image:
+ *                 type: string
+ *                 description: Species image URL
+ *               endangered:
+ *                 type: boolean
+ *                 description: Species endangered status, default is false
+ *               locations:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   description: Reference to location, points to the ObjectId in Location collection
+ *         locations:
+ *           type: array
+ *           items:
+ *             type: string
+ *             description: The ID of the location
+ *         createAt:
+ *           type: string
+ *           format: date-time
+ *           description: The creation date
+ *         updateAt:
+ *           type: string
+ *           format: date-time
+ *           description: The last update date
+ */

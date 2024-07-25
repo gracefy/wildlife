@@ -1,65 +1,10 @@
-/**
- * @swagger
- * components:
- *   schemas:
- *     Volunteer:
- *       type: object
- *       properties:
- *         eventid:
- *           type: string
- *           description: Reference to Event collection, points to Event id
- *         userid:
- *           type: string
- *           description: Reference to User collection, points to User id
- *         name:
- *           type: string
- *           description: Volunteer name
- *         email:
- *           type: string
- *           description: Volunteer email
- *         phone:
- *           type: string
- *           description: Volunteer phone number
- *         street:
- *           type: string
- *           description: Volunteer street address
- *         postal:
- *           type: string
- *           description: Volunteer postal code
- *         city:
- *           type: string
- *           description: Volunteer city
- *         province:
- *           type: string
- *           description: Volunteer province, default is ON
- *         intro:
- *           type: string
- *           description: Volunteer introduction, default is empty
- *         isPass:
- *           type: boolean
- *           description: Volunteer application status, default is false
- *         createAt:
- *           type: string
- *           description: Volunteer application create time
- *         updateAt:
- *           type: string
- *           description: Volunteer application update time
- *       required:
- *         - eventid
- *         - userid
- *         - name
- *         - email
- *         - phone
- *         - street
- *         - postal
- *         - city
- *         - province
- */
-
 //import mongoose
 const mongoose = require('mongoose');
 const Event = require('./eventModel');
 const User = require('./userModel');
+const { max } = require('moment');
+
+
 
 const volunteerSchema = new mongoose.Schema({
   event: {
@@ -72,7 +17,7 @@ const volunteerSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  intro: { type: String, default: '' },
+  intro: { type: String, default: '', maxlength: 200 },
   isPass: { type: Boolean, default: false },
   createAt: { type: Date, default: Date.now },
   updateAt: { type: Date, default: Date.now }
@@ -87,3 +32,42 @@ volunteerSchema.pre('save', function (next) {
 const Volunteer = mongoose.model('Volunteer', volunteerSchema);
 
 module.exports = Volunteer;
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Volunteer:
+ *       type: object
+ *       required:
+ *         - event
+ *         - user
+ *       properties:
+ *         event:
+ *           type: string
+ *           description: The ID of the event the volunteer is associated with
+ *           example: 60c72b2f9b1e8c1e9c8b456a
+ *         user:
+ *           type: string
+ *           description: The ID of the user who is volunteering
+ *           example: 60c72b2f9b1e8c1e9c8b4568
+ *         intro:
+ *           type: string
+ *           description: A brief introduction of the volunteer
+ *           maxlength: 200
+ *           example: I am excited to help with this event.
+ *         isPass:
+ *           type: boolean
+ *           description: Indicates whether the volunteer has passed the selection process
+ *           default: false
+ *         createAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date and time when the volunteer record was created
+ *           example: 2024-07-24T14:48:00.000Z
+ *         updateAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date and time when the volunteer record was last updated
+ *           example: 2024-07-24T15:00:00.000Z
+ */

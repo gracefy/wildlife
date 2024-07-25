@@ -160,6 +160,15 @@
   border-radius: 10px;
 }
 
+/* >>>>>>>>>>>>> map info window >>>>>>>>>>>> */
+.infoWindow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  background-color: #7AB2B280 !important;
+}
+
 
 /* >>>>>>>>>>>>>>> resposive design >>>>>>>>>>>>>>>>>>>> */
 @media screen and (max-width: 768px) {

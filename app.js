@@ -99,5 +99,5 @@ connectDB();
 const PORT = appConfig.port || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on  http://localhost:${PORT}`);
-  console.log(`Swagger is running on http://localhost:${PORT}/api-docs`);
+  console.log(`Check Eco-Wild database: http://localhost:${PORT}/api-docs`);
 });

@@ -67,6 +67,9 @@ const updateProfile = async (req, res) => {
 
       const newUser = await userService.updateUser(userid, { username, email });
 
+      req.session.username = username;
+      req.session.email = email;
+
       return res.render('profile/profile', {
         user: newUser,
         comments,

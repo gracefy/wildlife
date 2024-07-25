@@ -12,7 +12,7 @@ router.get('/:userid', profileController.getProfile);
 // Route for updating profile
 router.post('/edit', [
   check('username').notEmpty().withMessage('Username is required'),
-  check('username', 'Username only include characters and numbers.').matches(/^[a-zA-Z0-9]+$/),
+  check('username', 'Username only include characters and numbers.').matches(/^[a-zA-Z0-9\s]+$/),
   check('username', 'Username is at most 20 character.').isLength({ max: 20 }),
   check('email').isEmail().withMessage('Email is invalid')
 ], profileController.updateProfile);

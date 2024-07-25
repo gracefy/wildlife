@@ -1,61 +1,32 @@
 
-// 显示弹窗信息
-function showInfo(name, address, city, province) {
 
-  console.log("showInfo", name, address, city, province);
-  const infoWindow = new google.maps.InfoWindow({
-    content: `
-    <div>
-      <h3>${name}</h3>
-      <p>${address}</p>
-      <p>${city}, ${province}</p>
-    </div>
-  `
-  });
+async function initMap() {
+  console.log("Maps JavaScript API loaded.");
 
-  const gmpMap = document.getElementById("map");
+  const infoWindow = new google.maps.InfoWindow();
 
+  // Return an array of markers.
+  const advancedMarkers = [...document.querySelectorAll('gmp-advanced-marker')];
 
-  const zoom = parseInt(gmpMap.getAttribute("zoom"), 10);
+  // Loop through the markers
+  for (let i = 0; i < advancedMarkers.length; i++) {
+    const marker = advancedMarkers[i];
+    console.log('Processing marker:', marker);
 
-  //convert string to JSON object
-  const centerStr = gmpMap.getAttribute("center");
-  const [lat, lng] = centerStr.split(",").map(parseFloat);
-  const center = { lat: lat, lng: lng };
+    marker.addListener('click', () => {
+      const googleMapsUrl = `https://www.google.com/maps/place/${marker.dataset.position}/@${marker.dataset.position},12z`;
 
+      infoWindow.setContent(`
+        <div>
+          <h3>${marker.title}</h3>
+          <p>${marker.dataset.address}</p>
+          <a href="${googleMapsUrl}" target="_blank" style="color:#4D869C">Open in Google Maps</a>
+        </div>
+      `);
+      infoWindow.open(marker.map, marker);
 
-  const map = new google.maps.Map(gmpMap, {
-    center: center,
-    zoom: zoom,
-  });
-
-
-  infoWindow.setPosition(center);
-  infoWindow.open(gmpMap);
-
+    });
+  }
 }
 
-function openGoogleMaps(query) {
-  const encodedQuery = encodeURIComponent(query);
-  window.open(`https://www.google.com/maps/search/?api=1&query=${encodedQuery}`, '_blank');
-}
-
-// initMap function
-function initMap() {
-
-  const gmpMap = document.getElementById("map");
-  const zoom = parseInt(gmpMap.getAttribute("zoom"), 10);
-
-  //convert string to JSON object
-  const centerStr = gmpMap.getAttribute("center");
-  const [lat, lng] = centerStr.split(",").map(parseFloat);
-  const center = { lat: lat, lng: lng };
-
-
-  const map = new google.maps.Map(gmpMap, {
-    center: center,
-    zoom: zoom,
-  });
-
-  return map;
-};
+window.initMap = initMap;

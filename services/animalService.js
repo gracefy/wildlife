@@ -25,14 +25,6 @@ const getAnimalsByName = async (name) => {
     .populate('locations'); //populate the locations field
 }
 
-// >>>>>>>>>>>>>>>>>CRUD OPERATIONS<<<<<<<<<<<<<<<<<<
-// get animal by id
-const getAnimalById = async (id) => {
-  return await Animal.findById(id)
-    .populate('type')
-    .populate('locations');
-}
-
 // create animal
 const createAnimal = async (animalData) => {
   const animal = await Animal.create(animalData);
@@ -51,6 +43,13 @@ const deleteAnimal = async (id) => {
   return result !== null;
 }
 
+// get animal by id
+const getAnimalById = async (id) => {
+  return await Animal.findById(id)
+    .populate('type')
+    .populate('locations');
+}
+
 // >>>>>>>>>>>>>>>>>PAGINATION AND COUNT<<<<<<<<<<<<<<<<<<
 // get animal count
 const getAnimalCount = async () => {
@@ -60,11 +59,6 @@ const getAnimalCount = async () => {
 // get animal count by type
 const getAnimalCountByType = async (typeID) => {
   return await Animal.countDocuments({ type: typeID });
-}
-
-//get endengered animal count
-const getEndangeredAnimalCount = async () => {
-  return await Animal.countDocuments({ endangered: true });
 }
 
 //get search animal count
@@ -98,16 +92,6 @@ const getPaginationAnimalsByType = async (typeID, skipNumber, limitSize) => {
   return paginatedAnimals;
 }
 
-//get endengered animal
-const getEndangeredAnimals = async (skipNumber, limitSize) => {
-  return await Animal.find({ endangered: true })
-    .sort({ order: -1 })
-    .skip(skipNumber)
-    .limit(limitSize)
-    .populate('type')
-    .populate('locations');
-}
-
 //get search animals
 const getSearchAnimals = async (name, skipNumber, limitSize) => {
   return await Animal.find({ name: { $regex: name, $options: 'i' } })
@@ -120,19 +104,11 @@ const getSearchAnimals = async (name, skipNumber, limitSize) => {
 
 //export functions
 module.exports = {
-  getAllAnimals,
-  getAnimalsByType,
   getAnimalById,
   getPaginationAnimals,
   getPaginationAnimalsByType,
   getSearchAnimals,
-  getEndangeredAnimals,
-  createAnimal,
-  updateAnimal,
-  deleteAnimal,
   getAnimalCount,
   getAnimalCountByType,
-  getEndangeredAnimalCount,
   getSearchAnimalCount,
-  getAnimalsByName
 };
