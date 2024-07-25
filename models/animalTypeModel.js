@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 
 // Define animalType schema
 const animalTypeSchema = new mongoose.Schema({
-  name: { type: String, required: true, maxlength: 10 },
-  image: { type: String, required: true, maxlength: 100 },
+  name: { type: String, required: true },
+  image: { type: String, required: true },
   order: { type: Number, required: true },
   desc: { type: String, required: true },
 });
