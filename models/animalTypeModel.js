@@ -1,4 +1,3 @@
-const { max } = require('moment');
 const mongoose = require('mongoose');
 
 // Define animalType schema

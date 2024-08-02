@@ -133,40 +133,39 @@ const handleWebhook = async (req, res) => {
 
   try {
     // Parse and verify Stripe webhook event
-    let event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-    let donateData;
+    const event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
 
-    // Set donation data based on event type
-    if (event.type == 'checkout.session.completed') {
+    // Only handle checkout.session.completed event
+    if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
 
-      donateData = {
-        userid: session.metadata.userid,
-        amount: session.amount_total / 100,
+      const userid = session.metadata.userid;
+      const amount = session.amount_total / 100;
+
+      const donateData = {
+        userid: userid,
+        amount: amount,
         createAt: new Date(session.created * 1000),
-        status: 'completed'
-      }
-    } else {
-      const session = event.data.object;
-      donateData = {
-        userid: session.metadata.userid,
-        amount: session.amount_total / 100,
-        createAt: new Date(session.created * 1000),
-        status: 'failed'
-      }
+        status: 'completed',
+        sessionId: session.id
+      };
+
+      // Save donation data
+      await donateService.saveDonate(donateData);
+
+      console.log('Donate data saved successfully');
     }
 
-    //save donate data
-    await donateService.saveDonate(donateData);
+    // Return success response to Stripe after successful handling
+    return res.status(200).json({ received: true });
   } catch (error) {
     // handle error
     console.log('Error saving donate:', error.message);
-    return res.render('home/error', { message: 'Sorry, Error in saving donation.' });
+    console.log('Error details:', error);
+    res.status(400).render('home/error', { message: 'Sorry, Error in saving donation.' });
+    return;
   }
-  // Return success response to Stripe after successful handling
-  res.json({ received: true });
 }
-
 
 module.exports = {
   processDonate,

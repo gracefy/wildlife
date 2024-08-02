@@ -96,7 +96,7 @@ const updateUserPassword = async (userId, password) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await User.findByIdAndUpdate(userId, { password: hashedPassword }, { new: true });
+    const user = await User.findByIdAndUpdate(userId, { password: hashedPassword }, { new: true }).populate('address');
     return user;
   } catch (error) {
     throw error;

@@ -54,3 +54,6 @@ $(function () {
 
   $('#passwordForm').hide();
 });
+
+//fade out alert message
+$('#successMessage').fadeOut(5000);

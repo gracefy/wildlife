@@ -1,8 +1,6 @@
 // import the functions from service
 const animalService = require('../services/animalService');
 
-
-
 // get animal list
 const getAnimalList = async (req, res) => {
   let type = req.query.type;

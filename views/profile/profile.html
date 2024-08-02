@@ -38,12 +38,11 @@
         </ul>
         <!-- >>>>>>> tabs end >>>>>>>> -->
 
-
         <!-- >>>>>>> profile  start >>>>>>>> -->
         <section id="profile" class="item">
 
           <% if(typeof(success) !='undefined' ) {%>
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success" role="alert" id="successMessage">
               <%= success %>
             </div>
             <%}%>
@@ -296,6 +295,7 @@
                   <th>NO.</th>
                   <th>Donation Date</th>
                   <th>Amount</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -309,6 +309,9 @@
                     </td>
                     <td>
                       $<%= donation.amount %>
+                    </td>
+                    <td>
+                      <%= donation.status %>
                     </td>
                   </tr>
                   <%})%>

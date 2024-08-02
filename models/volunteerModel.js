@@ -2,9 +2,6 @@
 const mongoose = require('mongoose');
 const Event = require('./eventModel');
 const User = require('./userModel');
-const { max } = require('moment');
-
-
 
 const volunteerSchema = new mongoose.Schema({
   event: {

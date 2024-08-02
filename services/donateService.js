@@ -13,7 +13,7 @@ const saveDonate = async (donateData) => {
 
 // Get all donates by user id
 const getDonatesByUser = async (userId) => {
-  const donates = await Donate.find({ userid: userId });
+  const donates = await Donate.find({ userid: userId }).sort({ createAt: -1 });
   return donates.map(donate => ({
     ...donate.toObject(),
     createAt: formatDateTime(donate.createAt),
