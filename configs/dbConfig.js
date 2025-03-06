@@ -3,13 +3,13 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 
 const dbConfig = {
-  mongoURI: process.env.MONGO_URI || 'mongodb://localhost:27017/wildlife',
+  mongoURI: process.env.MONGO_URI,
 };
 
 const connectDB = async () => {
   try {
     await mongoose.connect(dbConfig.mongoURI);
-    console.log('MongoDB connected successfully!');
+    console.log('MongoDB Atlas connected successfully!');
   } catch (err) {
     console.error(err.message);
     process.exit(1); //exit process with failure

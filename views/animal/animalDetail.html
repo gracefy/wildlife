@@ -153,10 +153,17 @@
                 <!-- >>>>>>>>>> detail map end >>>>>>>>>>>>>>> -->
 
                 <!-- >>>>>>>>>> search bar start >>>>>>>>>>>> -->
-                <div class="search">
+                <!-- <div class="search">
                   <input type="search" name="search_query" id="search_query" placeholder="Search by animal name">
                   <button id="search_button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
+                </div> -->
+
+                <form action="/animal" method="get">
+                  <div class="search">
+                    <input type="search" id="search_query" name="search_query" placeholder="Search by animal name">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                  </div>
+                </form>
                 <!-- >>>>>>>>>>>> search bar end >>>>>>>>>>>> -->
 
       </div>
