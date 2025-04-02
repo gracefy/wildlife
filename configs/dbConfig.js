@@ -9,6 +9,7 @@ const dbConfig = {
 const connectDB = async () => {
   try {
     await mongoose.connect(dbConfig.mongoURI);
+    console.log(dbConfig.mongoURI)
     console.log('MongoDB Atlas connected successfully!');
   } catch (err) {
     console.error(err.message);
