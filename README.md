@@ -41,7 +41,7 @@ A full-stack web application showcasing Ontario wildlife, featuring animal infor
 
 ## 📂 Repository
 
-Source Code: [GitHub - gracefy/wildlife-web-app](https://github.com/gracefy/wildlife-web-app)
+Source Code: [GitHub - gracefy/wildlife-web-app](https://github.com/gracefy/wildlife)
 
 ## 📌 Project Background
 
