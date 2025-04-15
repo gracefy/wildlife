@@ -12,10 +12,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "archetype": "^0.8.6",
+    "archetype": "^0.13.1",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
-    "connect-mongodb-session": "^2.2.0",
+    "connect-mongodb-session": "^5.0.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
