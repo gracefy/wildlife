@@ -42,7 +42,7 @@
 
           <% paginatedBlogs.forEach(blog=> { %>
             <div class="row blog-card">
-              <a href="/blog/<%= blog._id %>" class="col-md-6"><img src="https://<%= blog.image %>"
+              <a href="/blog/<%= blog._id %>" class="col-md-6"><img src="<%= blog.image %>"
                   alt="blog image"></a>
               <div class="col-md-6 blog-info">
                 <h3>

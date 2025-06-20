@@ -1,61 +1,100 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
     <a class="navbar-brand logo" href="/">
-      <img src="https://aflive.qiniu.huangmeimi.com/uPic/logo.png" alt="Eco-Wild">
+      <img src="/images/icons/logo.png" alt="Eco-Wild" />
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link <%= currentPath === '/' ? 'active' : '' %>" href="/">Home</a>
+          <a
+            class="nav-link <%= currentPath === '/' ? 'active' : '' %>"
+            href="/"
+            >Home</a
+          >
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <%= currentPath === '/animal' ? 'active' : '' %>" href="/animal"
-            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a
+            class="nav-link dropdown-toggle <%= currentPath === '/animal' ? 'active' : '' %>"
+            href="/animal"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             animal
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/animal">All Animals</a></li>
             <li>
-              <hr class="dropdown-divider">
+              <hr class="dropdown-divider" />
             </li>
             <% animalTypes.forEach(type=> { %>
-              <li><a class="dropdown-item" href="/animal?type=<%= type._id %>">
-                  <%= type.name %>
-                </a></li>
-              <% }); %>
+            <li>
+              <a class="dropdown-item" href="/animal?type=<%= type._id %>">
+                <%= type.name %>
+              </a>
+            </li>
+            <% }); %>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link <%= currentPath === '/event' ? 'active' : '' %>" href="/event">Event</a>
+          <a
+            class="nav-link <%= currentPath === '/event' ? 'active' : '' %>"
+            href="/event"
+            >Event</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link <%= currentPath === '/blog' ? 'active' : '' %>" href="/blog">Blog</a>
+          <a
+            class="nav-link <%= currentPath === '/blog' ? 'active' : '' %>"
+            href="/blog"
+            >Blog</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link <%= currentPath === '/about' ? 'active' : '' %>" href="/about">About</a>
+          <a
+            class="nav-link <%= currentPath === '/about' ? 'active' : '' %>"
+            href="/about"
+            >About</a
+          >
         </li>
       </ul>
 
       <% if(username) { %>
-        <div class="account dropdown userinfo">
-          <button class="username dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <%= username %>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/profile/<%= userid %>">My Profile</a></li>
-            <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
-          </ul>
-        </div>
-        <% } else { %>
-          <div class="account d-flex">
-            <a href="/user/login" class="btn btn-secondary">LogIn</a>
-            <a href="/user/register" class="btn btn-secondary">SignUp</a>
-          </div>
-          <% } %>
+      <div class="account dropdown userinfo">
+        <button
+          class="username dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <%= username %>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="/profile/<%= userid %>"
+              >My Profile</a
+            >
+          </li>
+          <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+        </ul>
+      </div>
+      <% } else { %>
+      <div class="account d-flex">
+        <a href="/user/login" class="btn btn-secondary">LogIn</a>
+        <a href="/user/register" class="btn btn-secondary">SignUp</a>
+      </div>
+      <% } %>
     </div>
   </div>
 </nav>

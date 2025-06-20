@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eco-Wild</title>
+    <meta name="keywords" content="wildelife, animals" />
+    <meta
+      name="description"
+      content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife."
+    />
+    <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/5775cf1f45.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/public.css" />
+    <link rel="stylesheet" href="/css/animal.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eco-Wild</title>
-  <meta name="keywords" content="wildelife, animals">
-  <meta name="description"
-    content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
-  <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/5775cf1f45.js" crossorigin="anonymous"></script>
-  <!-- bootstrap css -->
-  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-  <link rel="stylesheet" href="/css/public.css">
-  <link rel="stylesheet" href="/css/animal.css">
-</head>
-
-<body>
-  <!-- import header/nav section -->
-  <%- include('../layouts/header.html') %>
+  <body>
+    <!-- import header/nav section -->
+    <%- include('../layouts/header.html') %>
     <main>
       <!-- >>>>>>> hero image start >>>>>>>> -->
       <section class="hero-public">
-        <img src="/images/wildlife.jpg" alt="Eco-Wild">
+        <img src="/images/wildlife.jpg" alt="Eco-Wild" />
         <h1>Wildlife in Ontario</h1>
       </section>
       <!-- >>>>>>> hero image end >>>>>>>>> -->
@@ -33,8 +37,15 @@
 
         <form action="/animal" method="get">
           <div class="search">
-            <input type="search" id="search_query" name="search_query" placeholder="Search by animal name">
-            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input
+              type="search"
+              id="search_query"
+              name="search_query"
+              placeholder="Search by animal name"
+            />
+            <button type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
           </div>
         </form>
 
@@ -42,45 +53,50 @@
 
         <!-- >>>>>>>>>> filter box start >>>>>>>>>>>> -->
         <ul class="aniaml-type">
-          <li class="type-item <%= type == '' || type == 'all'? 'type-active' : ''%>">
+          <li
+            class="type-item <%= type == '' || type == 'all'? 'type-active' : ''%>"
+          >
             <a href="/animal?type=all" data-type="all">
-              <img src="https://aflive.qiniu.huangmeimi.com/uPic/all.jpg" alt="all" class="type-img">
+              <img src="/images/types/all.jpg" alt="all" class="type-img" />
               <h3 class="type-title">All</h3>
             </a>
           </li>
           <% animalTypes.forEach(animaltype=> { %>
-            <li class="type-item <%= type == animaltype._id? 'type-active' : ''%>">
-              <a href="/animal?type=<%= animaltype._id %>" data-type="<%= animaltype._id %>">
-                <img src="https://<%= animaltype.image %>" alt="<%= animaltype.name %>" class="type-img">
-                <h3 class="type-title">
-                  <%= animaltype.name %>
-                </h3>
-              </a>
-            </li>
-            <% }); %>
+          <li
+            class="type-item <%= type == animaltype._id? 'type-active' : ''%>"
+          >
+            <a
+              href="/animal?type=<%= animaltype._id %>"
+              data-type="<%= animaltype._id %>"
+            >
+              <img
+                src="<%= animaltype.image %>"
+                alt="<%= animaltype.name %>"
+                class="type-img"
+              />
+              <h3 class="type-title"><%= animaltype.name %></h3>
+            </a>
+          </li>
+          <% }); %>
         </ul>
         <!-- >>>>>>>>>> filter box end >>>>>>>>>>>> -->
 
         <!-- >>>>>>>>>> animal list start >>>>>>>>>>>> -->
         <div class="animal-list">
           <% paginatedAnimals.forEach(animal=> { %>
-            <div class="animal-card">
-              <a href="/animal/<%= animal._id %>" class="card-img">
-                <img src="https://<%= animal.image %>" alt="<%= animal.name %>">
-                <% if(animal.endangered){%>
-                  <p class="label">Endangered</p>
-                  <% } %>
-              </a>
-              <div class="card-title">
-                <h5>
-                  <%= animal.name %>
-                </h5>
-                <p>
-                  <%= animal.type.name %>
-                </p>
-              </div>
+          <div class="animal-card">
+            <a href="/animal/<%= animal._id %>" class="card-img">
+              <img src="<%= animal.image %>" alt="<%= animal.name %>" />
+              <% if(animal.endangered){%>
+              <p class="label">Endangered</p>
+              <% } %>
+            </a>
+            <div class="card-title">
+              <h5><%= animal.name %></h5>
+              <p><%= animal.type.name %></p>
             </div>
-            <% }); %>
+          </div>
+          <% }); %>
         </div>
         <!-- >>>>>>>>>> animal list end >>>>>>>>>>>> -->
 
@@ -89,23 +105,31 @@
         <div class="pages">
           <ul class="pagination">
             <% if (currentPage> 1) { %>
-              <li class="page-item">
-                <a href="/animal?page=<%= currentPage-1 %>&type=<%= type %>" class="page-link">Previous</a>
-              </li>
-              <% } %>
-                <% for (let page=1; page <=totalPages; page++) { %>
-                  <li class="page-item">
-                    <a href="/animal?page=<%= page %>&type=<%= type %>"
-                      class="page-link <%= page == currentPage ? 'pageActive' : '' %>">
-                      <%= page %>
-                    </a>
-                  </li>
-                  <% } %>
-                    <% if (currentPage < totalPages) { %>
-                      <li class="page-item">
-                        <a href="/animal?page=<%= currentPage+1 %>&type=<%= type %>" class="page-link">Next</a>
-                      </li>
-                      <% } %>
+            <li class="page-item">
+              <a
+                href="/animal?page=<%= currentPage-1 %>&type=<%= type %>"
+                class="page-link"
+                >Previous</a
+              >
+            </li>
+            <% } %> <% for (let page=1; page <=totalPages; page++) { %>
+            <li class="page-item">
+              <a
+                href="/animal?page=<%= page %>&type=<%= type %>"
+                class="page-link <%= page == currentPage ? 'pageActive' : '' %>"
+              >
+                <%= page %>
+              </a>
+            </li>
+            <% } %> <% if (currentPage < totalPages) { %>
+            <li class="page-item">
+              <a
+                href="/animal?page=<%= currentPage+1 %>&type=<%= type %>"
+                class="page-link"
+                >Next</a
+              >
+            </li>
+            <% } %>
           </ul>
         </div>
         <!-- >>>>>>>>>> pagination end >>>>>>>>>>>> -->
@@ -115,8 +139,7 @@
     <!-- import footer section -->
     <%- include('../layouts/footer.html') %>
 
-      <!-- bootstrap JS, Popper.js, and jQuery -->
-      <script src="/bootstrap/js/bootstrap.bundle.js"></script>
-</body>
-
+    <!-- bootstrap JS, Popper.js, and jQuery -->
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
 </html>

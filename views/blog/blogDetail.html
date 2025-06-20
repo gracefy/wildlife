@@ -1,102 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eco-Wild</title>
+    <meta name="keywords" content="wildelife, animals" />
+    <meta
+      name="description"
+      content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife."
+    />
+    <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/5775cf1f45.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/public.css" />
+    <link rel="stylesheet" href="/css/blogDetail.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eco-Wild</title>
-  <meta name="keywords" content="wildelife, animals">
-  <meta name="description"
-    content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
-  <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/5775cf1f45.js" crossorigin="anonymous"></script>
-  <!-- bootstrap css -->
-  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-  <link rel="stylesheet" href="/css/public.css">
-  <link rel="stylesheet" href="/css/blogDetail.css">
-</head>
-
-<body>
-  <!-- import header/nav section -->
-  <%- include('../layouts/header.html') %>
+  <body>
+    <!-- import header/nav section -->
+    <%- include('../layouts/header.html') %>
     <main>
       <div class="container blogDetail">
-
         <!-- >>>>>>>>>> blog content start >>>>>>>>>>>> -->
-        <h2>
-          <%= blog.title %>
-        </h2>
+        <h2><%= blog.title %></h2>
 
         <div class="subInfo">
-          <p>
-            <%= blog.createAt %>
-          </p>
-          <p>By <i>
-              <%= blog.author %>
-            </i>
-          </p>
+          <p><%= blog.createAt %></p>
+          <p>By <i> <%= blog.author %> </i></p>
         </div>
-        <img src="https://<%= blog.image %>" class="blog-img" alt="blog image">
-        <div class="blog-content">
-          <%- blog.content -%>
-        </div>
+        <img src="<%= blog.image %>" class="blog-img" alt="blog image" />
+        <div class="blog-content"><%- blog.content -%></div>
 
         <!-- >>>>>>>>>> blog content end >>>>>>>>>>>> -->
 
         <!-- >>>>>>>>>> blog comment start >>>>>>>>>>>> -->
         <div class="comment">
           <% if(comments.length>0) {%>
-            <h3>Comments</h3>
-            <div class="comment-list">
-              <% comments.forEach(comment=> { %>
-                <div class="comment-item" style="white-space: pre-line;">
-                  <%= comment.content %>
-                    <p class="text-end userinfo">By <%= comment.userid.username %> on <%= comment.createAt %>
-                    </p>
-                </div>
-                <% }); %>
+          <h3>Comments</h3>
+          <div class="comment-list">
+            <% comments.forEach(comment=> { %>
+            <div class="comment-item" style="white-space: pre-line">
+              <%= comment.content %>
+              <p class="text-end userinfo">
+                By <%= comment.userid.username %> on <%= comment.createAt %>
+              </p>
             </div>
-            <% } else { %>
-              <p class="comment-message">Looks like you're the first to comment. Share your thoughts!</p>
-              <% } %>
-                <form action="/blog/<%= blog._id %>/comment" method="post">
-                  <input type="hidden" name="blogid" value="<%= blog._id %>">
-                  <div class="form-group">
-                    <label for="content">Comment</label>
-                    <textarea name="content" class="form-control" rows="4"
-                      placeholder="Share your thoughts here"><% if(typeof(errors)!='undefined' ){%><%- content %><%}%></textarea>
-                    <div class="form-text">Comments should be within 200 characters.</div>
-                  </div>
-                  <% if(typeof(userid)!='undefined' && userid ){%>
-                    <input type="hidden" name="userid" value="<%= userid %>">
-                    <% if(typeof(errors)!='undefined' ){ errors.forEach(error=> {%>
-                      <p class="error">
-                        <%= error.msg %>
-                      </p>
-                      <%})}%>
-                        <button type="submit" class="btn btn-info comment-submit">Comment</button>
-                        <%} else {%>
-                          <button type="submit" class="btn btn-secondary comment-submit" disabled>Comment</button>
-                          <p class="comment-message">Please <a href="/user/login" class="btn-link">login</a> to comment
-                          </p>
-                          <%}%>
-
-                </form>
-
+            <% }); %>
+          </div>
+          <% } else { %>
+          <p class="comment-message">
+            Looks like you're the first to comment. Share your thoughts!
+          </p>
+          <% } %>
+          <form action="/blog/<%= blog._id %>/comment" method="post">
+            <input type="hidden" name="blogid" value="<%= blog._id %>" />
+            <div class="form-group">
+              <label for="content">Comment</label>
+              <textarea
+                name="content"
+                class="form-control"
+                rows="4"
+                placeholder="Share your thoughts here"
+              >
+<% if(typeof(errors)!='undefined' ){%><%- content %><%}%></textarea
+              >
+              <div class="form-text">
+                Comments should be within 200 characters.
+              </div>
+            </div>
+            <% if(typeof(userid)!='undefined' && userid ){%>
+            <input type="hidden" name="userid" value="<%= userid %>" />
+            <% if(typeof(errors)!='undefined' ){ errors.forEach(error=> {%>
+            <p class="error"><%= error.msg %></p>
+            <%})}%>
+            <button type="submit" class="btn btn-info comment-submit">
+              Comment
+            </button>
+            <%} else {%>
+            <button
+              type="submit"
+              class="btn btn-secondary comment-submit"
+              disabled
+            >
+              Comment
+            </button>
+            <p class="comment-message">
+              Please <a href="/user/login" class="btn-link">login</a> to comment
+            </p>
+            <%}%>
+          </form>
         </div>
 
         <!-- >>>>>>>>>> blog comment end >>>>>>>>>>>> -->
-
-
-
       </div>
     </main>
     <!-- import footer section -->
     <%- include('../layouts/footer.html') %>
 
-      <!-- bootstrap JS, Popper.js, and jQuery -->
-      <script src="/bootstrap/js/bootstrap.bundle.js"></script>
-</body>
-
+    <!-- bootstrap JS, Popper.js, and jQuery -->
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
 </html>

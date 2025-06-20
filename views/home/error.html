@@ -1,50 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eco-Wild</title>
+    <meta name="keywords" content="wildelife, animals" />
+    <meta
+      name="description"
+      content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife."
+    />
+    <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon" />
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/public.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eco-Wild</title>
-  <meta name="keywords" content="wildelife, animals">
-  <meta name="description"
-    content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
-  <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
-  <!-- bootstrap css -->
-  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-  <link rel="stylesheet" href="/css/public.css">
-</head>
-
-<body>
-  <%- include('../layouts/header.html') %>
+  <body>
+    <%- include('../layouts/header.html') %>
     <main class="container d-flex align-items-center mt-5">
       <div class="errorpage">
         <!-- >>>>>>> hero image start >>>>>>>> -->
         <section class="error-hero">
-          <img src="https://aflive.qiniu.huangmeimi.com/upic_1721139774163" alt="Eco-Wild">
+          <img src="/images/error.jpg" alt="Eco-Wild" />
         </section>
         <!-- >>>>>>> hero image end >>>>>>>>> -->
         <% if(typeof(message) !='undefined' ){%>
-          <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">Error!</h4>
-            <p>
-              <%=message%>
-            </p>
-          </div>
-          <%}else{%>
-            <div class="alert alert-danger" role="alert">
-              <h4 class="alert-heading">Error!</h4>
-              <p>Sorry, the page you are looking for is not available.</p>
-            </div>
-            <%}%>
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">Error!</h4>
+          <p><%=message%></p>
+        </div>
+        <%}else{%>
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">Error!</h4>
+          <p>Sorry, the page you are looking for is not available.</p>
+        </div>
+        <%}%>
       </div>
-
     </main>
-
 
     <!-- import footer section -->
     <%- include('../layouts/footer.html') %>
-      <!-- bootstrap JS, Popper.js, and jQuery -->
-      <script src="/bootstrap/js/bootstrap.bundle.js"></script>
-</body>
-
+    <!-- bootstrap JS, Popper.js, and jQuery -->
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
 </html>

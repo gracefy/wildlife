@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eco-Wild</title>
+    <meta name="keywords" content="wildelife, animals" />
+    <meta
+      name="description"
+      content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife."
+    />
+    <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/5775cf1f45.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/public.css" />
+    <link rel="stylesheet" href="/css/animalDetail.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eco-Wild</title>
-  <meta name="keywords" content="wildelife, animals">
-  <meta name="description"
-    content="Eco-Wild is a non-profit organization that is dedicated to the preservation of wildlife.">
-  <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon">
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/5775cf1f45.js" crossorigin="anonymous"></script>
-  <!-- bootstrap css -->
-  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-  <link rel="stylesheet" href="/css/public.css">
-  <link rel="stylesheet" href="/css/animalDetail.css">
+  <body>
+    <!-- import header/nav section -->
 
-</head>
-
-<body>
-  <!-- import header/nav section -->
-
-  <%- include('../layouts/header.html') %>
+    <%- include('../layouts/header.html') %>
     <main>
-
       <!-- >>>>>>> hero image start >>>>>>>> -->
       <!-- <section class="hero-animal">
-        <img src="https://<%= animal.image %>" alt="<%= animal.name %>">
+        <img src="<%= animal.image %>" alt="<%= animal.name %>">
         <h1>
           <%= animal.name %>
         </h1>
@@ -36,12 +38,10 @@
       <div class="container animalDetail">
         <!-- >>>>>>>>>> detail card start >>>>>>>>>>>>>>> -->
         <div class="card-content">
-          <h2>
-            <%= animal.name.toUpperCase() %>
-          </h2>
+          <h2><%= animal.name.toUpperCase() %></h2>
           <div class="row detail-card">
             <div class="col-md-6 detail-img">
-              <img src="https://<%= animal.image %>" alt="<%= animal.name %>">
+              <img src="<%= animal.image %>" alt="<%= animal.name %>" />
             </div>
 
             <div class="col-md-6 detail-info">
@@ -74,8 +74,7 @@
 
         <!-- >>>>>>>>>> detail desc start >>>>>>>>>>>>>>> -->
         <div class="detail-desc">
-          <h3>About <%= animal.name %>
-          </h3>
+          <h3>About <%= animal.name %></h3>
           <%- animal.desc -%>
         </div>
         <!-- >>>>>>>>>> detail desc end >>>>>>>>>>>>>>> -->
@@ -83,103 +82,107 @@
         <!-- >>>>>>>>>> detail special start >>>>>>>>>>>>>>> -->
         <% if(animal.special !='' ){ %>
 
-          <div class="detail-special">
-            <h3>More Information About <%= animal.name %>
-            </h3>
-            <%- animal.special -%>
+        <div class="detail-special">
+          <h3>More Information About <%= animal.name %></h3>
+          <%- animal.special -%>
+        </div>
+        <% } %>
+        <!-- >>>>>>>>>> detail special end >>>>>>>>>>>>>>> -->
+
+        <!-- >>>>>>>>>> detail species start >>>>>>>>>>>>>>> -->
+        <% if(animal.species && animal.species.length> 0){ %>
+        <div class="species">
+          <h3><%= animal.name.toUpperCase() %> Species</h3>
+          <div class="species-list">
+            <ul>
+              <% animal.species.forEach(item=> { %>
+              <li>
+                <h4><%= item.name %></h4>
+                <img src="<%= item.image %>" alt="<%= item.name %>" />
+              </li>
+              <% }); %>
+            </ul>
           </div>
-          <% } %>
-            <!-- >>>>>>>>>> detail special end >>>>>>>>>>>>>>> -->
+        </div>
+        <% } %>
 
-            <!-- >>>>>>>>>> detail species start >>>>>>>>>>>>>>> -->
-            <% if(animal.species && animal.species.length> 0){ %>
-              <div class="species">
-                <h3>
-                  <%= animal.name.toUpperCase() %> Species
-                </h3>
-                <div class="species-list">
-                  <ul>
-                    <% animal.species.forEach(item=> { %>
-                      <li>
-                        <h4>
-                          <%= item.name %>
-                        </h4>
-                        <img src="https://<%= item.image %>" alt="<%= item.name %>">
-                      </li>
-                      <% }); %>
-                  </ul>
+        <!-- >>>>>>>>>> detail species end >>>>>>>>>>>>>>> -->
+
+        <!-- >>>>>>>>>> detail map start >>>>>>>>>>>>>>> -->
+
+        <div class="map-info">
+          <gmp-map
+            center="<%= animal.locations[0].lat %>,<%= animal.locations[0].lng %>"
+            zoom="8"
+            map-id="DEMO_MAP_ID"
+            style="height: 400px"
+          >
+            <% animal.locations.forEach(location=> { %>
+            <gmp-advanced-marker
+              position="<%= location.lat %>,<%= location.lng %>"
+              title="<%= location.name %>"
+              data-address="<%= location.address %>, <%= location.city %> <%= location.province %>"
+              data-position="<%= location.lat %>,<%= location.lng %>"
+            ></gmp-advanced-marker>
+            <% }); %>
+          </gmp-map>
+
+          <div class="map-desc">
+            <h3>Location</h3>
+            <ul class="location-list">
+              <% animal.locations.forEach(location=> { %>
+              <li class="location-item">
+                <img src="<%= location.image %>" alt="" />
+                <div class="location-info">
+                  <p>
+                    <span class="text-bold">Name: </span>
+                    <%= location.name %>
+                  </p>
+                  <p>
+                    <span class="text-bold">Address: </span>
+                    <%= location.address %>, <%= location.city %> <%=
+                    location.province %>
+                  </p>
                 </div>
+              </li>
+              <% }); %>
+            </ul>
+          </div>
+        </div>
+        <!-- >>>>>>>>>> detail map end >>>>>>>>>>>>>>> -->
 
-              </div>
-              <% } %>
-
-                <!-- >>>>>>>>>> detail species end >>>>>>>>>>>>>>> -->
-
-                <!-- >>>>>>>>>> detail map start >>>>>>>>>>>>>>> -->
-
-                <div class="map-info">
-
-                  <gmp-map center="<%= animal.locations[0].lat %>,<%= animal.locations[0].lng %>" zoom="8"
-                    map-id="DEMO_MAP_ID" style="height: 400px">
-                    <% animal.locations.forEach(location=> { %>
-                      <gmp-advanced-marker position="<%= location.lat %>,<%= location.lng %>"
-                        title="<%= location.name %>"
-                        data-address="<%= location.address %>, <%= location.city %> <%= location.province %>"
-                        data-position="<%= location.lat %>,<%= location.lng %>"></gmp-advanced-marker>
-                      <% }); %>
-                  </gmp-map>
-
-                  <div class="map-desc">
-                    <h3>Location</h3>
-                    <ul class="location-list">
-                      <% animal.locations.forEach(location=> { %>
-                        <li class="location-item">
-                          <img src="https://<%= location.image %>" alt="">
-                          <div class="location-info">
-                            <p><span class="text-bold">Name: </span>
-                              <%= location.name %>
-                            </p>
-                            <p><span class="text-bold">Address: </span>
-                              <%= location.address %>,
-                                <%= location.city %>
-                                  <%= location.province %>
-                            </p>
-                          </div>
-                        </li>
-                        <% }); %>
-                    </ul>
-                  </div>
-                </div>
-                <!-- >>>>>>>>>> detail map end >>>>>>>>>>>>>>> -->
-
-                <!-- >>>>>>>>>> search bar start >>>>>>>>>>>> -->
-                <!-- <div class="search">
+        <!-- >>>>>>>>>> search bar start >>>>>>>>>>>> -->
+        <!-- <div class="search">
                   <input type="search" name="search_query" id="search_query" placeholder="Search by animal name">
                   <button id="search_button"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div> -->
 
-                <form action="/animal" method="get">
-                  <div class="search">
-                    <input type="search" id="search_query" name="search_query" placeholder="Search by animal name">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                  </div>
-                </form>
-                <!-- >>>>>>>>>>>> search bar end >>>>>>>>>>>> -->
-
+        <form action="/animal" method="get">
+          <div class="search">
+            <input
+              type="search"
+              id="search_query"
+              name="search_query"
+              placeholder="Search by animal name"
+            />
+            <button type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </form>
+        <!-- >>>>>>>>>>>> search bar end >>>>>>>>>>>> -->
       </div>
     </main>
 
     <!-- import footer section -->
     <%- include('../layouts/footer.html') %>
-      <!-- bootstrap JS, Popper.js, and jQuery -->
-      <script src="/bootstrap/js/bootstrap.bundle.js"></script>
-      <script
-        src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&libraries=maps,marker&v=beta&loading=async&callback=initMap"
-        defer></script>
-      <script src="/jquery/jquery.js"></script>
-      <script src="/js/showMapInfo.js"></script>
-
-</body>
-
-
+    <!-- bootstrap JS, Popper.js, and jQuery -->
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&libraries=maps,marker&v=beta&loading=async&callback=initMap"
+      defer
+    ></script>
+    <script src="/jquery/jquery.js"></script>
+    <script src="/js/showMapInfo.js"></script>
+  </body>
 </html>

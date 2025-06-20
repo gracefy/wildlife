@@ -1,22 +1,21 @@
-const mongoose = require('mongoose');
-const Location = require('./locationModel');
-const AnimalType = require('./animalTypeModel');
+const mongoose = require("mongoose");
+const Location = require("./locationModel");
+const AnimalType = require("./animalTypeModel");
 
 // Define species schema
 const speciesSchema = {
-  name: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
   desc: { type: String, required: true },
   image: { type: String, required: true },
   endangered: { type: Boolean, default: false },
-}
+};
 
 // Define animal schema
 const animalSchema = new mongoose.Schema({
-
   type: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'AnimalType',
-    required: true
+    ref: "AnimalType",
+    required: true,
   },
   name: { type: String, required: true, unique: true },
   order: { type: Number, default: 1 },
@@ -26,27 +25,28 @@ const animalSchema = new mongoose.Schema({
   image: { type: String, required: true },
   endangered: { type: Boolean, default: false },
   desc: { type: String, required: true },
-  special: { type: String, default: '' },
+  special: { type: String, default: "" },
   species: [speciesSchema],
-  locations: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Location',
-    required: true
-  }],
+  locations: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Location",
+      required: true,
+    },
+  ],
   createAt: { type: Date, default: Date.now },
-  updateAt: { type: Date, default: Date.now }
+  updateAt: { type: Date, default: Date.now },
 });
 
 // Pre-save update time
-animalSchema.pre('save', function (next) {
+animalSchema.pre("save", function (next) {
   this.updateAt = new Date();
   next();
 });
 
-const Animal = mongoose.model('Animal', animalSchema);
+const Animal = mongoose.model("Animal", animalSchema);
 
 module.exports = Animal;
-
 
 /**
  * @swagger
